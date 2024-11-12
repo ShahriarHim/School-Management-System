@@ -17,6 +17,10 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/', function(){
-    dd(1);
+Route::get('/home/dashboard', function () {
+    return view('dashboard');
+});
+
+Route::get('/dashboard', function () {
+    return redirect('home/dashboard');
 });
