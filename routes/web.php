@@ -17,3 +17,6 @@ Route::get('/home', function () {
     return view('home');
 });
 
+Route::get('/', function(){
+    dd(1);
+});
