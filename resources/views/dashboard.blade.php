@@ -2,7 +2,7 @@
 @section('title', 'Home Page')
 @section('content')
     <div class="text-center">
-        <h1>Welcome to the School Management System Updated 1</h1>
+        <h1>Welcome to the School Management System Updated 12</h1>
         <p style="font-size: 50px">This is Dashboard Page</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cupiditate similique eum laborum rem ut eos, facere,
             excepturi amet, magni ad suscipit? Pariatur blanditiis aut sunt fuga itaque tempore veritatis reprehenderit
