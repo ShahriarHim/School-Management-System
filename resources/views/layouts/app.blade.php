@@ -11,7 +11,7 @@
 
 <body>
     <!-- Header Section -->
-        <main class="">
+        <main class="header">
             @yield('header')
         </main>
 

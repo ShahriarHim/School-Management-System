@@ -2,7 +2,7 @@
 
 @section('title', 'Home Page')
 
-@section('header')
+
 <!-- Image Slider (Custom CSS Carousel) -->
 <header class="header">
     <img src="{{ asset('images/logo-light.png') }}" alt="Logo">

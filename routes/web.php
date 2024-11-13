@@ -15,6 +15,6 @@ Route::get('/events', function () {
 Route::get('/teachers', function () {
     return view('teachers');
 });
-Route::get('/galary', function () {
-    return view('galary');
+Route::get('/gallery', function () {
+    return view('gallery');
 });
