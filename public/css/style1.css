@@ -1,0 +1,218 @@
+/* General styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fc;
+    color: #333;
+}
+
+/* Navbar styles */
+.navbar {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    background-color: transparent; /* Transparent for overlay effect */
+    color: white;
+    padding: 10px 20px;
+    z-index: 10;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.navbar-links {
+    list-style: none;
+    display: flex;
+}
+
+.navbar-links li {
+    margin-left: 20px;
+}
+
+.navbar-links a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navbar-links a:hover {
+    text-decoration: underline;
+}
+
+/* Home Header with Slider */
+.header-home {
+    position: relative;
+    height: 100vh; /* Full screen height */
+    overflow: hidden;
+}
+
+.slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slider-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    font-size: 2em;
+}
+
+/* Page Header for Other Pages */
+.header-page {
+    background: linear-gradient(135deg, #1e3c72, #2a5298); /* Radiant blue background */
+    padding: 100px 0;
+    text-align: center;
+    color: white;
+}
+
+.header-page h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+/* Main Content styles */
+.main-content {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Footer styles */
+.footer {
+    background-color: #f4f7fc;
+    color: #333;
+    padding: 40px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-container {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 180px;
+    margin: 10px;
+    text-align: left;
+}
+
+.footer-section h4 {
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.footer-section a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.footer-section a:hover {
+    color: #555;
+    text-decoration: underline;
+}
+
+.footer-social-icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.footer-social-icons a {
+    display: inline-block;
+    margin: 0 10px;
+    color: #333;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.footer-social-icons a:hover {
+    color: #555;
+}
+
+.footer .dropdown {
+    margin-bottom: 15px;
+    padding: 5px;
+    font-size: 14px;
+    width: 200px;
+}
+
+.footer p {
+    font-size: 14px;
+    color: #777;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #999;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-links {
+        margin-top: 10px;
+        flex-direction: column;
+    }
+
+    .navbar-links li {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .footer {
+        padding: 10px 0;
+    }
+
+    /* Adjust slider text size on smaller screens */
+    .slider-text {
+        font-size: 1.5em;
+    }
+
+    /* Adjust header-page padding on smaller screens */
+    .header-page {
+        padding: 60px 0;
+    }
+
+    .header-page h1 {
+        font-size: 2em;
+    }
+}

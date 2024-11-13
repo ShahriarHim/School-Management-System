@@ -1,99 +1,279 @@
-/* General styles */
+/* General reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-/*     font-family: Poppins,Helvetica,Arial,sans-serif;
-    background-color: #f4f7fc;
-    color: #333; */
-}
 
-/* Navbar styles */
-.navbar {
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-}
 
-.navbar-container {
-    max-width: 1200px;
-    margin: 0 auto;
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.navbar-brand {
-    font-size: 24px;
-    font-weight: bold;
+    padding: 20px;
+    background-image: linear-gradient(150deg, #2d1582 0, #19a0ff 100%);
     color: white;
-    text-decoration: none;
 }
 
-.navbar-links {
+.header img {
+    height: 35px;
+}
+
+.nav-toggle {
+    display: none; /* Hidden by default on larger screens */
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.navbar ul {
     list-style: none;
     display: flex;
+    margin-right: 70px;
+
 }
 
-.navbar-links li {
+.navbar ul li {
     margin-left: 20px;
 }
 
-.navbar-links a {
-    color: white;
+.navbar ul li a {
+    color: rgb(177, 177, 177);
     text-decoration: none;
-    font-size: 18px;
+    padding: 5px 10px;
+    transition: color 0.3s, background-color 0.3s; /* Smooth hover effect */
 }
 
-.navbar-links a:hover {
-    text-decoration: underline;
+.navbar ul li a:hover {
+    color: white;
+    border-radius: 5px;
 }
 
+/* Main content styles */
+.main-content {
+    /* max-width: 1200px; */
+    /* margin: auto; 
+    padding: 20px;  */
+    background-color: #f4f7fc;
+}
 
-/* Footer styles */
+/* Footer Styling */
 .footer {
-    position: relative;
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+    padding: 50px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
 }
 
-.footer a {
-    color: #ffffff;
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.dropdown {
+    width: 400px;
+    height: 50px;
+}
+.dropdown option {
+    font-size: 24px;
+}
+
+.footer-section img {
+    height: 50px;
+    width: 200px;
+}
+
+.footer-social-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.footer-right {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.footer-section {
+    flex: 1 1 10%; /* Each section takes 45% of the width, wrapping as needed */
+    min-width: 100px;
+}
+
+.footer-section h4 {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.footer-section a {
+    display: block;
+    color: grey;
     text-decoration: none;
+    margin-bottom: 5px;
 }
 
-.footer a:hover {
-    text-decoration: underline;
+.footer-section a:hover {
+    color: skyblue;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .navbar-container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+.footer-bottom {
+    grid-column: 1 / -1;
+    /* text-align: center; */
+    /* margin-top: 20px; */
+    font-size: 0.9rem;
+    color: grey;
+}
 
-    .navbar-links {
-        margin-top: 10px;
-        flex-direction: column;
-    }
-
-    .navbar-links li {
-        margin-left: 0;
-        margin-top: 10px;
-    }
-
+/* Responsive styles */
+@media (max-width: 992px) {
     .footer {
-        padding: 10px 0;
+        grid-template-columns: 1fr; /* Switch to a single-column layout */
+    }
+
+    .footer-right {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .footer-section {
+        flex: 1 1 45%; /* Sections wrap at 45% width */
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-section {
+        flex: 1 1 100%; /* Full-width sections on smaller screens */
+    }
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .navbar {
+        display: none; /* Hide navbar by default on smaller screens */
+        flex-direction: column;
+        background-color: #ffffff;
+        color: black;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        overflow: hidden;
+        max-height: 0; /* Initially collapsed */
+        transition: max-height 0.9s ease-out; /* Smooth slide-down effect */
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar ul li {
+        margin: 10px 0;
+    }
+
+    /* Show toggle button on smaller screens */
+    .nav-toggle {
+        display: block;
+    }
+
+    /* Show navbar when active */
+    .navbar.active {
+        display: flex;
+        max-height: 300px; /* Set a height that can fit your menu items */
+    }
+}
+
+/* Carousel container */
+.carousel-container {
+    position: relative;
+    margin-top: -100px;
+    width: 100%;
+    /* max-width: 1200px; */
+    overflow: hidden;
+}
+
+/* Carousel items */
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+
+}
+
+.carousel-item {
+    min-width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+
+}
+
+/* Previous and Next buttons */
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.carousel-control-prev {
+    left: 10px;
+}
+
+.carousel-control-next {
+    right: 10px;
+}
+
+/* Welcome Section */
+.welcome-section {
+    text-align: center;
+    padding: 50px 0;
+}
+
+/* Teacher Section */
+.teachers-section {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.teachers-section .rounded-circle {
+    border: 2px solid #2d1582;
+}
+
+/* Event Section */
+.events-section {
+    padding: 50px 0;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    text-align: center;
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 768px) {
+    .carousel-item img {
+        width: 100%;
     }
 }
