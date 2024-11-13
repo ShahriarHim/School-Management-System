@@ -1,16 +1,20 @@
 <?php
 use Illuminate\Support\Facades\Route;
+
+
+
+
 Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/home/events', function () {
+Route::get('/events', function () {
     return view('events');
 });
 
-Route::get('/home/teachers', function () {
+Route::get('/teachers', function () {
     return view('teachers');
 });
-Route::get('/home/galary', function () {
+Route::get('/galary', function () {
     return view('galary');
 });

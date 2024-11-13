@@ -39,6 +39,7 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     padding: 20px;
+    margin-bottom: 100px;
 }
 
 .vlog-item {
@@ -95,4 +96,23 @@ hr {
 
 .styled-link:hover {
     color: blue;
+}
+
+
+@media (max-width: 768px) {
+    .vlog-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .round-pic {
+        width: 150px; height: 150px;
+    }
+}
+@media (max-width: 480px) {
+    .vlog-grid {
+        grid-template-columns: 1fr;
+    }
+    .round-pic {
+        width: 120px;
+        height: 120px;
+    }
 }

@@ -11,7 +11,11 @@
         <h2 class="text-primary">Our Professional Teachers</h2>
     </div>
     <div class="team-container">
+
+
+
         <div class="team-row">
+
             <div class="team-member no-pic">
                 <div class="name">John Doe</div>
                 <div class="position">Developer</div>
@@ -30,9 +34,11 @@
                         </a>
                     </div>
             </div>
+
             <div class="team-member with-pic">
                 <img src="{{ asset('images/pic1.jpeg') }}" alt="John Doe" class="round-pic">
             </div>
+
             <div class="team-member no-pic">
                 <div class="name">Jane Smith</div>
                 <div class="position">Designer</div>
@@ -51,11 +57,17 @@
                     <span class="fab fa-linkedin-in btn-icon__inner"></span>
                     </a>
                 </div>
+
             </div>
             <div class="team-member with-pic">
                 <img src="{{ asset('images/pic1.jpeg') }}" alt="Jane Smith" class="round-pic">
             </div>
+
         </div>
+
+
+
+
         <div class="team-row">
             <div class="team-member no-pic">
                 <div class="name">John Doe</div>
@@ -102,5 +114,4 @@
             </div>
         </div>
     </div>
-
 @endsection

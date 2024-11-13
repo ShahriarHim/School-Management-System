@@ -11,6 +11,7 @@
 <h2 class="text-primary">Upcoming and past events</h2>
 </div>
 <div class="vlog-grid">
+
     <div class="vlog-item">
         <div class="date">01 Feb, 2022</div>
         <h2 class="vlog-title"><a class="styled-link" href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti quos nostrum incidunt.</a></h2>
@@ -20,6 +21,8 @@
             <span class="vlog-name"><a class="styled-link" href="#">John Doe</a></span>
         </div>
     </div>
+
+
     <div class="vlog-item">
         <div class="date">02 Mar, 2022</div>
         <h2 class="vlog-title"><a class="styled-link" href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti quos nostrum incidunt.</a></h2>
@@ -29,6 +32,8 @@
             <span class="vlog-name"><a class="styled-link" href="#">John Doe</a></span>
         </div>
     </div>
+
+
     <div class="vlog-item">
         <div class="date">03 Apr, 2022</div>
         <h2 class="vlog-title"><a class="styled-link" href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti quos nostrum incidunt.</a></h2>
@@ -38,6 +43,8 @@
             <span class="vlog-name"><a class="styled-link" href="#">John Doe</a></span>
         </div>
     </div>
+
+
     <div class="vlog-item">
         <div class="date">04 May, 2022</div>
         <h2 class="vlog-title"><a class="styled-link" href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti quos nostrum incidunt.</a></h2>
@@ -47,8 +54,9 @@
             <span class="vlog-name"><a class="styled-link" href="#">John Doe</a></span>
         </div>
     </div>
-</div>
 
+
+</div>
 @endsection
 
 
