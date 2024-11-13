@@ -7,6 +7,7 @@
     <title>@yield('title', 'School Management')</title>
     <!-- Link to your custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
 </head>
 
 <body>
