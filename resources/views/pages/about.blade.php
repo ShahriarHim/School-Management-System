@@ -2,16 +2,18 @@
 
 @section('title', 'About us | University of Michigan')
 
+@section('header-class', 'header-transparent')
+
 @section('content')
     <link rel="stylesheet" href="{{asset('css/salauddin.css')}}">
 
-    <div class="content-header">
-        <h1>About us</h1>
+    <div class="noticeboard-header">
+        <h1 class="noticeboard-title">About us</h1>
     </div>
 
     <div class="about-page-margin">
         <div class="">
-            <img src="{{asset('storage/about.jpg')}}" alt="">
+            <img class="about-img" src="{{asset('storage/about.jpg')}}" alt="">
         </div>
 
         <div>
@@ -25,7 +27,7 @@
         </div>
 
         <div>
-            <h2>Our school historys</h2>
+            <h2 class="salauddin-h2">Our school historys</h2>
 
             <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard 
                 McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going 
@@ -34,12 +36,12 @@
         </div>
 
         <div class="last-div">
-            <h2>Something interesting about our schools</h2>
+            <h2 class="salauddin-h2">Something interesting about our schools</h2>
             <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't
                 look even slightly believable. If you are going to use a passage
             </p>
 
-                <ul>
+                <ul class="salauddin-ul">
                     <li>making this the first true generator</li>
                     <li>to generate Lorem Ipsum which</li>
                     <li>but the majority have suffered alteratio</li>
