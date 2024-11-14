@@ -9,7 +9,7 @@
     </div>
     <div class="upper">
         <span class="btn1">01 Jan, 1897</span>
-        <h2 class="text-primary">Convocation Day</h2>
+        <hp class="text-primary">Convocation Day</hp>
     </div>
 
 <div class="gal-container">
