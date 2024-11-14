@@ -9,16 +9,15 @@
     </div>
     <div class="upper">
         <span class="btn1">01 Jan, 1897</span>
-        <hp class="text-primary">Convocation Day</hp>
+        <p class="text-primary">Convocation Day</p>
     </div>
-
-<div class="gal-container">
-        <p class="it1">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its
-        layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
-        using 'Content here, content here', making it look like readable English. It is a long established fact that a
-        reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem
-        Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content
-        here', making it look like readable English.</p>
+    <p class="it1">It is a long established fact that a reader will be distracted by the readable content of a page when
+        looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,
+        as opposed to using 'Content here, content here', making it look like readable English. It is a long established
+        fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of
+        using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here,
+        content here', making it look like readable English.</p>
+    <div class="gal-container">
         <div class="pic">
             <img src="{{ asset('images/picg5.jpg') }}" class="vlog-pic">
         </div>
@@ -44,5 +43,4 @@
             <img src="{{ asset('images/picg5.jpg') }}" class="vlog-pic">
         </div>
     </div>
-
 @endsection
