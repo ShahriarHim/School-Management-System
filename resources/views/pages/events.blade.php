@@ -1,5 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Home Page')
+@section('title', 'Events Page')
+@section('header-class', 'header-transparent')
 @section('content')
 
 <link rel="stylesheet" href="{{ asset('css/eventstyle.css') }}">

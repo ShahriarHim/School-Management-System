@@ -23,10 +23,14 @@ Route::get('/events', function () {
     return view('pages.events');
 });
 
-Route::get('/teachers', function () {
+Route::get('/coaches', function () {
     return view('pages.teachers');
 });
 Route::get('/gallery', function () {
     return view('pages.gallery');
 });
+Route::get('/galdetails', function () {
+    return view('pages.backfromgal');
+});
+
 
