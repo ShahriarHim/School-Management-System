@@ -97,6 +97,7 @@
     .gal-container {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
+        padding: 5px;
     }
 }
 
@@ -104,6 +105,7 @@
     .gal-container {
         grid-template-columns: 1fr;
         gap: 10px;
+        padding: 5px;
     }
 
     .overlay-text {
