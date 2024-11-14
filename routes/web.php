@@ -10,6 +10,9 @@ Route::get('/', function () {
 Route::get('/noticeboard', function () {
     return view('pages.noticeboard');
 });
+Route::get('/noticeboard-details', function () {
+    return view('pages.noticeboardDetails');
+});
 
 Route::get('/about', function(){
     return view('pages.about');
