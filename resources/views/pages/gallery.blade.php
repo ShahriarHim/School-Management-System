@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('title', 'Gallery Page')
+@section('header-class', 'header-transparent')
 @section('content')
-    <link rel="stylesheet" href="{{ asset('css/galarystyle.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/gal.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <div class="first">
         <h1>Photo Gallery</h1>
