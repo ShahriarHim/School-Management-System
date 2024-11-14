@@ -7,20 +7,14 @@
 @section('content')
 <link rel="stylesheet" href="{{asset('css/salauddin.css')}}">
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
-<div class="noticeboard-header">
-    <h1 class="noticeboard-title">Contact Us</h1>
-</div>
-<div class="contact-info-header">
-    <p>Contact Info</p>
-</div>
-
-    <div class="content-header">
-        <h1>Contact us</h1>
-
+    <div class="noticeboard-header">
+        <h1 class="noticeboard-title">Contact Us</h1>
     </div>
-
+    
     <div class="contact-info-header">
         <p>Contact Info</p>
+    </div>
+
 <div class="row">
 
     <div class="col col-1">
