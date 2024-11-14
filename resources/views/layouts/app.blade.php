@@ -26,7 +26,10 @@
                 <li><a href="/contact">Contact</a></li>
             </ul>
         </nav>
-
+        <!-- Title section for each page -->
+        <!-- <div class="page-title">
+            @yield('page-title')
+        </div> -->
     </header>
 <!-- 
     <div class="header-next">
