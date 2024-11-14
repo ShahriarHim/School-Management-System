@@ -5,11 +5,11 @@
     <link rel="stylesheet" href="{{ asset('css/gal.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <div class="first">
-        <h1>Photo Gallery</h1>
+        <h1>Photo gallery</h1>
     </div>
     <div class="upper">
         <span class="btn1">Albums</span>
-        <h2 class="text-primary">Our latest photo galleries</h2>
+        <p class="text-primary">Our latest photo galleries</p>
     </div>
 
     <div class="gal-container">
