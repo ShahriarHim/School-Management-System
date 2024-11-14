@@ -37,11 +37,14 @@
 
 .gal-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    padding: 50px 150px;
+    padding: 50px 100px;
 }
-
+.it1{
+    grid-column: 1 / span 4;
+    color: gray;
+}
 .pic {
     cursor: pointer;
     position: relative;
@@ -53,33 +56,10 @@
 
 .vlog-pic {
     width: 100%;
-    height: 400px;
+    height: 300px;
     object-fit: cover;
     border-radius: 10px;
     display: block;
-}
-
-.overlay-text {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    opacity: 1;
-    padding: 10px;
-    text-align: center;
-}
-.overlay-text h2{
-    margin-top: 10px;
-}
-.overlay-text h1{
-    margin-top: 300px;
 }
 
 .pic:hover {
@@ -98,10 +78,5 @@
     .gal-container {
         grid-template-columns: 1fr;
         gap: 10px;
-    }
-
-    .overlay-text {
-        font-size: 14px;
-        padding: 5px;
     }
 }

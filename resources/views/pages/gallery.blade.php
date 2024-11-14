@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Home Page')
+@section('title', 'Gallery Page')
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/galarystyle.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -10,5 +10,40 @@
         <span class="btn1">Albums</span>
         <h2 class="text-primary">Our latest photo galleries</h2>
     </div>
-    here i need a row of grid with 3 colmn each portion contain an image and out of image layer a title and 8 images
+
+    <div class="gal-container">
+
+
+        <a href="{{ url('/galdetails') }}">
+        <div class="pic">
+            <img src="{{ asset('images/picg1.jpg') }}" class="vlog-pic">
+            <div class="overlay-text">
+                <h1>School Images</h1>
+                <h2>8 Images</h2>
+            </div>
+        </div>
+        </a>
+
+        <a href="{{ url('/galdetails') }}">
+        <div class="pic">
+            <img src="{{ asset('images/picg2.jpg') }}" class="vlog-pic">
+            <div class="overlay-text">
+                <h1>School Images</h1>
+                <h2>8 Images</h2>
+            </div>
+        </div>
+        </a>
+
+        <a href="{{ url('/galdetails') }}">
+        <div class="pic">
+            <img src="{{ asset('images/picg3.jpg') }}" class="vlog-pic">
+            <div class="overlay-text">
+                <h1>School Images</h1>
+                <h2>8 Images</h2>
+            </div>
+        </div>
+        </a>
+
+    </div>
+
 @endsection
