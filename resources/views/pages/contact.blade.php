@@ -3,10 +3,14 @@
 @section('title', 'Contact us | University of Michigan')
 
 
-
 @section('content')
     <link rel="stylesheet" href="{{asset('css/salauddin.css')}}">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
+
+    <div class="content-header">
+        <h1>Contact us</h1>
+
+    </div>
 
     <div class="contact-info-header">
         <p>Contact Info</p>

@@ -26,7 +26,12 @@
                 <li><a href="/contact">Contact</a></li>
             </ul>
         </nav>
+
     </header>
+<!-- 
+    <div class="header-next">
+        @yield('headerNext')
+    </div> -->
 
 
     <!-- Main Content -->

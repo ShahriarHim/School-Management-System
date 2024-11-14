@@ -5,25 +5,25 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('home');
+    return view('pages.home');
 });
 
 Route::get('/about', function(){
-    return view('about');
+    return view('pages.about');
 });
 
 Route::get('/contact', function(){
-    return view('contact');
+    return view('pages.contact');
 });
 
 Route::get('/events', function () {
-    return view('events');
+    return view('pages.events');
 });
 
 Route::get('/teachers', function () {
-    return view('teachers');
+    return view('pages.teachers');
 });
 Route::get('/gallery', function () {
-    return view('gallery');
+    return view('pages.gallery');
 });
 

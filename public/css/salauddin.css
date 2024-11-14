@@ -7,13 +7,16 @@
 .content-header{
     margin: auto;
     text-align: center;
-    background-color: rgb(82, 82, 218);
+    background-color:   #19a0ff;
 }
 
-img{
+
+
+.about-img{
     margin-top: 25px;
     width: 100%;
 }
+
 .first-h1{
     font-size: 2.5rem;
     font-weight: 300;
