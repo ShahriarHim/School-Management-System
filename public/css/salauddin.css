@@ -82,6 +82,11 @@ h2{
 
 .col p{
     color: #77838f;
+    overflow: hidden;     /* Hides overflow content */
+    text-overflow: ellipsis; /* Adds ellipsis (...) if the text overflows */
+    margin: 0;
+    padding: 0;
+    display: block; 
 }
 
 .divider {
@@ -99,6 +104,21 @@ h2{
     background-color: #e7eaf3;
 }
 
+
+
+/* @media (min-width:1323px){
+    .col{
+        flex: 1;
+     
+     }
+     
+    .col p{
+        padding: 0;
+        margin: 0;
+        white-space: nowrap;
+    }
+}
+ */
 
 @media (max-width:990px) {
     .col{
@@ -158,7 +178,7 @@ p{
     max-width: 880px;
     margin: auto;
 }
-
+ 
 label{
     font-size: 80%;
     margin-bottom: 9px;
