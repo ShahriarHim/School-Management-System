@@ -110,6 +110,7 @@ hr {
 @media (max-width: 768px) {
     .vlog-grid {
         grid-template-columns: repeat(2, 1fr);
+        padding: 5px;
     }
     .round-pic {
         width: 150px; height: 150px;
@@ -118,6 +119,7 @@ hr {
 @media (max-width: 480px) {
     .vlog-grid {
         grid-template-columns: 1fr;
+        padding: 5px;
     }
     .round-pic {
         width: 120px;
