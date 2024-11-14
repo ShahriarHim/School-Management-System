@@ -31,6 +31,10 @@
             @yield('page-title')
         </div> -->
     </header>
+<!-- 
+    <div class="header-next">
+        @yield('headerNext')
+    </div> -->
 
 
     <!-- Main Content -->
