@@ -15,7 +15,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 20px 120px;
     color: white;
 
 }
@@ -29,6 +29,7 @@
 }
 
 .header img {
+    margin-left: 10px;
     height: 35px;
     padding-left: 100px;
 }
@@ -53,14 +54,15 @@
 }
 
 .navbar ul li a {
-    color: rgb(177, 177, 177);
+    font-family: Poppins,Helvetica,Arial,sans-serif;
+    color: rgb(223, 221, 221);
     text-decoration: none;
-    padding: 5px 10px;
+    padding: 5px 5px;
     transition: color 0.3s, background-color 0.3s;
 }
 
 .navbar ul li a:hover {
-    color: white;
+    color: #ffffff;
     border-radius: 5px;
 }
 

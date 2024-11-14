@@ -9,12 +9,12 @@
     </div>
     <div class="upper">
         <span class="btn1">Teachers</span>
-        <h2 class="text-primary">Our Professional Teachers</h2>
+        <hp class="text-primary">Our Professional Teachers</hp>
     </div>
     <div class="team-container">
         <div class="team-row">
             <div class="team-member no-pic">
-                <div class="name">John Doe</div>
+                <div class="name">Alison Frami</div>
                 <div class="position">Developer</div>
                 <div class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor Lorem
                     ipsum dolor sit amet consectetur adipisicing elit. Dolore assumenda obcaecati ad deleniti magni minima
@@ -32,10 +32,10 @@
                     </div>
             </div>
             <div class="team-member with-pic">
-                <img src="{{ asset('images/pic1.jpeg') }}" alt="John Doe" class="round-pic">
+                <img src="{{ asset('images/rr1.jpg') }}" alt="John Doe" class="round-pic">
             </div>
             <div class="team-member no-pic">
-                <div class="name">Jane Smith</div>
+                <div class="name">Dr. Nyasia Rowe</div>
                 <div class="position">Designer</div>
                 <div class="description">Sed do eiusmod tempor Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                     Placeat veritatis beatae voluptas quo porro saepe soluta dolor doloribus repellendus delectus.
@@ -54,12 +54,12 @@
                 </div>
             </div>
             <div class="team-member with-pic">
-                <img src="{{ asset('images/pic1.jpeg') }}" alt="Jane Smith" class="round-pic">
+                <img src="{{ asset('images/rr2.jpg') }}" alt="Jane Smith" class="round-pic">
             </div>
         </div>
         <div class="team-row">
             <div class="team-member no-pic">
-                <div class="name">John Doe</div>
+                <div class="name">Lilla Marquardt</div>
                 <div class="position">Developer</div>
                 <div class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor Lorem
                     ipsum dolor sit amet consectetur adipisicing elit. Dolore assumenda obcaecati ad deleniti magni minima
@@ -77,7 +77,7 @@
                     </div>
             </div>
             <div class="team-member with-pic">
-                <img src="{{ asset('images/pic1.jpeg') }}" alt="John Doe" class="round-pic">
+                <img src="{{ asset('images/rr.jpg') }}" alt="John Doe" class="round-pic">
             </div>
             <div class="team-member no-pic">
                 <div class="name">Jane Smith</div>
@@ -99,7 +99,7 @@
                 </div>
             </div>
             <div class="team-member with-pic">
-                <img src="{{ asset('images/pic1.jpeg') }}" alt="Jane Smith" class="round-pic">
+                <img src="{{ asset('images/rr4.jpg') }}" alt="Jane Smith" class="round-pic">
             </div>
         </div>
     </div>
