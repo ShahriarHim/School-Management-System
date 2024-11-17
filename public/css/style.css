@@ -15,8 +15,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 120px;
-    color: white;
+    padding: 20px;
+    color: #fff;
 
 }
 
@@ -29,9 +29,9 @@
 }
 
 .header img {
-    margin-left: 10px;
+    margin-left: 30px;
     height: 35px;
-    padding-left: 100px;
+    padding-left: 70px;
 }
 
 .nav-toggle {
@@ -54,10 +54,9 @@
 }
 
 .navbar ul li a {
-    font-family: Poppins,Helvetica,Arial,sans-serif;
-    color: rgb(223, 221, 221);
+    color: #c4c3c3;
     text-decoration: none;
-    padding: 5px 5px;
+    padding: 5px 10px;
     transition: color 0.3s, background-color 0.3s;
 }
 
@@ -301,7 +300,11 @@
 }
 
 
-
+.button-container {
+    display: flex;
+    justify-content: center; /* Horizontally centers the button */
+    align-items: center; /* Vertically centers the button if needed */
+}
 .learn-more-btn {
     background-color: #377dff; /* Initial background color */
     color: #fff;
@@ -343,17 +346,18 @@
 /* ------------------ Event Section ------------------ */
 
 .events-section {
-    padding: 50px 0;
+    padding: 10px 0; /* Space inside the section */
+    background-color: #eceef0 !important; /* Background color */
+    width: 100%; /* Ensure the section spans the full width */
+    margin-top: 10%;
+    min-height: 400px;
+}
+.container-fluid {
+    padding: 0; /* Remove container padding if needed */
+
 }
 
-.card-img-top {
-    height: 200px;
-    object-fit: cover;
-}
 
-.card-body {
-    text-align: center;
-}
 
 /* ------------------ Noticeboard Page Styling ------------------ */
 

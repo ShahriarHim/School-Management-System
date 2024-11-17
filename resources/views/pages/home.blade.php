@@ -6,6 +6,7 @@
 @section('header-class', 'header-transparent')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/teacherstyle.css') }}">
 <div class="carousel-container">
     <div class="carousel">
         <div class="carousel-item active">
@@ -33,7 +34,7 @@
                 Eastgate, Factoria, Newport Hills, Newport Shores, Somerset, The Summit, and Sunset. As of the 2014-2015
                 school year, the principal is Dion Yahoudy. The mascot is the Knight, and the school colors are scarlet
                 and gold.</p>
-            <button class="learn-more-btn">Learn More</button>
+            <button class="learn-more-btn">Learn More ></button>
         </div>
         <div class="image-content">
             <img src="{{ asset('images/home_promo_1.png') }}" alt="Ekattor High School" />
@@ -43,68 +44,77 @@
 
 
 <!-- Our Teachers Section -->
-<section class="teachers-section my-5">
-    <div class="container">
-        <h2 class="text-center mb-4">Our Teachers</h2>
-        <div class="row">
-            <div class="col-md-4 text-center">
-                <img src="{{ asset('images/teacher1.jpg') }}" class="rounded-circle mb-3" alt="Teacher 1" width="150">
-                <h4>John Doe</h4>
-                <p>Mathematics Teacher</p>
+<div class="team-container">
+    <div class="noticeboard-precontent">
+        <p class="noticeboard-subheader">Teachers</p>
+
+        <h2 class="section-subtitle">Our Professional Teachers</h2>
+    </div>
+    <div class="team-row">
+        <div class="team-member no-pic">
+            <div class="name">Alison Frami</div>
+            <div class="position">Developer</div>
+            <div class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor Lorem
+                ipsum dolor sit amet consectetur adipisicing elit. Dolore assumenda obcaecati ad deleniti magni minima
+                mollitia, eum perferendis ullam itaque? sit amet, consectetur adipiscing elit.</div>
+            <div class="social-media">
+                <a class="btn btn-sm btn-icon btn-soft-secondary" href="https://facebook.com/janesmith" tabindex="0">
+                    <span class="fab fa-facebook-f btn-icon__inner"></span>
+                </a>
+                <a class="btn btn-sm btn-icon btn-soft-secondary" href="https://twitter.com/janesmith" tabindex="0">
+                    <span class="fab fa-twitter btn-icon__inner"></span>
+                </a>
+                <a class="btn btn-sm btn-icon btn-soft-secondary" href="https://linkedin.com/in/janesmith" tabindex="0">
+                    <span class="fab fa-linkedin-in btn-icon__inner"></span>
+                </a>
             </div>
-            <div class="col-md-4 text-center">
-                <img src="{{ asset('images/teacher2.jpg') }}" class="rounded-circle mb-3" alt="Teacher 2" width="150">
-                <h4>Jane Smith</h4>
-                <p>Science Teacher</p>
+        </div>
+        <div class="team-member with-pic">
+            <img src="{{ asset('images/rr1.jpg') }}" alt="John Doe" class="round-pic">
+        </div>
+        <div class="team-member no-pic">
+            <div class="name">Dr. Nyasia Rowe</div>
+            <div class="position">Designer</div>
+            <div class="description">Sed do eiusmod tempor Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Placeat veritatis beatae voluptas quo porro saepe soluta dolor doloribus repellendus delectus.
+                incididunt ut labore et dolore magna aliqua, Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </div>
-            <div class="col-md-4 text-center">
-                <img src="{{ asset('images/teacher3.jpg') }}" class="rounded-circle mb-3" alt="Teacher 3" width="150">
-                <h4>Michael Brown</h4>
-                <p>History Teacher</p>
+            <div class="social-media">
+                <a class="btn btn-sm btn-icon btn-soft-secondary" href="https://facebook.com/janesmith" tabindex="0">
+                    <span class="fab fa-facebook-f btn-icon__inner"></span>
+                </a>
+                <a class="btn btn-sm btn-icon btn-soft-secondary" href="https://twitter.com/janesmith" tabindex="0">
+                    <span class="fab fa-twitter btn-icon__inner"></span>
+                </a>
+                <a class="btn btn-sm btn-icon btn-soft-secondary" href="https://linkedin.com/in/janesmith" tabindex="0">
+                    <span class="fab fa-linkedin-in btn-icon__inner"></span>
+                </a>
             </div>
+        </div>
+        <div class="team-member with-pic">
+            <img src="{{ asset('images/rr2.jpg') }}" alt="Jane Smith" class="round-pic">
+        </div>
+
+    </div>
+</div>
+<div class="button-container">
+    <button class="learn-more-btn">Learn More ></button>
+</div>
+
+<!-- Events Section -->
+
+<section class="events-section my-5">
+    <div class="container-fluid">
+        <div class="noticeboard-precontent">
+            <p class="noticeboard-subheader">Events</p>
+            <h2 class="section-subtitle">Upcoming Events</h2>
+        </div>
+        <div class="button-container">
+            <button class="learn-more-btn">Learn More ></button>
         </div>
     </div>
 </section>
 
-<!-- Events Section -->
-<section class="events-section my-5">
-    <div class="container">
-        <h2 class="text-center mb-4">Upcoming Events</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="{{ asset('images/event1.jpg') }}" class="card-img-top" alt="Event 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Science Fair</h5>
-                        <p class="card-text">Join us for an exciting science fair showcasing projects from our students.
-                        </p>
-                        <p><small>Date: Dec 15, 2024</small></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="{{ asset('images/event2.jpg') }}" class="card-img-top" alt="Event 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Math Olympiad</h5>
-                        <p class="card-text">A competition for math enthusiasts to show their skills and win prizes.</p>
-                        <p><small>Date: Jan 10, 2025</small></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="{{ asset('images/event3.jpg') }}" class="card-img-top" alt="Event 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Art Exhibition</h5>
-                        <p class="card-text">Experience beautiful art pieces created by our talented students.</p>
-                        <p><small>Date: Feb 20, 2025</small></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const prevButton = document.querySelector('.carousel-control-prev');
