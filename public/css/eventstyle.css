@@ -18,6 +18,7 @@
     height: 10vh;
     margin: 50px;
 }
+
 .btn {
     margin-top: 70px;
     font-family: Poppins,Helvetica,Arial,sans-serif;
@@ -119,7 +120,7 @@ hr {
 @media (max-width: 480px) {
     .vlog-grid {
         grid-template-columns: 1fr;
-        padding: 5px;
+        padding: 35px;
     }
     .round-pic {
         width: 120px;

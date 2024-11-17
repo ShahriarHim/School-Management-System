@@ -23,11 +23,12 @@
         </div>
         <div class="notice-text">
             <span class="notice-date">31 Dec, 2019</span>
-            <h3 class="notice-title">Sports day preparation event calling</h3>
+            <a href="{{ route('noticeboard-details',['title'=>1]) }}" class="notice-title-link"><h3 class="notice-title">Sports day preparation event calling</h3></a>
+            
             <p class="notice-description">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
                 roots in a piece of classic literature from 45 BC...</p>
-            <a href="{{ url('/noticeboard-details') }}" class="read-more-btn">Read More</a>
 
+            <a href="{{ route('noticeboard-details',['title'=>1]) }}" class="read-more-btn">Read More</a>
         </div>
     </div>
 
@@ -36,11 +37,12 @@
             <img src="{{ asset('images/nb2.jpg') }}" alt="Notice Image">
         </div>
         <div class="notice-text">
-            <span class="notice-date">31 Dec, 2019</span>
-            <h3 class="notice-title">Sports day preparation event calling</h3>
+            <span class="notice-date">30 Dec, 2019</span>
+            <a href="{{ route('noticeboard-details',['title'=>2]) }}" class="notice-title-link"><h3 class="notice-title">Picnic registration is now open</h3></a>
+
             <p class="notice-description">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
                 roots in a piece of classic literature from 45 BC...</p>
-            <button class="read-more-btn">Read More</button>
+                <a href="{{ route('noticeboard-details',['title'=>2]) }}" class="read-more-btn">Read More</a>
         </div>
     </div>
     <div class="notice-item">
@@ -48,11 +50,12 @@
             <img src="{{ asset('images/nb3.jpg') }}" alt="Notice Image">
         </div>
         <div class="notice-text">
-            <span class="notice-date">31 Dec, 2019</span>
-            <h3 class="notice-title">Sports day preparation event calling</h3>
+            <span class="notice-date">19 Dec, 2019</span>
+            <a href="{{ route('noticeboard-details',['title'=>3]) }}" class="notice-title-link"><h3 class="notice-title">Semester exam date postponed</h3></a>
+            
             <p class="notice-description">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
                 roots in a piece of classic literature from 45 BC...</p>
-            <button class="read-more-btn">Read More</button>
+            <a href="{{ route('noticeboard-details',['title'=>3]) }}" class="read-more-btn">Read More</a>
         </div>
     </div>
     <div class="notice-item">
@@ -60,11 +63,12 @@
             <img src="{{ asset('images/nb4.jpg') }}" alt="Notice Image">
         </div>
         <div class="notice-text">
-            <span class="notice-date">31 Dec, 2019</span>
-            <h3 class="notice-title">Sports day preparation event calling</h3>
+        <span class="notice-date">01 Jan, 2019</span>
+            <a href="{{ route('noticeboard-details',['title'=>4]) }}" class="notice-title-link"><h3 class="notice-title">Library building renovated</h3></a>
+            
             <p class="notice-description">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
                 roots in a piece of classic literature from 45 BC...</p>
-            <button class="read-more-btn">Read More</button>
+            <a href="{{ route('noticeboard-details',['title'=>4]) }}" class="read-more-btn">Read More</a>
         </div>
     </div>
 </div>
