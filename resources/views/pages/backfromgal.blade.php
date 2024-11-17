@@ -22,27 +22,35 @@
 
         <div class="pic">
             <img src="{{ asset('images/picg5.jpg') }}" class="vlog-pic">
+            <div class="plus-overlay"> <span class="plus-icon">+</span> </div>
         </div>
         <div class="pic">
             <img src="{{ asset('images/picg6.jpg') }}" class="vlog-pic">
+            <div class="plus-overlay"> <span class="plus-icon">+</span> </div>
         </div>
         <div class="pic">
             <img src="{{ asset('images/picg1.jpg') }}" class="vlog-pic">
+            <div class="plus-overlay"> <span class="plus-icon">+</span> </div>
         </div>
         <div class="pic">
             <img src="{{ asset('images/picg3.jpg') }}" class="vlog-pic">
+            <div class="plus-overlay"> <span class="plus-icon">+</span> </div>
         </div>
         <div class="pic">
             <img src="{{ asset('images/picg2.jpg') }}" class="vlog-pic">
+            <div class="plus-overlay"> <span class="plus-icon">+</span> </div>
         </div>
         <div class="pic">
             <img src="{{ asset('images/picg1.jpg') }}" class="vlog-pic">
+            <div class="plus-overlay"> <span class="plus-icon">+</span> </div>
         </div>
         <div class="pic">
             <img src="{{ asset('images/picg4.jpg') }}" class="vlog-pic">
+            <div class="plus-overlay"> <span class="plus-icon">+</span> </div>
         </div>
         <div class="pic">
             <img src="{{ asset('images/picg5.jpg') }}" class="vlog-pic">
+            <div class="plus-overlay"> <span class="plus-icon">+</span> </div>
         </div>
     </div>
 
