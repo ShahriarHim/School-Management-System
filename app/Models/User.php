@@ -21,6 +21,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'image',
+        'designation',
+        'fb',
+        'twitter',
+        'linkedin',
+        'description',
     ];
 
     /**
@@ -41,4 +48,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    const ROLE_STUDENT = 1;
+    const ROLE_ADMIN = 2;
+    const ROLE_TEACHER = 3;
+
+    // Example usage
+    public function isAdmin(): bool
+    {
+        return $this->role === self::ROLE_ADMIN;
+    }
+    
 }
