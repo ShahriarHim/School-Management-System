@@ -13,7 +13,7 @@
 
     <div class="about-page-margin">
         <div class="">
-            <img class="about-img" src="{{asset('storage/about.jpg')}}" alt="">
+            <img class="about-img" src="{{asset('images/about.jpg')}}" alt="">
         </div>
 
         <div>
