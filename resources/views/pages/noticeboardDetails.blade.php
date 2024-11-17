@@ -23,8 +23,11 @@
 ?>
 
 
-
+<div class="noticeboard-header">
+        <h1 class="noticeboard-title">Noticeboard</h1>
+    </div>
 <section class="about-section">
+
     <div class="about-content">
         <div class="text-content">
             <a href="{{url('/noticeboard')}}" class="back-button">
