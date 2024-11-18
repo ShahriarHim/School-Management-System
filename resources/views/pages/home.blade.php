@@ -27,7 +27,7 @@
 <section class="about-section">
     <div class="about-content">
         <div class="text-content">
-            <h5> About</h5>
+            <h6> About</h6>
             <h2>Welcome to Ekattor High School</h2>
             <p>Ekattor High School (NHS) is a public secondary school in Bellevue, Washington. It serves students in
                 grades 9–12 in the southern part of the Bellevue School District, including the neighborhoods of
@@ -47,54 +47,37 @@
 <div class="team-container">
     <div class="noticeboard-precontent">
         <p class="noticeboard-subheader">Teachers</p>
-
         <h2 class="section-subtitle">Our Professional Teachers</h2>
     </div>
     <div class="team-row">
-        <div class="team-member no-pic">
-            <div class="name">Alison Frami</div>
-            <div class="position">Developer</div>
-            <div class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Dolore assumenda obcaecati ad deleniti magni minima
-                mollitia, eum perferendis ullam itaque? sit amet, consectetur adipiscing elit.</div>
-            <div class="social-media">
-                <a class="btn btn-sm btn-icon btn-soft-secondary" href="https://facebook.com/janesmith" tabindex="0">
-                    <span class="fab fa-facebook-f btn-icon__inner"></span>
-                </a>
-                <a class="btn btn-sm btn-icon btn-soft-secondary" href="https://twitter.com/janesmith" tabindex="0">
-                    <span class="fab fa-twitter btn-icon__inner"></span>
-                </a>
-                <a class="btn btn-sm btn-icon btn-soft-secondary" href="https://linkedin.com/in/janesmith" tabindex="0">
-                    <span class="fab fa-linkedin-in btn-icon__inner"></span>
-                </a>
+        @foreach ($teachers as $teacher)
+            <div class="team-member {{ $teacher->image_url ? 'with-pic' : 'no-pic' }}">
+                @if ($teacher->image_url)
+                    <img src="{{ asset($teacher->image_url) }}" alt="{{ $teacher->name }}" class="round-pic">
+                @else
+                    <div class="name">{{ $teacher->name }}</div>
+                    <div class="position">{{ $teacher->designation }}</div>
+                    <div class="description">{{ $teacher->description }}</div>
+                    <div class="social-media">
+                        @if ($teacher->facebook_url)
+                            <a class="btn btn-sm btn-icon btn-soft-secondary" href="{{ $teacher->facebook_url }}" tabindex="0">
+                                <span class="fab fa-facebook-f btn-icon__inner"></span>
+                            </a>
+                        @endif
+                        @if ($teacher->twitter_url)
+                            <a class="btn btn-sm btn-icon btn-soft-secondary" href="{{ $teacher->twitter_url }}" tabindex="0">
+                                <span class="fab fa-twitter btn-icon__inner"></span>
+                            </a>
+                        @endif
+                        @if ($teacher->linkedin_url)
+                            <a class="btn btn-sm btn-icon btn-soft-secondary" href="{{ $teacher->linkedin_url }}" tabindex="0">
+                                <span class="fab fa-linkedin-in btn-icon__inner"></span>
+                            </a>
+                        @endif
+                    </div>
+                @endif
             </div>
-        </div>
-        <div class="team-member with-pic">
-            <img src="{{ asset('images/rr1.jpg') }}" alt="John Doe" class="round-pic">
-        </div>
-        <div class="team-member no-pic">
-            <div class="name">Dr. Nyasia Rowe</div>
-            <div class="position">Designer</div>
-            <div class="description">Sed do eiusmod tempor Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Placeat veritatis beatae voluptas quo porro saepe soluta dolor doloribus repellendus delectus.
-                incididunt ut labore et dolore magna aliqua, Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </div>
-            <div class="social-media">
-                <a class="btn btn-sm btn-icon btn-soft-secondary" href="https://facebook.com/janesmith" tabindex="0">
-                    <span class="fab fa-facebook-f btn-icon__inner"></span>
-                </a>
-                <a class="btn btn-sm btn-icon btn-soft-secondary" href="https://twitter.com/janesmith" tabindex="0">
-                    <span class="fab fa-twitter btn-icon__inner"></span>
-                </a>
-                <a class="btn btn-sm btn-icon btn-soft-secondary" href="https://linkedin.com/in/janesmith" tabindex="0">
-                    <span class="fab fa-linkedin-in btn-icon__inner"></span>
-                </a>
-            </div>
-        </div>
-        <div class="team-member with-pic">
-            <img src="{{ asset('images/rr2.jpg') }}" alt="Jane Smith" class="round-pic">
-        </div>
-
+        @endforeach
     </div>
 </div>
 <div class="button-container">

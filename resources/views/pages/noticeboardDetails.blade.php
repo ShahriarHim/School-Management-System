@@ -9,23 +9,36 @@
 
 
 <div class="noticeboard-header">
-        <h1 class="noticeboard-title">Noticeboard</h1>
-    </div>
-<section class="about-section">
+    <h1 class="noticeboard-title">Noticeboard</h1>
+</div>
 
-    <div class="about-content">
-        <div class="text-content">
-            <h5> About</h5>
-            <h2>Welcome to Ekattor High School</h2>
-            <p>Ekattor High School (NHS) is a public secondary school in Bellevue, Washington. It serves students in
-                grades 9–12 in the southern part of the Bellevue School District, including the neighborhoods of
-                Eastgate, Factoria, Newport Hills, Newport Shores, Somerset, The Summit, and Sunset. As of the 2014-2015
-                school year, the principal is Dion Yahoudy. The mascot is the Knight, and the school colors are scarlet
-                and gold.</p>
-            <button class="learn-more-btn">Learn More</button>
+<?php
+$titleArray = [
+    'Sports day preparation event calling',
+    'Picnic registration is now open',
+    'Semester exam date postponed',
+    'Library building renovated'
+];
+?>
+<section class="notice-details-section">
+
+    <div class="notice-details-content">
+        <div class="notice-text-content">
+            <a href="{{url('/noticeboard')}}" class="back-btn-container">
+                <span class="fas fa-arrow-left small back-btn-icon"></span>
+                <span class="back-btn-text">Back to noticeboard</span>
+            </a>
+
+            <h1>{{$titleArray[$title - 1]}}</h1>
+            <span>31 Dec, 2019</span>
+            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+                Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at
+                Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a
+                Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the
+                undoubtable source.</p>
         </div>
-        <div class="image-content">
-            <img src="{{ asset('images/home_promo_1.png') }}" alt="Ekattor High School" />
+        <div class="notice-details-image">
+            <img src="{{ asset('images/nb1.jpg') }}" alt="Ekattor High School" />
         </div>
     </div>
 </section>
