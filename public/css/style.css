@@ -281,7 +281,7 @@
     margin-bottom: 20px;
 }
 
-.text-content h5 {
+.text-content h6 {
     max-width: 70px;
     padding: 10px ;
     color:#00c9a7;
@@ -433,6 +433,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+
 }
 
 .notice-date {
@@ -441,11 +442,12 @@
     margin-bottom: 5px;
 }
 
-.notice-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #333;
+.notice-title-link {
+    font-size: 1rem;
+    /* font-weight: 100 ; */
+    color: #1a1919;
     margin: 5px 0;
+    text-decoration: none;
 }
 
 .notice-description {
@@ -479,6 +481,111 @@
         flex-direction: column;
     }
     .notice-image, .notice-text {
+        width: 100%;
+    }
+}
+
+
+/* ------------------ Noticeboard details Styling ------------------ */
+
+.notice-details-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background-color: #f4f7fc;
+    gap: 20px;
+}
+
+.notice-details-content {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    max-width: 1200px;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.back-btn-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Space between the icon and text */
+    cursor: pointer; /* Indicate it's clickable */
+    color: #666; /* Adjust text color if needed */
+    font-size: 1rem; /* Adjust font size */
+    text-decoration: none; /* Remove underline if it's a link */
+    margin-bottom: 1rem; /* Add spacing below the back button if needed */
+}
+
+.back-btn-icon {
+    font-size: 1.2rem; /* Adjust icon size */
+    font-weight: bold;
+}
+
+.back-btn-text {
+    font-size: 1rem;
+    color: inherit; /* Matches the parent color */
+}
+
+.notice-text-content {
+    flex: 1;
+    padding: 30px;
+}
+.notice-text-content a{
+    text-decoration: none;
+    color: #77838f!important;
+}
+
+.notice-text-content h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #377dff;
+    margin-bottom: 10px;
+}
+
+.notice-text-content span {
+    font-size: 1rem;
+    color: #888;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.notice-text-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.notice-details-image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.notice-details-image img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .notice-details-section {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .notice-details-content {
+        flex-direction: column;
+    }
+
+    .notice-details-image img {
         width: 100%;
     }
 }

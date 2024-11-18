@@ -5,46 +5,24 @@
     <link rel="stylesheet" href="{{ asset('css/gal.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <div class="first">
-        <h1>Photo gallery</h1>
+        <h1>{{ $pc->title }}</h1>
     </div>
     <div class="upper">
-        <span class="btn1">Albums</span>
-        <p class="text-primary">Our latest photo galleries</p>
+        <span class="btn1">{{ $pc->button }}</span>
+        <p class="text-primary">{{ $pc->title2 }}</p>
     </div>
 
     <div class="gal-container">
-
-
-        <a href="{{ url('/galdetails') }}">
-        <div class="pic">
-            <img src="{{ asset('images/picg1.jpg') }}" class="vlog-pic">
-            <div class="overlay-text">
-                <h1>School Images</h1>
-                <h2>8 Images</h2>
-            </div>
-        </div>
-        </a>
-
-        <a href="{{ url('/galdetails') }}">
-        <div class="pic">
-            <img src="{{ asset('images/picg2.jpg') }}" class="vlog-pic">
-            <div class="overlay-text">
-                <h1>School Images</h1>
-                <h2>8 Images</h2>
-            </div>
-        </div>
-        </a>
-
-        <a href="{{ url('/galdetails') }}">
-        <div class="pic">
-            <img src="{{ asset('images/picg3.jpg') }}" class="vlog-pic">
-            <div class="overlay-text">
-                <h1>School Images</h1>
-                <h2>8 Images</h2>
-            </div>
-        </div>
-        </a>
-
+        @foreach($galleries as $gallery)
+            <a href="{{ url('/galdetails', $gallery->id) }}">
+                <div class="pic">
+                    <img src="{{ asset($gallery->thumbnail) }}" class="vlog-pic">
+                    <div class="overlay-text">
+                        <h1>{{ $gallery->title }}</h1>
+                        <h2>{{ $gallery->images_count }} Images</h2>
+                    </div>
+                </div>
+            </a>
+        @endforeach
     </div>
-
 @endsection

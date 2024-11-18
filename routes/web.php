@@ -1,9 +1,13 @@
 <?php
 
 use App\Http\Controllers\aboutPageController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\PageContentController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\GalleryDetailsController;
 
 
 Route::get('/', function () {
@@ -12,22 +16,13 @@ Route::get('/', function () {
 Route::get('/noticeboard', function () {
     return view('pages.noticeboard');
 });
-Route::get('/noticeboard-details', function () {
-    return view('pages.noticeboardDetails');
-});
+Route::get('/noticeboard-details/{title}', function ($title) {
+    return view('pages.noticeboardDetails', ['title'=> $title]);
+})->name('noticeboard-details');
 
 
-Route::get('/events', [EventController::class, 'index'])->name('events.index');
 
-Route::get('/coaches', function () {
-    return view('pages.teachers');
-});
-Route::get('/gallery', function () {
-    return view('pages.gallery');
-});
-Route::get('/galdetails', function () {
-    return view('pages.backfromgal');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 
 /* --------------admin routes------------------------- */
@@ -43,3 +38,8 @@ Route::get('/about',[aboutPageController::class,'index'])->name('about');
 Route::get('/contact', function(){
     return view('pages.contact');
 });
+//Sobuj Part
+Route::get('/coaches', [TeacherController::class, 'index'])->name('teachers.index');
+Route::get('/galdetails/{id}', [GalleryDetailsController::class, 'show'])->name('gallery.details');
+Route::get('/events', [EventController::class, 'show'])->name('events.show');
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
