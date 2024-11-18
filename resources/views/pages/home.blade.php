@@ -7,6 +7,7 @@
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/teacherstyle.css') }}">
+<link rel="stylesheet" href="{{ asset('css/eventstyle.css') }}">
 <div class="carousel-container">
     <div class="carousel">
         <div class="carousel-item active">
@@ -27,7 +28,7 @@
 <section class="about-section">
     <div class="about-content">
         <div class="text-content">
-            <h5> About</h5>
+            <h6> About</h6>
             <h2>Welcome to Ekattor High School</h2>
             <p>Ekattor High School (NHS) is a public secondary school in Bellevue, Washington. It serves students in
                 grades 9–12 in the southern part of the Bellevue School District, including the neighborhoods of
@@ -47,54 +48,37 @@
 <div class="team-container">
     <div class="noticeboard-precontent">
         <p class="noticeboard-subheader">Teachers</p>
-
         <h2 class="section-subtitle">Our Professional Teachers</h2>
     </div>
     <div class="team-row">
-        <div class="team-member no-pic">
-            <div class="name">Alison Frami</div>
-            <div class="position">Developer</div>
-            <div class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Dolore assumenda obcaecati ad deleniti magni minima
-                mollitia, eum perferendis ullam itaque? sit amet, consectetur adipiscing elit.</div>
-            <div class="social-media">
-                <a class="btn btn-sm btn-icon btn-soft-secondary" href="https://facebook.com/janesmith" tabindex="0">
-                    <span class="fab fa-facebook-f btn-icon__inner"></span>
-                </a>
-                <a class="btn btn-sm btn-icon btn-soft-secondary" href="https://twitter.com/janesmith" tabindex="0">
-                    <span class="fab fa-twitter btn-icon__inner"></span>
-                </a>
-                <a class="btn btn-sm btn-icon btn-soft-secondary" href="https://linkedin.com/in/janesmith" tabindex="0">
-                    <span class="fab fa-linkedin-in btn-icon__inner"></span>
-                </a>
-            </div>
-        </div>
-        <div class="team-member with-pic">
-            <img src="{{ asset('images/rr1.jpg') }}" alt="John Doe" class="round-pic">
-        </div>
-        <div class="team-member no-pic">
-            <div class="name">Dr. Nyasia Rowe</div>
-            <div class="position">Designer</div>
-            <div class="description">Sed do eiusmod tempor Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Placeat veritatis beatae voluptas quo porro saepe soluta dolor doloribus repellendus delectus.
-                incididunt ut labore et dolore magna aliqua, Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </div>
-            <div class="social-media">
-                <a class="btn btn-sm btn-icon btn-soft-secondary" href="https://facebook.com/janesmith" tabindex="0">
-                    <span class="fab fa-facebook-f btn-icon__inner"></span>
-                </a>
-                <a class="btn btn-sm btn-icon btn-soft-secondary" href="https://twitter.com/janesmith" tabindex="0">
-                    <span class="fab fa-twitter btn-icon__inner"></span>
-                </a>
-                <a class="btn btn-sm btn-icon btn-soft-secondary" href="https://linkedin.com/in/janesmith" tabindex="0">
-                    <span class="fab fa-linkedin-in btn-icon__inner"></span>
-                </a>
-            </div>
-        </div>
-        <div class="team-member with-pic">
-            <img src="{{ asset('images/rr2.jpg') }}" alt="Jane Smith" class="round-pic">
-        </div>
+        @foreach ($teachers as $teacher)
+            <div class="team-member {{ $teacher->image ? 'with-pic' : 'no-pic' }}">
 
+                <img src="{{ asset($teacher->image) }}" alt="{{ $teacher->name }}" class="round-pic">
+
+                <div class="name">{{ $teacher->name }}</div>
+                <div class="position">{{ $teacher->designation }}</div>
+                <div class="description">{{ $teacher->description }}</div>
+                <div class="social-media">
+                    @if ($teacher->fb)
+                        <a class="btn btn-sm btn-icon btn-soft-secondary" href="{{ $teacher->fb}}" tabindex="0">
+                            <span class="fab fa-facebook-f btn-icon__inner"></span>
+                        </a>
+                    @endif
+                    @if ($teacher->twitter)
+                        <a class="btn btn-sm btn-icon btn-soft-secondary" href="{{ $teacher->twitter }}" tabindex="0">
+                            <span class="fab fa-twitter btn-icon__inner"></span>
+                        </a>
+                    @endif
+                    @if ($teacher->linkedin)
+                        <a class="btn btn-sm btn-icon btn-soft-secondary" href="{{ $teacher->linkedin }}" tabindex="0">
+                            <span class="fab fa-linkedin-in btn-icon__inner"></span>
+                        </a>
+                    @endif
+                </div>
+
+            </div>
+        @endforeach
     </div>
 </div>
 <div class="button-container">
@@ -108,6 +92,26 @@
         <div class="noticeboard-precontent">
             <p class="noticeboard-subheader">Events</p>
             <h2 class="section-subtitle">Upcoming Events</h2>
+        </div>
+        <div class="vlog-grid">
+            @foreach($events as $event)
+                @if($event->status !== 'past')
+                    <div class="vlog-item">
+                        <div class="date">{{ $event->date->format('d M, Y') }}</div>
+                        <span class="vlog-name"><a class="styled-link" href="#">{{ $event->details }}</a></span>
+                        <hr>
+                        <div class="vlog-footer">
+                            <img src="{{ asset($event->image) }}" class="vlog-pic">
+                            <p class="vlog-title"><a class="styled-link" href="#">{{ $event->title }}</a></p>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
+        </div>
+        <div class="slider-dots">
+            @for ($i = 0; $i < ceil($event->count() / 4); $i++)
+                <span class="dot" onclick="currentSlide({{ $i + 1 }})"></span>
+            @endfor
         </div>
         <div class="button-container">
             <button class="learn-more-btn">Learn More ></button>
@@ -139,6 +143,41 @@
             carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
         }
     });
+</script>
+<script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("vlog-item");
+        let dots = document.getElementsByClassName("dot");
+
+        let totalSlides = Math.ceil(slides.length / 4);
+
+        if (n > totalSlides) {slideIndex = 1}
+        if (n < 1) {slideIndex = totalSlides}
+
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+
+        let start = (slideIndex - 1) * 4;
+        let end = start + 4;
+        for (i = start; i < end && i < slides.length; i++) {
+            slides[i].style.display = "block";
+        }
+
+        dots[slideIndex - 1].className += " active";
+    }
 </script>
 
 @endsection

@@ -1,9 +1,11 @@
 <?php
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GalleryDetailsController;
+
 
 Route::get('/', function () {
     return view('pages.home');
@@ -11,9 +13,9 @@ Route::get('/', function () {
 Route::get('/noticeboard', function () {
     return view('pages.noticeboard');
 });
-Route::get('/noticeboard-details', function () {
-    return view('pages.noticeboardDetails');
-});
+Route::get('/noticeboard-details/{title}', function ($title) {
+    return view('pages.noticeboardDetails', ['title'=> $title]);
+})->name('noticeboard-details');
 
 Route::get('/about', function(){
     return view('pages.about');
@@ -24,6 +26,7 @@ Route::get('/contact', function(){
 });
 
 
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 //Sobuj Part
 Route::get('/coaches', [TeacherController::class, 'index'])->name('teachers.index');
