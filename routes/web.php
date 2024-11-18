@@ -1,8 +1,9 @@
 <?php
-
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\GalleryDetailsController;
 
 Route::get('/', function () {
     return view('pages.home');
@@ -22,16 +23,11 @@ Route::get('/contact', function(){
     return view('pages.contact');
 });
 
+
+
+
+//Sobuj Part
+Route::get('/coaches', [TeacherController::class, 'index'])->name('teachers.index');
+Route::get('/galdetails/{id}', [GalleryDetailsController::class, 'show'])->name('gallery.details');
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
-
-Route::get('/coaches', function () {
-    return view('pages.teachers');
-});
-Route::get('/gallery', function () {
-    return view('pages.gallery');
-});
-Route::get('/galdetails', function () {
-    return view('pages.backfromgal');
-});
-
-
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
