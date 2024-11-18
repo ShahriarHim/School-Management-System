@@ -11,7 +11,7 @@
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/noticeboard">Noticeboard</a></li>
-            <li><a href="/events">Events</a></li>
+            <li><a href="/events">Noticeboard</a></li>
             <li><a href="/coaches">Coaches</a></li>
             <li><a href="/gallery">Gallery</a></li>
             <li><a href="/about">About</a></li>

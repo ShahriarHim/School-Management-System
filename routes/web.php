@@ -25,9 +25,8 @@ Route::get('/contact', function(){
 
 
 
-
 //Sobuj Part
 Route::get('/coaches', [TeacherController::class, 'index'])->name('teachers.index');
 Route::get('/galdetails/{id}', [GalleryDetailsController::class, 'show'])->name('gallery.details');
-Route::get('/events', [EventController::class, 'index'])->name('events.index');
+Route::get('/events', [EventController::class, 'show'])->name('events.show');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
