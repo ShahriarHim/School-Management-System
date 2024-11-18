@@ -37,3 +37,8 @@ Route::get('/galdetails', function () {
 });
 
 
+/* --------------admin routes------------------------- */
+
+Route::get('/about-content',function(){
+    return view('admin.aboutContent');
+});
