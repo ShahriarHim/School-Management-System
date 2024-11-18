@@ -8,47 +8,16 @@
         <h1>Gallery</h1>
     </div>
     <div class="upper">
-        <span class="btn1">01 Jan, 1897</span>
-        <p class="text-primary">Convocation Day</p>
+        <span class="btn1">2 Feb 1990</span>
+        <p class="text-primary">Convocation Day </p>
     </div>
-    <p class="it1">It is a long established fact that a reader will be distracted by the readable content of a page when
-        looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,
-        as opposed to using 'Content here, content here', making it look like readable English. It is a long established
-        fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of
-        using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here,
-        content here', making it look like readable English.</p>
+    <p class="it1">{{ $gallery->description }}</p>
     <div class="gal-container">
-        <div class="pic">
-            <img src="{{ asset('images/picg5.jpg') }}" class="vlog-pic">
-            <div class="plus-overlay"> <span class="plus-icon">+</span> </div>
-        </div>
-        <div class="pic">
-            <img src="{{ asset('images/picg6.jpg') }}" class="vlog-pic">
-            <div class="plus-overlay"> <span class="plus-icon">+</span> </div>
-        </div>
-        <div class="pic">
-            <img src="{{ asset('images/picg1.jpg') }}" class="vlog-pic">
-            <div class="plus-overlay"> <span class="plus-icon">+</span> </div>
-        </div>
-        <div class="pic">
-            <img src="{{ asset('images/picg3.jpg') }}" class="vlog-pic">
-            <div class="plus-overlay"> <span class="plus-icon">+</span> </div>
-        </div>
-        <div class="pic">
-            <img src="{{ asset('images/picg2.jpg') }}" class="vlog-pic">
-            <div class="plus-overlay"> <span class="plus-icon">+</span> </div>
-        </div>
-        <div class="pic">
-            <img src="{{ asset('images/picg1.jpg') }}" class="vlog-pic">
-            <div class="plus-overlay"> <span class="plus-icon">+</span> </div>
-        </div>
-        <div class="pic">
-            <img src="{{ asset('images/picg4.jpg') }}" class="vlog-pic">
-            <div class="plus-overlay"> <span class="plus-icon">+</span> </div>
-        </div>
-        <div class="pic">
-            <img src="{{ asset('images/picg5.jpg') }}" class="vlog-pic">
-            <div class="plus-overlay"> <span class="plus-icon">+</span> </div>
-        </div>
+        @foreach($gallery->images as $image)
+            <div class="pic">
+                <img src="{{ asset($image->image) }}" class="vlog-pic">
+                <div class="plus-overlay"> <span class="plus-icon">+</span> </div>
+            </div>
+        @endforeach
     </div>
 @endsection
