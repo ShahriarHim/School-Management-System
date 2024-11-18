@@ -36,7 +36,18 @@ p{
 
 
 
-/* contact page */
+
+
+
+
+
+
+
+
+
+/* -----------------contact page--------------- */
+
+
 
 p{
     margin-top: 0;
@@ -82,8 +93,8 @@ h2{
 
 .col p{
     color: #77838f;
-    overflow: hidden;     /* Hides overflow content */
-    text-overflow: ellipsis; /* Adds ellipsis (...) if the text overflows */
+    overflow: hidden;     
+    text-overflow: ellipsis; 
     margin: 0;
     padding: 0;
     display: block; 
@@ -105,20 +116,6 @@ h2{
 }
 
 
-
-/* @media (min-width:1323px){
-    .col{
-        flex: 1;
-     
-     }
-     
-    .col p{
-        padding: 0;
-        margin: 0;
-        white-space: nowrap;
-    }
-}
- */
 
 @media (max-width:990px) {
     .col{
@@ -264,7 +261,7 @@ button{
 
 }
 
-button:hover{
+.qna-button:hover{
     margin-top: -5px;
     transition: all .3s;
 }
@@ -273,3 +270,23 @@ button:hover{
 
 
 
+
+
+
+
+/* --------admin/aboutContent------------ */
+
+
+
+.about-content-button{
+    margin-top: 50px;
+}
+
+.form-div .col1 label{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.form-div .col1 {
+    margin-bottom: 30px;
+}
