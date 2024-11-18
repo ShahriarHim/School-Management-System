@@ -13,38 +13,16 @@
     </div>
 
     <div class="gal-container">
-
-
-        <a href="{{ url('/galdetails') }}">
-        <div class="pic">
-            <img src="{{ asset('images/picg1.jpg') }}" class="vlog-pic">
-            <div class="overlay-text">
-                <h1>School Images</h1>
-                <h2>8 Images</h2>
-            </div>
-        </div>
-        </a>
-
-        <a href="{{ url('/galdetails') }}">
-        <div class="pic">
-            <img src="{{ asset('images/picg2.jpg') }}" class="vlog-pic">
-            <div class="overlay-text">
-                <h1>School Images</h1>
-                <h2>8 Images</h2>
-            </div>
-        </div>
-        </a>
-
-        <a href="{{ url('/galdetails') }}">
-        <div class="pic">
-            <img src="{{ asset('images/picg3.jpg') }}" class="vlog-pic">
-            <div class="overlay-text">
-                <h1>School Images</h1>
-                <h2>8 Images</h2>
-            </div>
-        </div>
-        </a>
-
+        @foreach($galleries as $gallery)
+            <a href="{{ url('/galdetails', $gallery->id) }}">
+                <div class="pic">
+                    <img src="{{ asset($gallery->thumbnail) }}" class="vlog-pic">
+                    <div class="overlay-text">
+                        <h1>{{ $gallery->title }}</h1>
+                        <h2>{{ $gallery->images_count }} Images</h2>
+                    </div>
+                </div>
+            </a>
+        @endforeach
     </div>
-
 @endsection

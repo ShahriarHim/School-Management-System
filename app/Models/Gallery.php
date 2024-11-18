@@ -15,4 +15,7 @@ class Gallery extends Model
     {
         return $this->hasMany(GalleryImage::class);
     }
+    public function galleryDates(){
+        return $this->hasOne(GalleryDate::class);
+    }
 }
