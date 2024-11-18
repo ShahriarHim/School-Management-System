@@ -39,9 +39,6 @@ Route::post('/page-content',[PageContentController::class,'store'])->name('page-
 Route::get('/about',[aboutPageController::class,'index'])->name('about');
 
 
-Route::get('/about', function(){
-    return view('pages.about');
-});
 
 Route::get('/contact', function(){
     return view('pages.contact');
