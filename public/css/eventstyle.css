@@ -1,15 +1,17 @@
 .first {
-    font-family: Poppins,Helvetica,Arial,sans-serif;
+    font-family: Poppins, Helvetica, Arial, sans-serif;
     background-image: linear-gradient(150deg, #2d1582 0, #19a0ff 100%);
     padding: 60px 0;
     text-align: center;
     color: white;
     height: 250px;
 }
-.first h1{
+
+.first h1 {
     margin-top: 70px;
     font-size: 40px;
 }
+
 .upper {
     display: flex;
     flex-direction: column;
@@ -21,8 +23,8 @@
 
 .btn {
     margin-top: 70px;
-    font-family: Poppins,Helvetica,Arial,sans-serif;
-    background: rgba(0,201,167,.1);
+    font-family: Poppins, Helvetica, Arial, sans-serif;
+    background: rgba(0, 201, 167, .1);
     border-color: transparent;
     display: flex;
     align-items: center;
@@ -36,7 +38,7 @@
 }
 
 .text-primary {
-    font-family: Poppins,Helvetica,Arial,sans-serif;
+    font-family: Poppins, Helvetica, Arial, sans-serif;
     font-size: 2rem;
     color: #377dff !important;
     text-align: center;
@@ -56,6 +58,11 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: left;
+    transition: transform 0.3s ease;
+}
+
+.vlog-item:hover {
+    transform: scale(1.05);
 }
 
 .date {
@@ -65,9 +72,9 @@
 }
 
 .vlog-title {
-    font-family: Poppins,Helvetica,Arial,sans-serif;
-    margin-bottom: 30px;
-    font-size: 20px;
+    font-family: Poppins, Helvetica, Arial, sans-serif;
+    margin-bottom: 10px;
+    font-size: 16px;
     color: #333;
 }
 
@@ -81,7 +88,7 @@ hr {
 .vlog-footer {
     display: flex;
     align-items: center;
-    justify-content:left;
+    justify-content: left;
     gap: 10px;
 }
 
@@ -94,9 +101,10 @@ hr {
 
 .vlog-name {
     justify-content: center;
-    font-size: 16px;
+    font-size: 14px;
     color: #555;
 }
+
 .styled-link {
     color: black;
     text-decoration: none;
@@ -107,23 +115,55 @@ hr {
     color: blue;
 }
 
+.vlog-grid::-webkit-scrollbar {
+    display: none;
+}
+
+/* Dots for the slider */
+.slider-dots {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    cursor: pointer; /* Add pointer cursor */
+}
+
+.dot.active {
+    background-color: #377dff;
+}
 
 @media (max-width: 768px) {
     .vlog-grid {
         grid-template-columns: repeat(2, 1fr);
         padding: 5px;
     }
-    .round-pic {
-        width: 150px; height: 150px;
+    .vlog-item {
+        flex: 0 0 45%;
+    }
+    .vlog-pic {
+        width: 120px;
+        height: 120px;
     }
 }
+
 @media (max-width: 480px) {
     .vlog-grid {
         grid-template-columns: 1fr;
         padding: 35px;
     }
-    .round-pic {
-        width: 120px;
-        height: 120px;
+    .vlog-item {
+        flex: 0 0 100%;
+    }
+    .vlog-pic {
+        width: 100px;
+        height: 100px;
     }
 }

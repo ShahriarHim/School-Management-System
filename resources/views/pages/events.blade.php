@@ -8,57 +8,63 @@
     <h1>School events</h1>
 </div>
 <div class="upper">
-<span class="btn">Events</span>
-<p class="text-primary">Upcoming and past events</p>
+    <span class="btn">Events</span>
+    <p class="text-primary">Upcoming and past events</p>
 </div>
 <div class="vlog-grid">
-
-    <div class="vlog-item">
-        <div class="date">01 Feb, 2022</div>
-        <p class="vlog-title"><a class="styled-link" href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti quos nostrum incidunt.</a></p>
-        <hr>
-        <div class="vlog-footer">
-            <img src="{{ asset('images/pic1.jpeg') }}" class="vlog-pic">
-            <span class="vlog-name"><a class="styled-link" href="#">John Doe</a></span>
-        </div>
-    </div>
-
-
-    <div class="vlog-item">
-        <div class="date">02 Mar, 2022</div>
-        <p class="vlog-title"><a class="styled-link" href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti quos nostrum incidunt.</a></p>
-        <hr>
-        <div class="vlog-footer">
-            <img src="{{ asset('images/pic1.jpeg') }}" class="vlog-pic">
-            <span class="vlog-name"><a class="styled-link" href="#">John Doe</a></span>
-        </div>
-    </div>
-
-
-    <div class="vlog-item">
-        <div class="date">03 Apr, 2022</div>
-        <p class="vlog-title"><a class="styled-link" href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti quos nostrum incidunt.</a></p>
-        <hr>
-        <div class="vlog-footer">
-            <img src="{{ asset('images/pic1.jpeg') }}" class="vlog-pic">
-            <span class="vlog-name"><a class="styled-link" href="#">John Doe</a></span>
-        </div>
-    </div>
-
-
-    <div class="vlog-item">
-        <div class="date">04 May, 2022</div>
-        <p class="vlog-title"><a class="styled-link" href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti quos nostrum incidunt.</a></p>
-        <hr>
-        <div class="vlog-footer">
-            <img src="{{ asset('images/pic1.jpeg') }}" class="vlog-pic">
-            <span class="vlog-name"><a class="styled-link" href="#">John Doe</a></span>
-        </div>
-    </div>
-
-
+    @foreach($events as $event)
+        @if($event->status !== 'past')
+            <div class="vlog-item">
+                <div class="date">{{ $event->date->format('d M, Y') }}</div>
+                <span class="vlog-name"><a class="styled-link" href="#">{{ $event->details }}</a></span>
+                <hr>
+                <div class="vlog-footer">
+                    <img src="{{ asset($event->image) }}" class="vlog-pic">
+                    <p class="vlog-title"><a class="styled-link" href="#">{{ $event->title }}</a></p>
+                </div>
+            </div>
+        @endif
+    @endforeach
 </div>
+<div class="slider-dots">
+    @for ($i = 0; $i < ceil($events->count() / 4); $i++)
+        <span class="dot" onclick="currentSlide({{ $i + 1 }})"></span>
+    @endfor
+</div>
+
+<script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("vlog-item");
+        let dots = document.getElementsByClassName("dot");
+
+        let totalSlides = Math.ceil(slides.length / 4);
+
+        if (n > totalSlides) {slideIndex = 1}
+        if (n < 1) {slideIndex = totalSlides}
+
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+
+        let start = (slideIndex - 1) * 4;
+        let end = start + 4;
+        for (i = start; i < end && i < slides.length; i++) {
+            slides[i].style.display = "block";
+        }
+
+        dots[slideIndex - 1].className += " active";
+    }
+</script>
 @endsection
-
-
-

@@ -1,7 +1,7 @@
 <?php
+
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
-
-
 
 
 Route::get('/', function () {
@@ -22,9 +22,7 @@ Route::get('/contact', function(){
     return view('pages.contact');
 });
 
-Route::get('/events', function () {
-    return view('pages.events');
-});
+Route::get('/events', [EventController::class, 'index'])->name('events.index');
 
 Route::get('/coaches', function () {
     return view('pages.teachers');
