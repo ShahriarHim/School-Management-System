@@ -115,7 +115,7 @@
 
 
         <div class="row3">
-            <button type="submit">Submit</button>
+            <button type="submit" class="qna-button">Submit</button>
         </div>
 
     </form>

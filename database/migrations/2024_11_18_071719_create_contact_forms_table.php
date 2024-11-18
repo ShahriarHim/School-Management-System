@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('page_contents', function (Blueprint $table) {
+        Schema::create('contact_forms', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('button')->nullable();
-            $table->string('title2')->nullable();
-            $table->string('image')->nullable();
-            $table->string('content')->nullable();
+            $table->string('fname');
+            $table->string('lname');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('location');
+            $table->string('question');
+
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('page_contents');
+        Schema::dropIfExists('contact_forms');
     }
 };
