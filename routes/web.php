@@ -1,9 +1,11 @@
 <?php
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GalleryDetailsController;
+
 
 Route::get('/', function () {
     return view('pages.home');
@@ -24,6 +26,7 @@ Route::get('/contact', function(){
 });
 
 
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 //Sobuj Part
 Route::get('/coaches', [TeacherController::class, 'index'])->name('teachers.index');

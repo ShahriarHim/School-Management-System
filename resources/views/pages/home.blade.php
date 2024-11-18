@@ -7,6 +7,7 @@
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/teacherstyle.css') }}">
+<link rel="stylesheet" href="{{ asset('css/eventstyle.css') }}">
 <div class="carousel-container">
     <div class="carousel">
         <div class="carousel-item active">
@@ -51,31 +52,31 @@
     </div>
     <div class="team-row">
         @foreach ($teachers as $teacher)
-            <div class="team-member {{ $teacher->image_url ? 'with-pic' : 'no-pic' }}">
-                @if ($teacher->image_url)
-                    <img src="{{ asset($teacher->image_url) }}" alt="{{ $teacher->name }}" class="round-pic">
-                @else
-                    <div class="name">{{ $teacher->name }}</div>
-                    <div class="position">{{ $teacher->designation }}</div>
-                    <div class="description">{{ $teacher->description }}</div>
-                    <div class="social-media">
-                        @if ($teacher->facebook_url)
-                            <a class="btn btn-sm btn-icon btn-soft-secondary" href="{{ $teacher->facebook_url }}" tabindex="0">
-                                <span class="fab fa-facebook-f btn-icon__inner"></span>
-                            </a>
-                        @endif
-                        @if ($teacher->twitter_url)
-                            <a class="btn btn-sm btn-icon btn-soft-secondary" href="{{ $teacher->twitter_url }}" tabindex="0">
-                                <span class="fab fa-twitter btn-icon__inner"></span>
-                            </a>
-                        @endif
-                        @if ($teacher->linkedin_url)
-                            <a class="btn btn-sm btn-icon btn-soft-secondary" href="{{ $teacher->linkedin_url }}" tabindex="0">
-                                <span class="fab fa-linkedin-in btn-icon__inner"></span>
-                            </a>
-                        @endif
-                    </div>
-                @endif
+            <div class="team-member {{ $teacher->image ? 'with-pic' : 'no-pic' }}">
+
+                <img src="{{ asset($teacher->image) }}" alt="{{ $teacher->name }}" class="round-pic">
+
+                <div class="name">{{ $teacher->name }}</div>
+                <div class="position">{{ $teacher->designation }}</div>
+                <div class="description">{{ $teacher->description }}</div>
+                <div class="social-media">
+                    @if ($teacher->fb)
+                        <a class="btn btn-sm btn-icon btn-soft-secondary" href="{{ $teacher->fb}}" tabindex="0">
+                            <span class="fab fa-facebook-f btn-icon__inner"></span>
+                        </a>
+                    @endif
+                    @if ($teacher->twitter)
+                        <a class="btn btn-sm btn-icon btn-soft-secondary" href="{{ $teacher->twitter }}" tabindex="0">
+                            <span class="fab fa-twitter btn-icon__inner"></span>
+                        </a>
+                    @endif
+                    @if ($teacher->linkedin)
+                        <a class="btn btn-sm btn-icon btn-soft-secondary" href="{{ $teacher->linkedin }}" tabindex="0">
+                            <span class="fab fa-linkedin-in btn-icon__inner"></span>
+                        </a>
+                    @endif
+                </div>
+
             </div>
         @endforeach
     </div>
@@ -91,6 +92,26 @@
         <div class="noticeboard-precontent">
             <p class="noticeboard-subheader">Events</p>
             <h2 class="section-subtitle">Upcoming Events</h2>
+        </div>
+        <div class="vlog-grid">
+            @foreach($events as $event)
+                @if($event->status !== 'past')
+                    <div class="vlog-item">
+                        <div class="date">{{ $event->date->format('d M, Y') }}</div>
+                        <span class="vlog-name"><a class="styled-link" href="#">{{ $event->details }}</a></span>
+                        <hr>
+                        <div class="vlog-footer">
+                            <img src="{{ asset($event->image) }}" class="vlog-pic">
+                            <p class="vlog-title"><a class="styled-link" href="#">{{ $event->title }}</a></p>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
+        </div>
+        <div class="slider-dots">
+            @for ($i = 0; $i < ceil($event->count() / 4); $i++)
+                <span class="dot" onclick="currentSlide({{ $i + 1 }})"></span>
+            @endfor
         </div>
         <div class="button-container">
             <button class="learn-more-btn">Learn More ></button>
@@ -122,6 +143,41 @@
             carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
         }
     });
+</script>
+<script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("vlog-item");
+        let dots = document.getElementsByClassName("dot");
+
+        let totalSlides = Math.ceil(slides.length / 4);
+
+        if (n > totalSlides) {slideIndex = 1}
+        if (n < 1) {slideIndex = totalSlides}
+
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+
+        let start = (slideIndex - 1) * 4;
+        let end = start + 4;
+        for (i = start; i < end && i < slides.length; i++) {
+            slides[i].style.display = "block";
+        }
+
+        dots[slideIndex - 1].className += " active";
+    }
 </script>
 
 @endsection
