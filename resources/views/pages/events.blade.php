@@ -5,11 +5,11 @@
 
 <link rel="stylesheet" href="{{ asset('css/eventstyle.css') }}">
 <div class="first">
-    <h1>School events</h1>
+    <h1>{{ $pc->title }}</h1>
 </div>
 <div class="upper">
-    <span class="btn">Events</span>
-    <p class="text-primary">Upcoming and past events</p>
+    <span class="btn">{{ $pc->button }}</span>
+    <p class="text-primary">{{ $pc->title2 }}</p>
 </div>
 <div class="vlog-grid">
     @foreach($events as $event)
