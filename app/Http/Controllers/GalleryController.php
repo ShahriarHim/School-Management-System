@@ -1,12 +1,14 @@
 <?php
 namespace App\Http\Controllers;
 use App\Models\Gallery;
+use App\Models\PageContent;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
 {
     public function index() {
+        $pc = PageContent::where('slug', 'gallery')->first();
         $galleries = Gallery::withCount('images')->get();
-        return view('pages.gallery', compact('galleries'));
+        return view('pages.gallery', compact('galleries', 'pc'));
     }
 }

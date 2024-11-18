@@ -8,7 +8,7 @@
         <h1>Gallery</h1>
     </div>
     <div class="upper">
-        <span class="btn1">{{ \Carbon\Carbon::parse($gallery_date->date)->format('d M, Y') }}</span>
+        <span class="btn1">{{ $gallery_date->date }}</span>
         <p class="text-primary">Convocation Day </p>
     </div>
     <p class="it1">{{ $gallery->description }}</p>
