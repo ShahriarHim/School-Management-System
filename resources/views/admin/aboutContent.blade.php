@@ -7,14 +7,12 @@
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.css" />
 </head>
 <body>
-    <!-- Form -->
+
     <form action="/submit" method="POST">
-        <!-- CSRF token if using Laravel -->
          @csrf
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <label for="editor">Your Content:</label>
-        <!-- Textarea for the editor -->
         <textarea id="editor" name="content">
             <p>Hello from CKEditor 5!</p>
         </textarea>

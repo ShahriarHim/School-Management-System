@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('page_contents', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('button');
-            $table->string('title2');
-            $table->string('image');
-            $table->string('content');
+            $table->string('button')->nullable();
+            $table->string('title2')->nullable();
+            $table->string('image')->nullable();
+            $table->string('content')->nullable();
             $table->timestamps();
         });
     }
