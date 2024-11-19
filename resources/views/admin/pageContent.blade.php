@@ -18,11 +18,14 @@
             <div class="col1">
                 <label for="title">Select Page name</label>
                 <select name="slug" id="slug">
+                    <option value="">Select One</option>
                     <option value="home">home</option>
                     <option value="notice">notice</option>
+                    <option value="notice_details">notice detail</option>
                     <option value="event">event</option>
                     <option value="coaches">coaches</option>
                     <option value="gallery">gallery</option>
+                    <option value="gallery_detail">gallery detail</option>
                     <option value="about">about</option>
                     <option value="contact">contact</option>
                 </select>

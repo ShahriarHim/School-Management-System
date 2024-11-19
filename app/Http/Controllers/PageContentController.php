@@ -39,9 +39,6 @@ class PageContentController extends Controller
         ]);
 
 
-
-
-
         $fileName=null;
 
         if($request->file('image')){
@@ -52,16 +49,20 @@ class PageContentController extends Controller
         }
 
 
+        $pagecontent = PageContent::where('slug','about')->first();
 
-        $pagecontent= new PageContent();
-        $pagecontent->slug=$request->input('slug');
+        if(!$pagecontent){
+            $pagecontent= new PageContent();
+            $pagecontent->slug=$request->input('slug');
+        }
+
         $pagecontent->title=$request->input('title');
         $pagecontent->button=$request->input('button');
         $pagecontent->title2=$request->input('title2');
         $pagecontent->image=$fileName;
         $pagecontent->content=$request->input('content');
-
         $pagecontent->save();
+        
 
         return redirect()->back()->with('status', 'Saved successfully');
 
