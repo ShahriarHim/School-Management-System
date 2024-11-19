@@ -71,7 +71,7 @@
 
 <div class="form-body">
 
-    <form action="#" method="post">
+    <form action=" {{route('contact.store')}} " method="post">
 
         <div class="row1">
             <div class="col1">
@@ -117,7 +117,7 @@
         <div class="row2">
             <div class="col2">
                 <label for="name1-label">COMMENTS OR QUESTIONS<span class="required">*</span></label>
-                <textarea name="comments" class="comments" required></textarea>
+                <textarea name="question" class="comments" required></textarea>
             </div>
         </div>
 
