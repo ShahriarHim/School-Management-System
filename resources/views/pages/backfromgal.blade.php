@@ -5,11 +5,11 @@
     <link rel="stylesheet" href="{{ asset('css/galdetail.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <div class="first">
-        <h1>Gallery</h1>
+        <h1>{{ $pc->title }}</h1>
     </div>
     <div class="upper">
         <span class="btn1">{{ $gallery_date->date }}</span>
-        <p class="text-primary">Convocation Day </p>
+        <p class="text-primary">{{ $gallery->title }}</p>
     </div>
     <p class="it1">{{ $gallery->description }}</p>
     <div class="gal-container">

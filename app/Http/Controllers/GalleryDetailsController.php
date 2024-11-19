@@ -5,14 +5,15 @@ use App\Models\Gallery;
 use App\Models\GalleryImage;
 use App\Models\GalleryDate;
 use Illuminate\Http\Request;
+use App\Models\PageContent;
 
 class GalleryDetailsController extends Controller
 {
-    // Display the details of a specific gallery
     public function show($id)
     {
+        $pc = PageContent::where('slug', 'gallery_detail')->first();
         $gallery_date = GalleryDate::where('gallery_id', $id)->first();
         $gallery = Gallery::with('images')->findOrFail($id);
-        return view('pages.backfromgal', compact('gallery', 'gallery_date'));
+        return view('pages.backfromgal', compact('gallery', 'gallery_date', 'pc'));
     }
 }
