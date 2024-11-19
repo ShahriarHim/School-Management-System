@@ -1,5 +1,6 @@
 <?php
-
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\SignupController;
 use App\Http\Controllers\aboutPageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TeacherController;
@@ -38,8 +39,18 @@ Route::get('/about',[aboutPageController::class,'index'])->name('about');
 Route::get('/contact', function(){
     return view('pages.contact');
 });
+
+
 //Sobuj Part
 Route::get('/coaches', [TeacherController::class, 'index'])->name('teachers.index');
 Route::get('/galdetails/{id}', [GalleryDetailsController::class, 'show'])->name('gallery.details');
 Route::get('/events', [EventController::class, 'show'])->name('events.show');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
+Route::get('/signup', [SignupController::class, 'showSignupForm']);
+Route::post('/signup', [SignupController::class, 'signup']);
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/admin', function(){
+    return view('admin.home');
+});
