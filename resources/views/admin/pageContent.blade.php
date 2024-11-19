@@ -5,20 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CKEditor 5 - Extend Features</title>
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.css" />
+    <link rel="stylesheet" href="{{asset('css/salauddin.css')}}">
+
 </head>
 <body>
 
-    <form action="/submit" method="POST">
-         @csrf
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <div class="form-div">
+        <form action="{{route('page-content')}}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-        <label for="editor">Your Content:</label>
-        <textarea id="editor" name="content">
-            <p>Hello from CKEditor 5!</p>
-        </textarea>
+            <div class="col1">
+                <label for="title">Select Page name</label>
+                <select name="slug" id="slug">
+                    <option value="">Select One</option>
+                    <option value="home">home</option>
+                    <option value="notice">notice</option>
+                    <option value="notice_details">notice detail</option>
+                    <option value="event">event</option>
+                    <option value="coaches">coaches</option>
+                    <option value="gallery">gallery</option>
+                    <option value="gallery_detail">gallery detail</option>
+                    <option value="about">about</option>
+                    <option value="contact">contact</option>
+                </select>
+            </div>
 
-        <button type="submit">Submit</button>
-    </form>
+            <div class="col1">
+                <label for="title">Enter Title</label>
+                <input type="text" name="title" id="" class="content-title">
+            </div>
+
+            <div class="col1">
+                <label for="title">Enter Button Name</label>
+                <input type="text" name="button" id="" class="content-title">
+            </div>
+
+
+            <div class="col1">
+                <label for="title2">Enter second Title</label>
+                <input type="text" name="title2" id="" class="content-title">
+            </div>
+
+
+            <div class="col1">
+                <label for="image">Choose image</label>
+                <input type="file" name="image" id="">
+            </div>
+
+            <div class="col1">
+                <label for="editor">Page Content</label>
+                <textarea id="editor" name="content" class="about-content-text"></textarea>
+            </div>
+
+
+
+            <div class="content-submit">
+                <button type="submit" class="about-content-button">Submit</button>
+            </div>
+        </form>
+    </div>
+
+
 
     <!-- CKEditor dependencies -->
     <script type="importmap">

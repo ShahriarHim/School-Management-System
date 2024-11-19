@@ -13,7 +13,7 @@
 </div>
 <div class="vlog-grid">
     @foreach($events as $event)
-        @if($event->status !== 'past')
+        @if($event->status !== 'upcoming')
             <div class="vlog-item">
                 <div class="date">{{ $event->date->format('d M, Y') }}</div>
                 <span class="vlog-name"><a class="styled-link" href="#">{{ $event->details }}</a></span>

@@ -10,11 +10,12 @@ return new class extends Migration
     {
         Schema::create('page_contents', function (Blueprint $table) {
             $table->id();
+            $table->string('slug');
             $table->string('title');
             $table->string('button')->nullable();
             $table->string('title2')->nullable();
             $table->string('image')->nullable();
-            $table->string('content')->nullable();
+            $table->longText('content')->nullable();
             $table->timestamps();
         });
     }
