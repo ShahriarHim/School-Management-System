@@ -49,7 +49,7 @@ class PageContentController extends Controller
         }
 
 
-        $pagecontent = PageContent::where('slug','about')->first();
+        $pagecontent = PageContent::where('slug',$request->input('slug'))->first();
 
         if(!$pagecontent){
             $pagecontent= new PageContent();

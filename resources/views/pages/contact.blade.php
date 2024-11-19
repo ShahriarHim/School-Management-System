@@ -7,12 +7,20 @@
 @section('content')
 <link rel="stylesheet" href="{{asset('css/salauddin.css')}}">
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
+
     <div class="noticeboard-header">
-        <h1 class="noticeboard-title">Contact Us</h1>
+
+        @if($contactPageContent)
+            <h1 class="noticeboard-title">{{$contactPageContent->title}}</h1>
+        @endif
     </div>
     
     <div class="contact-info-header">
-        <p>Contact Info</p>
+
+        @if($contactPageContent)
+            <p> {{$contactPageContent->button}} </p>
+        @endif
+        
     </div>
 
 <div class="row">
@@ -63,7 +71,7 @@
 
 <div class="form-body">
 
-    <form action="#" method="post">
+    <form action=" {{route('contact.store')}} " method="post">
 
         <div class="row1">
             <div class="col1">
@@ -109,7 +117,7 @@
         <div class="row2">
             <div class="col2">
                 <label for="name1-label">COMMENTS OR QUESTIONS<span class="required">*</span></label>
-                <textarea name="comments" class="comments" required></textarea>
+                <textarea name="question" class="comments" required></textarea>
             </div>
         </div>
 
