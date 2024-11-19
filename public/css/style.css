@@ -379,6 +379,7 @@
     max-width: 1100px;
     text-align: center;
     margin: 5% auto;
+    margin-bottom: 100px;
 }
 .noticeboard-precontent{
     margin-top: 70px;
@@ -411,7 +412,6 @@
     background: #f9f9f9;
     padding: 0;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     overflow: hidden; /* Ensures rounded corners apply to both image and text */
 }
@@ -470,6 +470,9 @@
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
+.notice-title-link:hover {
+    color: #1540ce;
+}
 .read-more-btn:hover {
     background-color: #377dff;
     color: #fff;
@@ -513,7 +516,7 @@
     align-items: center;
     gap: 0.5rem; /* Space between the icon and text */
     cursor: pointer; /* Indicate it's clickable */
-    color: #666; /* Adjust text color if needed */
+    color: #66666671; /* Adjust text color if needed */
     font-size: 1rem; /* Adjust font size */
     text-decoration: none; /* Remove underline if it's a link */
     margin-bottom: 1rem; /* Add spacing below the back button if needed */
@@ -528,7 +531,9 @@
     font-size: 1rem;
     color: inherit; /* Matches the parent color */
 }
-
+.back-btn-container :hover {
+    color: #666;
+}
 .notice-text-content {
     flex: 1;
     padding: 30px;
