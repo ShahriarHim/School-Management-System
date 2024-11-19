@@ -5,11 +5,11 @@
     <link rel="stylesheet" href="{{ asset('css/teacherstyle.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <div class="first">
-        <h1>Our Teachers</h1>
+        <h1>{{ $pc->title }}</h1>
     </div>
     <div class="upper">
-        <span class="btn1">Teachers</span>
-        <p class="text-primary">Our Professional Teachers</p>
+        <span class="btn1">{{ $pc->button }}</span>
+        <p class="text-primary">{{ $pc->title2 }}</p>
     </div>
     <div class="team-container">
         @foreach($teachers as $index => $teacher)
