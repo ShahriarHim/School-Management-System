@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\aboutPageController;
+use App\Http\Controllers\ContactPageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\EventController;
@@ -32,12 +33,11 @@ Route::post('/page-content',[PageContentController::class,'store'])->name('page-
 
 
 Route::get('/about',[aboutPageController::class,'index'])->name('about');
+Route::get('/contact',[ContactPageController::class,'index'])->name('contact');
 
 
 
-Route::get('/contact', function(){
-    return view('pages.contact');
-});
+
 //Sobuj Part
 Route::get('/coaches', [TeacherController::class, 'index'])->name('teachers.index');
 Route::get('/galdetails/{id}', [GalleryDetailsController::class, 'show'])->name('gallery.details');
