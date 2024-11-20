@@ -33,29 +33,31 @@
 
             <div class="col1">
                 <label for="title">Enter Title</label>
-                <input type="text" name="title" id="" class="content-title">
+                <input type="text" name="title" id="" class="content-input">
             </div>
+
+
 
             <div class="col1">
                 <label for="title">Enter Button Name</label>
-                <input type="text" name="button" id="" class="content-title">
+                <input type="text" name="button" id="" class="content-input">
             </div>
 
 
             <div class="col1">
                 <label for="title2">Enter second Title</label>
-                <input type="text" name="title2" id="" class="content-title">
+                <input type="text" name="title2" id="" class="content-input">
             </div>
 
 
             <div class="col1">
                 <label for="image">Choose image</label>
-                <input type="file" name="image" id="">
+                <input type="file" name="image" id="" class="content-input">
             </div>
 
             <div class="col1">
                 <label for="editor">Page Content</label>
-                <textarea id="editor" name="content" class="about-content-text"></textarea>
+                <textarea id="editor" name="content" class="page-content-text"></textarea>
             </div>
 
 
@@ -140,7 +142,12 @@
                     ],
                     supportAllValues: true
                 },
-
+                
+                fontColor: {
+                    default: '#000000', // Set default text color to black
+                    columns: 5, // Optional: Customize the color picker grid
+                    documentColors: 0 // Optional: Disable document color auto-detection
+                },
 
                 image: {
                     toolbar: [

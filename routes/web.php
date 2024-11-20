@@ -12,6 +12,8 @@ use App\Http\Controllers\PageContentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GalleryDetailsController;
+use App\Http\Controllers\QuestionsController;
+use App\Http\Controllers\SchoolDetailController;
 use App\Http\Controllers\NoticeBoardController;
 use App\Http\Controllers\AdminNoticeBoardController;
 
@@ -53,18 +55,26 @@ Route::middleware(['web'])->group(function () {
         Route::delete('/noticeboard/{id}', [AdminNoticeBoardController::class, 'destroy'])->name('admin.noticeboard.destroy');
     });
 });
-Route::get('/page-content', [PageContentController::class, 'create'])->name('page-content');
-Route::post('/page-content', [PageContentController::class, 'store'])->name('page-content');
 
 
-Route::get('/about', [aboutPageController::class, 'index'])->name('about');
 
-/* Route::get('/contact',[ContactPageController::class,'index'])->name('contact');
- */
+//----------Salauddin's route------------
 
-/* Route::post('/contact',[ContactController::class,'store'])->name('contact.store');  */
+Route::get('/page-content',[PageContentController::class,'create'])->name('page-content');
+Route::post('/page-content',[PageContentController::class,'store'])->name('page-content');
 
-Route::resource('contact', ContactController::class)->names('contact');
+
+Route::get('/about',[aboutPageController::class,'index'])->name('about');
+
+Route::get('/admin/questions', [QuestionsController::class,'index']);
+
+Route::resource('contact',ContactController::class)->names('contact');
+
+Route::resource('admin/school', SchoolDetailController::class)->names('admin.school');
+
+
+
+//----------Salauddin's route end------------
 
 
 //Sobuj Part
