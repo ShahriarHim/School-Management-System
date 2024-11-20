@@ -11,7 +11,8 @@ use App\Http\Controllers\PageContentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GalleryDetailsController;
-
+use App\Http\Controllers\QuestionsController;
+use App\Http\Controllers\SchoolDetailController;
 
 Route::get('/', function () {
     return view('pages.home');
@@ -36,12 +37,12 @@ Route::post('/page-content',[PageContentController::class,'store'])->name('page-
 
 Route::get('/about',[aboutPageController::class,'index'])->name('about');
 
-/* Route::get('/contact',[ContactPageController::class,'index'])->name('contact');
- */
-
-/* Route::post('/contact',[ContactController::class,'store'])->name('contact.store');  */
-
 Route::resource('contact',ContactController::class)->names('contact');
+
+Route::get('/admin/questions', [QuestionsController::class,'index']);
+
+Route::resource('admin/school', SchoolDetailController::class)->names('admin.school');
+
 
 
 //Sobuj Part
