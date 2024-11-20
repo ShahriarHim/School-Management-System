@@ -1,18 +1,11 @@
 @extends('layouts.admin')
 
-@section('title', 'Event Management Panel')
+@section('title', 'Create Event')
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/noticeManagement.css') }}">
 <div class="management-panel">
-    <h1 class="panel-header">Event Management Panel</h1>
-
-    <!-- Display Success Message -->
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+    <h1 class="panel-header">Create New Event</h1>
 
     <!-- Display Error Messages -->
     @if ($errors->any())

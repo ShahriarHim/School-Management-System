@@ -90,12 +90,16 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/admin', function (){ $user = Auth::user(); return view('layouts.admin', ['user'=>$user]);});
+
 Route::middleware(['web'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/events-management', [AdminEventController::class, 'index'])->name('admin.eventsmanagement.index');
+        Route::get('/events-management/create', [AdminEventController::class, 'create'])->name('admin.eventsmanagement.create');
         Route::post('/events-management/store', [AdminEventController::class, 'store'])->name('admin.eventsmanagement.store');
         Route::get('/events-management/{id}/edit', [AdminEventController::class, 'edit'])->name('admin.eventsmanagement.edit');
         Route::put('/events-management/{id}', [AdminEventController::class, 'update'])->name('admin.eventsmanagement.update');
         Route::delete('/events-management/{id}', [AdminEventController::class, 'destroy'])->name('admin.eventsmanagement.destroy');
+        Route::get('/events-management/{id}/delete', [AdminEventController::class, 'confirmDelete'])->name('admin.eventsmanagement.confirmDelete');
     });
 });
+
