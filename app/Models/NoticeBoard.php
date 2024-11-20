@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class NoticeBoard extends Model
 {
-use HasFactory ;
+    use HasFactory;
+    protected $fillable = ['title', 'date', 'image','description'];
     use HasFactory;
 }

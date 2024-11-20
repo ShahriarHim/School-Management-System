@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GalleryDetailsController;
 use App\Http\Controllers\NoticeBoardController;
+use App\Http\Controllers\AdminNoticeBoardController;
+
 
 Route::get('/', function () {
     return view('pages.home');
@@ -32,24 +34,37 @@ Route::get('/noticeboard-details/{id}', [NoticeBoardController::class, 'show'])-
 
 
 /* --------------admin routes------------------------- */
-Route::get('/admin/notice-management', function(){
+
+/*Notice*/
+Route::get('/admin/notice-management', function () {
     return view('admin.noticeManagement');
 });
 
-Route::post('/admin/noticeboard/store', [AdminNoticeBoardController::class, 'store'])->name('admin.noticeboard.store');
+// Route::post('/admin/noticeboard/store', [AdminNoticeBoardController::class, 'store'])->name('admin.noticeboard.store');
+// use App\Http\Controllers\AdminNoticeBoardController;
 
-Route::get('/page-content',[PageContentController::class,'create'])->name('page-content');
-Route::post('/page-content',[PageContentController::class,'store'])->name('page-content');
+// Admin routes for noticeboard management
+Route::middleware(['web'])->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('/noticeboard', [AdminNoticeBoardController::class, 'index'])->name('admin.noticeboard.index');
+        Route::post('/noticeboard/store', [AdminNoticeBoardController::class, 'store'])->name('admin.noticeboard.store');
+        Route::get('/noticeboard/{id}/edit', [AdminNoticeBoardController::class, 'edit'])->name('admin.noticeboard.edit');
+        Route::put('/noticeboard/{id}', [AdminNoticeBoardController::class, 'update'])->name('admin.noticeboard.update');
+        Route::delete('/noticeboard/{id}', [AdminNoticeBoardController::class, 'destroy'])->name('admin.noticeboard.destroy');
+    });
+});
+Route::get('/page-content', [PageContentController::class, 'create'])->name('page-content');
+Route::post('/page-content', [PageContentController::class, 'store'])->name('page-content');
 
 
-Route::get('/about',[aboutPageController::class,'index'])->name('about');
+Route::get('/about', [aboutPageController::class, 'index'])->name('about');
 
 /* Route::get('/contact',[ContactPageController::class,'index'])->name('contact');
  */
 
 /* Route::post('/contact',[ContactController::class,'store'])->name('contact.store');  */
 
-Route::resource('contact',ContactController::class)->names('contact');
+Route::resource('contact', ContactController::class)->names('contact');
 
 
 //Sobuj Part
@@ -62,6 +77,6 @@ Route::post('/signup', [SignupController::class, 'signup']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('/admin', function(){
+Route::get('/admin', function () {
     return view('layouts.admin');
 });
