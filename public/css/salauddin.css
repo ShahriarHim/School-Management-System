@@ -356,6 +356,23 @@ tr:hover{
 
 /* ----------------addUpdateSchool---------------------- */
 
+.school-margin{
+    margin: 20px 25%;
+}
+
+@media (max-width:880px){
+    .school-margin{
+        margin: 20px;
+
+    }
+}
+
+.add-school-form{
+    margin-bottom: 200px;
+    padding: 20px;
+    background-color: #f7f8fa;
+    
+}
 
 .school-header{
     text-align: center;
@@ -395,7 +412,6 @@ tr:hover{
     background-color: #377dff;
     color: #fff;
     font-weight: 300;
-    margin-bottom: 200px;
     border: 1px solid gray;
     font-size: 1.2rem;
     border-radius: 7px;
@@ -418,9 +434,6 @@ tr:hover{
 }
 
 
-.school-margin{
-    margin: 20px 30%;
-}
 
 .school-info{
     margin-top: 50px;
