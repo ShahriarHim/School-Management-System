@@ -1,9 +1,7 @@
 @extends('layouts.admin')
-
 @section('title', 'Event Management Panel')
-
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/noticeManagement.css') }}">
+<link rel="stylesheet" href="{{ asset('css/table.css') }}">
 <div class="management-panel">
     <h1 class="panel-header">Event Management Panel</h1>
 
