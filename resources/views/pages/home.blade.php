@@ -11,13 +11,13 @@
 <div class="carousel-container">
     <div class="carousel">
         <div class="carousel-item active">
-            <img src="{{ asset('images/slider4.jpg') }}" class="d-block w-100" alt="Image 1">
+            <img src="{{ asset('images/slider1.jpg') }}" class="d-block w-100" alt="Image 1">
         </div>
         <div class="carousel-item">
-            <img src="{{ asset('images/slider5.jpg') }}" class="d-block w-100" alt="Image 2">
+            <img src="{{ asset('images/slider2.jpg') }}" class="d-block w-100" alt="Image 2">
         </div>
         <div class="carousel-item">
-            <img src="{{ asset('images/slider6.jpg') }}" class="d-block w-100" alt="Image 3">
+            <img src="{{ asset('images/slider3.jpg') }}" class="d-block w-100" alt="Image 3">
         </div>
     </div>
     <button class="carousel-control-prev">&#10094;</button>
@@ -28,17 +28,13 @@
 <section class="about-section">
     <div class="about-content">
         <div class="text-content">
-            <h6> About</h6>
-            <h2>Welcome to Ekattor High School</h2>
-            <p>Ekattor High School (NHS) is a public secondary school in Bellevue, Washington. It serves students in
-                grades 9–12 in the southern part of the Bellevue School District, including the neighborhoods of
-                Eastgate, Factoria, Newport Hills, Newport Shores, Somerset, The Summit, and Sunset. As of the 2014-2015
-                school year, the principal is Dion Yahoudy. The mascot is the Knight, and the school colors are scarlet
-                and gold.</p>
+            <h6> {{$home->button}}</h6>
+            <h2>{{$home->title}}</h2>
+            <p>{{$home->content}}</p>
             <button class="learn-more-btn">Learn More ></button>
         </div>
         <div class="image-content">
-            <img src="{{ asset('images/home_promo_1.png') }}" alt="Ekattor High School" />
+            <img src="{{ $home->image}}" alt="Ekattor High School" />
         </div>
     </div>
 </section>
@@ -47,8 +43,8 @@
 <!-- Our Teachers Section -->
 <div class="team-container">
     <div class="noticeboard-precontent">
-        <p class="noticeboard-subheader">Teachers</p>
-        <h2 class="section-subtitle">Our Professional Teachers</h2>
+        <p class="noticeboard-subheader">{{$coach->button}}</p>
+        <h2 class="section-subtitle">{{$coach->title}}</h2>
     </div>
     <div class="team-row">
         @foreach ($teachers as $teacher)
@@ -90,8 +86,8 @@
 <section class="events-section my-5">
     <div class="container-fluid">
         <div class="noticeboard-precontent">
-            <p class="noticeboard-subheader">Events</p>
-            <h2 class="section-subtitle">Upcoming Events</h2>
+            <p class="noticeboard-subheader">{{$event_head->button}}</p>
+            <h2 class="section-subtitle">Upcoming{{$event_head->button}}</h2>
         </div>
         <div class="vlog-grid">
             @foreach($events as $event)
