@@ -14,11 +14,12 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->string('image');
-            $table->text('details');
-            $table->date('date');
             $table->string('title');
-            $table->enum('status', ['past', 'upcoming']);
+            $table->string('author_name');
+            $table->date('date');
+            $table->enum('status', ['upcoming', 'past']);
+            $table->string('image')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
