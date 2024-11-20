@@ -1,23 +1,24 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
-class ContactForm extends Model
+class Event extends Model
 {
     use HasFactory;
 
-/*     protected $table='contact_forms';
+    protected $fillable = [
+        'title',
+        'author_name',
+        'date',
+        'status',
+        'image',
+        'description'
+    ];
 
-    protected $fillable=[
-        'fname',
-        'lname',
-        'email',
-        'phone',
-        'loation',
-        'question'
-
-    ]; */
+    protected $casts = [
+        'date' => 'datetime',
+    ];
 }
