@@ -8,7 +8,12 @@
 </head>
 <body>
     <div class="signup-container">
-        <h2>Sign Up</h2>
+
+
+        <h2>
+            Sign Up
+        </h2>
+
         <form action="/signup" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-row">
@@ -21,6 +26,8 @@
                     <input type="email" id="email" name="email" required value="{{ old('email') }}">
                 </div>
             </div>
+
+
             <div class="form-row">
                 <div class="form-group column">
                     <label for="password">Password</label>
@@ -31,6 +38,8 @@
                     <input type="password" id="password_confirmation" name="password_confirmation" required>
                 </div>
             </div>
+
+
             <div class="form-row">
                 <div class="form-group column">
                     <label for="role">Role</label>
@@ -45,6 +54,8 @@
                     <input type="file" id="image" name="image">
                 </div>
             </div>
+
+
             <div class="form-row">
                 <div class="form-group column">
                     <label for="designation">Designation</label>
@@ -55,6 +66,8 @@
                     <textarea id="description" name="description">{{ old('description') }}</textarea>
                 </div>
             </div>
+
+
             <div class="form-row">
                 <div class="form-group column">
                     <label for="fb">Facebook Profile</label>
@@ -65,13 +78,20 @@
                     <input type="url" id="twitter" name="twitter" value="{{ old('twitter') }}">
                 </div>
             </div>
+
+
             <div class="form-row">
                 <div class="form-group column">
                     <label for="linkedin">LinkedIn Profile</label>
                     <input type="url" id="linkedin" name="linkedin" value="{{ old('linkedin') }}">
                 </div>
-                <div class="form-row"><button type="submit">Sign Up</button></div>
             </div>
+
+
+            <div class="form-row">
+                <button type="submit">Sign Up</button>
+            </div>
+
 
         </form>
     </div>

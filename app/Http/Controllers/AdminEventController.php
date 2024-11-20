@@ -14,7 +14,15 @@ class AdminEventController extends Controller
     public function index()
     {
         $events = Event::all();
-        return view('admin.eventsmanagement', compact('events'));
+        return view('admin.event.index', compact('events'));
+    }
+
+    /**
+     * Show the form for creating a new event.
+     */
+    public function create()
+    {
+        return view('admin.event.create');
     }
 
     /**
@@ -63,7 +71,7 @@ class AdminEventController extends Controller
     public function edit($id)
     {
         $event = Event::findOrFail($id);
-        return view('admin.eventsmanagement.edit', compact('event'));
+        return view('admin.event.edit', compact('event'));
     }
 
     /**
@@ -110,19 +118,25 @@ class AdminEventController extends Controller
     }
 
     /**
+     * Show the form for confirming the deletion of the specified event.
+     */
+    public function confirmDelete($id)
+    {
+        $event = Event::findOrFail($id);
+        return view('admin.event.delete', compact('event'));
+    }
+
+    /**
      * Remove the specified event from storage.
      */
     public function destroy($id)
     {
         $event = Event::findOrFail($id);
-
-        // Delete the image file if exists
         if ($event->image && file_exists(public_path($event->image))) {
             unlink(public_path($event->image));
         }
-
         $event->delete();
-
-        return redirect()->route('admin.eventsmanagement.index')->with('success', 'Event deleted successfully!');
+        return redirect()->route('admin.eventsmanagement.index')->with('success', 'Event deleted successfully!');;
     }
+
 }
