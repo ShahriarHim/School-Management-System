@@ -7,6 +7,25 @@
 <div class="management-panel">
     <h1 class="panel-header">Noticeboard Management Panel</h1>
     
+
+        <!-- Display Success Message -->
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <!-- Display Error Messages -->
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    
     <form action="{{ route('admin.noticeboard.store') }}" method="POST" enctype="multipart/form-data" class="notice-form">
         @csrf
         <div class="form-group">
