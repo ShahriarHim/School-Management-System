@@ -89,7 +89,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="admin/eventsmanagement" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 User Management
@@ -98,7 +98,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="/admin/notice-management" class="nav-link">
+            <a href="/admin/events-management" class="nav-link">
               <i class="nav-icon fas fa-bullhorn"></i>
               <p>
                 Notice Management
@@ -107,14 +107,13 @@
           </li>
 
           <li class="nav-item">
-            <a href="events-management" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
                 Events Management
               </p>
             </a>
           </li>
-
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-image"></i>
@@ -125,27 +124,8 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{route('admin.school.create')}}" class="nav-link">
-              <i class="nav-icon fas fa-bullhorn"></i>
-              <p>
-                Manage school
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="{{route('admin.school.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-bullhorn"></i>
-              <p>
-                school info
-              </p>
-            </a>
-          </li>
-
-
-          <li class="nav-item">
             <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-sign-out-alt"></i>
+            <i class="nav-icon fas fa-sign-out-alt mt-5"></i>
             <p>
              Logout
             </p>
