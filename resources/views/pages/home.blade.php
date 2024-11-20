@@ -11,13 +11,13 @@
 <div class="carousel-container">
     <div class="carousel">
         <div class="carousel-item active">
-            <img src="{{ asset('images/slider4.jpg') }}" class="d-block w-100" alt="Image 1">
+            <img src="{{ asset('images/slider1.jpg') }}" class="d-block w-100" alt="Image 1">
         </div>
         <div class="carousel-item">
-            <img src="{{ asset('images/slider5.jpg') }}" class="d-block w-100" alt="Image 2">
+            <img src="{{ asset('images/slider2.jpg') }}" class="d-block w-100" alt="Image 2">
         </div>
         <div class="carousel-item">
-            <img src="{{ asset('images/slider6.jpg') }}" class="d-block w-100" alt="Image 3">
+            <img src="{{ asset('images/slider3.jpg') }}" class="d-block w-100" alt="Image 3">
         </div>
     </div>
     <button class="carousel-control-prev">&#10094;</button>
@@ -87,7 +87,7 @@
     <div class="container-fluid">
         <div class="noticeboard-precontent">
             <p class="noticeboard-subheader">{{$event_head->button}}</p>
-            <h2 class="section-subtitle">Upcoming {{$event_head->button}}</h2>
+            <h2 class="section-subtitle">Upcoming{{$event_head->button}}</h2>
         </div>
         <div class="vlog-grid">
             @foreach($events as $event)
