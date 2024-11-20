@@ -55,14 +55,20 @@ Route::middleware(['web'])->group(function () {
         Route::delete('/noticeboard/{id}', [AdminNoticeBoardController::class, 'destroy'])->name('admin.noticeboard.destroy');
     });
 });
-Route::get('/page-content', [PageContentController::class, 'create'])->name('page-content');
-Route::post('/page-content', [PageContentController::class, 'store'])->name('page-content');
 
 
-Route::get('/about', [aboutPageController::class, 'index'])->name('about');
+
+Route::get('/page-content',[PageContentController::class,'create'])->name('page-content');
+Route::post('/page-content',[PageContentController::class,'store'])->name('page-content');
+
+
+Route::get('/about',[aboutPageController::class,'index'])->name('about');
 
 Route::resource('contact',ContactController::class)->names('contact');
 
+Route::get('/admin/questions', [QuestionsController::class,'index']);
+
+Route::resource('admin/school', SchoolDetailController::class)->names('admin.school');
 
 //Sobuj Part
 Route::get('/coaches', [TeacherController::class, 'index'])->name('teachers.index');
