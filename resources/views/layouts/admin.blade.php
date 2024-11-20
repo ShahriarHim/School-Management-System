@@ -125,6 +125,25 @@
           </li>
 
           <li class="nav-item">
+            <a href="/admin/school/create" class="nav-link">
+              <i class="nav-icon fas fa-bullhorn"></i>
+              <p>
+                Manage school
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/admin/school" class="nav-link">
+              <i class="nav-icon fas fa-bullhorn"></i>
+              <p>
+                school info
+              </p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt mt-5"></i>
               <p>

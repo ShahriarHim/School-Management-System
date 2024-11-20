@@ -177,7 +177,7 @@ label{
     margin-bottom: 9px;
 }
 
-span{
+.required{
     color: red;
 }
 
@@ -245,7 +245,7 @@ input{
     resize: vertical; 
 }
 
-button{
+.qna-button{
     padding: 10px 40px;
     background-color: #377dff;
     color: #fff;
@@ -359,6 +359,7 @@ tr:hover{
 
 .school-header{
     text-align: center;
+    margin-bottom: 40px;
 }
 
 
@@ -389,9 +390,23 @@ tr:hover{
     text-align: center;
 }
 
+.addUpdate-school-button{
+    padding: 5px 40px;
+    background-color: #377dff;
+    color: #fff;
+    font-weight: 300;
+    margin-bottom: 200px;
+    border: 1px solid gray;
+    font-size: 1.2rem;
+    border-radius: 7px;
+
+}
+
+
 .addUpdate-school-button:hover{
     margin-top: -2px;
     background-color: #00c9a7;
+    transition: all 0.3s;
 }
 
 
@@ -401,3 +416,16 @@ tr:hover{
     }
 
 }
+
+
+.school-margin{
+    margin: 20px 30%;
+}
+
+.school-info{
+    margin-top: 50px;
+    display: flex;
+    gap: 80px;
+    margin-bottom: 300px;
+}
+
