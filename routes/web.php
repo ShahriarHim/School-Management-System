@@ -58,17 +58,24 @@ Route::middleware(['web'])->group(function () {
 
 
 
+//----------Salauddin's route------------
+
 Route::get('/page-content',[PageContentController::class,'create'])->name('page-content');
 Route::post('/page-content',[PageContentController::class,'store'])->name('page-content');
 
 
 Route::get('/about',[aboutPageController::class,'index'])->name('about');
 
-Route::resource('contact',ContactController::class)->names('contact');
-
 Route::get('/admin/questions', [QuestionsController::class,'index']);
 
+Route::resource('contact',ContactController::class)->names('contact');
+
 Route::resource('admin/school', SchoolDetailController::class)->names('admin.school');
+
+
+
+//----------Salauddin's route end------------
+
 
 //Sobuj Part
 Route::get('/coaches', [TeacherController::class, 'index'])->name('teachers.index');
