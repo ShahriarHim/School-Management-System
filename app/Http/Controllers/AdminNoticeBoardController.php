@@ -16,7 +16,12 @@ class AdminNoticeBoardController extends Controller
         $notices = NoticeBoard::all();
         return view('admin.noticeManagement', compact('notices'));
     }
-
+    
+    public function create()
+    {
+        return view('admin.createNotice');
+    }
+    
 
     /**
      * Store a newly created notice in storage.

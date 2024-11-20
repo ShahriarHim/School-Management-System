@@ -4,54 +4,54 @@
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/noticeManagement.css') }}">
+
 <div class="management-panel">
     <h1 class="panel-header">Noticeboard Management Panel</h1>
-    
 
-        <!-- Display Success Message -->
-        @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+    <!-- Button to Create a New Notice -->
+    <div class="actions">
+        <a href="{{ route('admin.noticeboard.create') }}" class="btn btn-primary">Create Notice</a>
+    </div>
 
-    <!-- Display Error Messages -->
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+    <!-- Notices Table -->
+    <div class="table-container">
+        <table class="notices-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($notices as $notice)
+                    <tr>
+                        <td>{{ $notice->id }}</td>
+                        <td>{{ $notice->title }}</td>
+                        <td>{{ \Carbon\Carbon::parse($notice->date)->format('d M, Y') }}</td>
+                        <td>{{ Str::limit($notice->description, 50, '...') }}</td>
+                        <td>
+                            @if ($notice->image)
+                                <img src="{{ asset($notice->image) }}" alt="{{ $notice->title }}" class="notice-image">
+                            @else
+                                <span>No Image</span>
+                            @endif
+                        </td>
+                        <td>
+                            <a href="{{ route('admin.noticeboard.edit', $notice->id) }}" class="btn btn-primary">Edit</a>
+                            <form action="{{ route('admin.noticeboard.destroy', $notice->id) }}" method="POST" class="delete-form">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
                 @endforeach
-            </ul>
-        </div>
-    @endif
-    
-    <form action="{{ route('admin.noticeboard.store') }}" method="POST" enctype="multipart/form-data" class="notice-form">
-        @csrf
-        <div class="form-group">
-            <label for="title">Notice Title</label>
-            <input type="text" name="title" id="title" class="form-control" placeholder="Enter the notice title" required>
-        </div>
-
-        <div class="form-group">
-            <label for="date">Notice Date</label>
-            <input type="date" name="date" id="date" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-            <label for="image">Notice Image</label>
-            <input type="file" name="image" id="image" class="form-control">
-        </div>
-
-        <div class="form-group">
-            <label for="description">Notice Description</label>
-            <textarea name="description" id="description" rows="5" class="form-control" placeholder="Enter the notice description"></textarea>
-        </div>
-
-        <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Save Notice</button>
-            <button type="reset" class="btn btn-secondary">Clear</button>
-        </div>
-    </form>
+            </tbody>
+        </table>
+    </div>
 </div>
 @endsection

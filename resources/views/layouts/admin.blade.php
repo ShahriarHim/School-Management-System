@@ -99,7 +99,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="/admin/notice-management" class="nav-link">
+            <a href="/admin/noticeboard" class="nav-link">
               <i class="nav-icon fas fa-bullhorn"></i>
               <p>
                 Notice Management
@@ -162,7 +162,7 @@
     </main>
   </div>
 
-  
+
   <footer class="main-footer">
     <strong>Copyright &copy; 2024-Present <a href="/admin">Ekattor 7</a>.</strong>
     All rights reserved.
@@ -188,7 +188,7 @@
   <script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
   <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
   <script src="{{ asset('dist/js/adminlte.js') }}"></script>
-  <script src="{{ asset('dist/js/demo.js') }}"></script>
+  <!-- <script src="{{ asset('dist/js/demo.js') }}"></script> -->
   <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
 </body>
 

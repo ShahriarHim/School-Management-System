@@ -95,3 +95,93 @@
     background-color: #f2dede;
     border-color: #ebccd1;
 }
+
+
+.actions {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.actions .btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #007bff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.actions .btn:hover {
+    background-color: #0056b3;
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.notices-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    text-align: left;
+}
+
+.notices-table th, .notices-table td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+.notices-table th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.notices-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.notices-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.notice-image {
+    width: 80px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* .btn {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+} */
+
+/* .btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+} */
+
+.delete-form {
+    display: inline-block;
+    margin-left: 5px;
+}
