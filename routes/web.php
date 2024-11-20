@@ -32,6 +32,11 @@ Route::get('/noticeboard-details/{id}', [NoticeBoardController::class, 'show'])-
 
 
 /* --------------admin routes------------------------- */
+Route::get('/admin/notice-management', function(){
+    return view('admin.noticeManagement');
+});
+
+Route::post('/admin/noticeboard/store', [AdminNoticeBoardController::class, 'store'])->name('admin.noticeboard.store');
 
 Route::get('/page-content',[PageContentController::class,'create'])->name('page-content');
 Route::post('/page-content',[PageContentController::class,'store'])->name('page-content');
@@ -58,5 +63,5 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/admin', function(){
-    return view('admin.home');
+    return view('layouts.admin');
 });

@@ -94,7 +94,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/admin/notice-management" class="nav-link">
               <i class="nav-icon fas fa-bullhorn"></i>
               <p>
                 Notice Management
@@ -143,7 +143,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#" id="homedes">Home</a></li>
+              <li class="breadcrumb-item"><a href="/" id="homedes">Home</a></li>
             </ol>
           </div>
         </div>
