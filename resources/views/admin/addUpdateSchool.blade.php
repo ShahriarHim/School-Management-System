@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+@extends('layouts.admin')
+
+@section('content')
+
     <link rel="stylesheet" href="{{asset('css/salauddin.css')}}">
-</head>
-<body>
+
 
     <div class="school-margin">
         <div class="school-header">
@@ -101,6 +98,5 @@
         </div>
 
     </div>
-    
-</body>
-</html>
+
+@endsection
