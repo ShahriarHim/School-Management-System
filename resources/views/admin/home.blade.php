@@ -65,6 +65,18 @@
           <a href="#" class="d-block">Rishita</a>
         </div>
       </div>
+
+      {{-- <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div> --}}
+
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
@@ -77,7 +89,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="admin/eventsmanagement" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 User Management
@@ -86,7 +98,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="/admin/noticeboard" class="nav-link">
+            <a href="/admin/events-management" class="nav-link">
               <i class="nav-icon fas fa-bullhorn"></i>
               <p>
                 Notice Management
@@ -95,14 +107,13 @@
           </li>
 
           <li class="nav-item">
-            <a href="events-management" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
                 Events Management
               </p>
             </a>
           </li>
-
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-image"></i>
@@ -113,27 +124,8 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{route('admin.school.create')}}" class="nav-link">
-              <i class="nav-icon fas fa-bullhorn"></i>
-              <p>
-                Manage school
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="{{route('admin.school.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-bullhorn"></i>
-              <p>
-                school info
-              </p>
-            </a>
-          </li>
-
-
-          <li class="nav-item">
             <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-sign-out-alt"></i>
+            <i class="nav-icon fas fa-sign-out-alt mt-5"></i>
             <p>
              Logout
             </p>
@@ -195,7 +187,7 @@
   <script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
   <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
   <script src="{{ asset('dist/js/adminlte.js') }}"></script>
-  <!-- <script src="{{ asset('dist/js/demo.js') }}"></script> -->
+  <script src="{{ asset('dist/js/demo.js') }}"></script>
   <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
 </body>
 

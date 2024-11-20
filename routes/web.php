@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\SignupController;
 use App\Http\Controllers\aboutPageController;
@@ -12,8 +13,11 @@ use App\Http\Controllers\PageContentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GalleryDetailsController;
+use App\Http\Controllers\QuestionsController;
+use App\Http\Controllers\SchoolDetailController;
 use App\Http\Controllers\NoticeBoardController;
 use App\Http\Controllers\AdminNoticeBoardController;
+use App\Http\Controllers\AdminEventController;
 
 
 Route::get('/', function () {
@@ -50,14 +54,26 @@ Route::get('/page-content', [PageContentController::class, 'create'])->name('pag
 Route::post('/page-content', [PageContentController::class, 'store'])->name('page-content');
 
 
+
+//----------Salauddin's route------------
+
+Route::get('/page-content',[PageContentController::class,'create'])->name('page-content');
+Route::post('/page-content',[PageContentController::class,'store'])->name('page-content');
+
+
 Route::get('/about', [aboutPageController::class, 'index'])->name('about');
 
-/* Route::get('/contact',[ContactPageController::class,'index'])->name('contact');
- */
+Route::get('/admin/questions', [QuestionsController::class,'index']);
 
-/* Route::post('/contact',[ContactController::class,'store'])->name('contact.store');  */
+Route::resource('contact',ContactController::class)->names('contact');
 
-Route::resource('contact', ContactController::class)->names('contact');
+Route::resource('contact',ContactController::class)->names('contact');
+
+Route::resource('admin/school', SchoolDetailController::class)->names('admin.school');
+
+
+
+//----------Salauddin's route end------------
 
 
 //Sobuj Part
@@ -70,6 +86,17 @@ Route::post('/signup', [SignupController::class, 'signup']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('/admin', function () {
-    return view('layouts.admin');
+Route::get('/admin', function (){ $user = Auth::user(); return view('layouts.admin', ['user'=>$user]);});
+
+Route::middleware(['web'])->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('/events-management', [AdminEventController::class, 'index'])->name('admin.eventsmanagement.index');
+        Route::get('/events-management/create', [AdminEventController::class, 'create'])->name('admin.eventsmanagement.create');
+        Route::post('/events-management/store', [AdminEventController::class, 'store'])->name('admin.eventsmanagement.store');
+        Route::get('/events-management/{id}/edit', [AdminEventController::class, 'edit'])->name('admin.eventsmanagement.edit');
+        Route::put('/events-management/{id}', [AdminEventController::class, 'update'])->name('admin.eventsmanagement.update');
+        Route::delete('/events-management/{id}', [AdminEventController::class, 'destroy'])->name('admin.eventsmanagement.destroy');
+        Route::get('/events-management/{id}/delete', [AdminEventController::class, 'confirmDelete'])->name('admin.eventsmanagement.confirmDelete');
+    });
 });
+
