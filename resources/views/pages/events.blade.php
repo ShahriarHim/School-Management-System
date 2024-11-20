@@ -16,11 +16,11 @@
         @if($event->status !== 'upcoming')
             <div class="vlog-item">
                 <div class="date">{{ $event->date->format('d M, Y') }}</div>
-                <span class="vlog-name"><a class="styled-link" href="#">{{ $event->details }}</a></span>
+                <span class="vlog-name"><a class="styled-link" href="#">{{ $event->description }}</a></span>
                 <hr>
                 <div class="vlog-footer">
                     <img src="{{ asset($event->image) }}" class="vlog-pic">
-                    <p class="vlog-title"><a class="styled-link" href="#">{{ $event->title }}</a></p>
+                    <p class="vlog-title"><a class="styled-link" href="#">{{ $event->author_name }}</a></p>
                 </div>
             </div>
         @endif

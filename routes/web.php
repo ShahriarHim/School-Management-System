@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\SignupController;
 use App\Http\Controllers\aboutPageController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GalleryDetailsController;
 use App\Http\Controllers\NoticeBoardController;
 use App\Http\Controllers\AdminNoticeBoardController;
+use App\Http\Controllers\AdminEventController;
 
 
 Route::get('/', function () {
@@ -77,6 +79,13 @@ Route::post('/signup', [SignupController::class, 'signup']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('/admin', function () {
-    return view('layouts.admin');
+Route::get('/admin', function (){ $user = Auth::user(); return view('layouts.admin', ['user'=>$user]);});
+Route::middleware(['web'])->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('/events-management', [AdminEventController::class, 'index'])->name('admin.eventsmanagement.index');
+        Route::post('/events-management/store', [AdminEventController::class, 'store'])->name('admin.eventsmanagement.store');
+        Route::get('/events-management/{id}/edit', [AdminEventController::class, 'edit'])->name('admin.eventsmanagement.edit');
+        Route::put('/events-management/{id}', [AdminEventController::class, 'update'])->name('admin.eventsmanagement.update');
+        Route::delete('/events-management/{id}', [AdminEventController::class, 'destroy'])->name('admin.eventsmanagement.destroy');
+    });
 });
