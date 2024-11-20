@@ -125,7 +125,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="/admin/school/create" class="nav-link">
+            <a href="{{route('admin.school.create')}}" class="nav-link">
               <i class="nav-icon fas fa-bullhorn"></i>
               <p>
                 Manage school
@@ -134,7 +134,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="/admin/school" class="nav-link">
+            <a href="{{route('admin.school.index')}}" class="nav-link">
               <i class="nav-icon fas fa-bullhorn"></i>
               <p>
                 school info
