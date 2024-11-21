@@ -74,7 +74,7 @@ Route::resource('admin/school', SchoolDetailController::class)->names('admin.sch
 
 
 
-//----------Salauddin's route end------------
+//----------Salauddin's route ends here------------
 
 
 //Sobuj Part
