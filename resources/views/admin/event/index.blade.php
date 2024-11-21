@@ -23,7 +23,9 @@
         </div>
     @endif
 
-    <a href="{{ route('admin.eventsmanagement.create') }}" class="btn btn-primary mb-3">Add New Event</a>
+    <div class="addnewevent">
+        <a href="{{ route('admin.eventsmanagement.create') }}" class="btn btn-primary mb-3">Add New Event</a>
+    </div>
 
     <!-- Events Table -->
     <div class="events-table">

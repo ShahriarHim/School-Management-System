@@ -1,6 +1,4 @@
 .management-panel {
-    max-width: 800px;
-    margin: 20px auto;
     padding: 20px;
     background: #f9f9f9;
     border-radius: 10px;
@@ -96,4 +94,9 @@
     border-color: #ebccd1;
 }
 
+.addnewevent{
+    text-align: center;
+}
+.eventstable{
 
+}

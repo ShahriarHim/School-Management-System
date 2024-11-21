@@ -16,22 +16,13 @@
   <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
-  <style>
-    #homedes {
-      color: black;
-    }
-
-    #homedes:hover {
-      color: blue;
-    }
-  </style>
 </head>
 
 
 <body class="hold-transition sidebar-mini layout-fixed">
 
   {{----NavBar----}}
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="position: sticky !important; top: 0; width: 100%; z-index: 1030;">
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
