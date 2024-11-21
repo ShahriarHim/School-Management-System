@@ -7,7 +7,23 @@
 
 <div class="management-panel">
     <h1 class="panel-header">Noticeboard Management Panel</h1>
+    <!-- Display Success Message -->
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
+    <!-- Display Error Messages -->
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <!-- Button to Create a New Notice -->
     <div class="actions">
         <a href="{{ route('admin.noticeboard.create') }}" class="btn btn-primary">Create Notice</a>
@@ -40,12 +56,14 @@
                                 <span>No Image</span>
                             @endif
                         </td>
-                        <td>
-                            <a href="{{ route('admin.noticeboard.edit', $notice->id) }}" class="btn btn-primary">Edit</a>
-                            <form action="{{ route('admin.noticeboard.destroy', $notice->id) }}" method="POST" class="delete-form">
+                        <td class="actions-container">
+                            <a href="{{ route('admin.noticeboard.edit', $notice->id) }}"
+                                class="btn btn-sm btn-secondary">Edit</a>
+                            <form action="{{ route('admin.noticeboard.destroy', $notice->id) }}" method="POST"
+                                class="delete-form">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                             </form>
                         </td>
                     </tr>

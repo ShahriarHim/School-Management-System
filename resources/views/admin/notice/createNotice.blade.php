@@ -8,7 +8,7 @@
 <div class="management-panel">
 <a href="{{ url('/admin/noticeboard') }}" class="back-btn-container">
                 <span class="fas fa-arrow-left small back-btn-icon"></span>
-                <span class="back-btn-text">< Noticeboard Management</span>
+                <span class="back-btn-text">Noticeboard Management</span>
             </a>
     <h1 class="panel-header">Create New Notice</h1>
 
