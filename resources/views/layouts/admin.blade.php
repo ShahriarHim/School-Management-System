@@ -96,10 +96,19 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+            <a href="{{ route('admin.galleries.index') }}" class="nav-link">
+                <i class="nav-icon far fa-image"></i>
+                <p>
+                    Gallery
+                </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{route('admin.page-content.create')}}" class="nav-link">
+              <i class="nav-icon fas fa-bullhorn"></i>
               <p>
-                Gallery
+                Manage Page Content
               </p>
             </a>
           </li>
