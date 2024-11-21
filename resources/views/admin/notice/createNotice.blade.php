@@ -1,21 +1,22 @@
 @extends('layouts.admin')
 
-@section('title', 'Noticeboard Management Panel')
+@section('title', 'Create Notice')
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/noticeManagement.css') }}">
-<div class="management-panel">
-    <h1 class="panel-header">Noticeboard Management Panel</h1>
-    
 
-        <!-- Display Success Message -->
-        @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
+<div class="management-panel">
+<a href="{{ url('/admin/noticeboard') }}" class="back-btn-container">
+                <span class="fas fa-arrow-left small back-btn-icon"></span>
+                <span class="back-btn-text">Noticeboard Management</span>
+            </a>
+    <h1 class="panel-header">Create New Notice</h1>
+
+    <!-- Success and Error Messages -->
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <!-- Display Error Messages -->
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -25,7 +26,8 @@
             </ul>
         </div>
     @endif
-    
+
+    <!-- Notice Form -->
     <form action="{{ route('admin.noticeboard.store') }}" method="POST" enctype="multipart/form-data" class="notice-form">
         @csrf
         <div class="form-group">
