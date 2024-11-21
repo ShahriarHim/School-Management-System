@@ -105,6 +105,15 @@
           </li>
 
           <li class="nav-item">
+            <a href="{{route('admin.page-content.create')}}" class="nav-link">
+              <i class="nav-icon fas fa-bullhorn"></i>
+              <p>
+                Manage Page Content
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="{{route('admin.school.create')}}" class="nav-link">
               <i class="nav-icon fas fa-bullhorn"></i>
               <p>
