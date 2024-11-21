@@ -1,7 +1,8 @@
 /* General Panel Styling */
 .management-panel {
-    max-width: 800px;
-    margin: 20px auto;
+    margin-left: 300px;
+    margin-top: 70px;
+    margin-bottom: 100px;
     padding: 20px;
     background: #f9f9f9;
     border-radius: 10px;
@@ -265,4 +266,14 @@
     .notice-form .btn {
         width: 100%; /* Make buttons full width */
     }
+}
+
+@media (max-width: 996px) {
+    .management-panel {
+        margin-left: 0px;
+        margin-top: 70px;
+        margin-bottom: 100px;
+    }
+
+
 }
