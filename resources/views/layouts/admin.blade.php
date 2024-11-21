@@ -22,10 +22,10 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 
   {{----NavBar----}}
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="position: sticky !important; top: 0; width: 100%; z-index: 1030;">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="position: fixed !important; top: 0; width: 100%; z-index: 1030;">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        <a id="togglebtn1" {{-- onclick="SidebarShow()" --}} class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
@@ -36,10 +36,11 @@
         </a>
       </li>
     </ul>
-  </nav>
+</nav>
+
 
   {{-- Asside --}}
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" id="sidebar1">
     <a href="/admin" class="brand-link">
       <img src="{{ asset('dist/img/logoB.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
         style="opacity: .8">
@@ -137,24 +138,8 @@
     </div>
   </aside>
 
-  <!-- <div class="content-wrapper">
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/" id="homedes">Home</a></li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
 
-  <div class="main">
+  <div class="main" {{-- onclick="closeToggle()" --}}>
     <main class="main-content">
       @yield('content')
     </main>
@@ -188,6 +173,18 @@
   <script src="{{ asset('dist/js/adminlte.js') }}"></script>
   <!-- <script src="{{ asset('dist/js/demo.js') }}"></script> -->
   <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
+  {{-- <script>
+    function closeToggle() {
+        const x = document.getElementById("sidebar1");
+        x.style.display = 'none';
+    }
+    function SidebarShow(){
+        const x = document.getElementById("sidebar1");
+        if(x.style.display = 'none'){
+            x.style.display = 'block';
+        }
+    }
+</script> --}}
 </body>
 
 </html>
