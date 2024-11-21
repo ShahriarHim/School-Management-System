@@ -14,9 +14,14 @@ class AdminNoticeBoardController extends Controller
     public function index()
     {
         $notices = NoticeBoard::all();
-        return view('admin.noticeManagement', compact('notices'));
+        return view('admin.notice.noticeManagement', compact('notices'));
     }
-
+    
+    public function create()
+    {
+        return view('admin.notice.createNotice');
+    }
+    
 
     /**
      * Store a newly created notice in storage.
@@ -63,7 +68,7 @@ class AdminNoticeBoardController extends Controller
     public function edit($id)
     {
         $notice = NoticeBoard::findOrFail($id);
-        return view('admin.noticeboard.edit', compact('notice'));
+        return view('admin.notice.editNotice', compact('notice'));
     }
 
     /**

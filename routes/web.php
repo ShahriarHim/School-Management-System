@@ -40,23 +40,18 @@ Route::get('/noticeboard-details/{id}', [NoticeBoardController::class, 'show'])-
 /* --------------admin routes------------------------- */
 
 /*Notice*/
-Route::get('/admin/notice-management', function () {
-    return view('admin.noticeManagement');
+
+Route::prefix('admin')->group(function () {
+    Route::get('/noticeboard', [AdminNoticeBoardController::class, 'index'])->name('admin.noticeboard.index'); // Displays all notices
+    Route::get('/noticeboard/create', [AdminNoticeBoardController::class, 'create'])->name('admin.noticeboard.create'); // Create form
+    Route::post('/noticeboard/store', [AdminNoticeBoardController::class, 'store'])->name('admin.noticeboard.store'); // Store notice
+    Route::get('/noticeboard/{id}/edit', [AdminNoticeBoardController::class, 'edit'])->name('admin.noticeboard.edit'); // Edit form
+    Route::put('/noticeboard/{id}', [AdminNoticeBoardController::class, 'update'])->name('admin.noticeboard.update'); // Update notice
+    Route::delete('/noticeboard/{id}', [AdminNoticeBoardController::class, 'destroy'])->name('admin.noticeboard.destroy'); // Delete notice
 });
 
-// Route::post('/admin/noticeboard/store', [AdminNoticeBoardController::class, 'store'])->name('admin.noticeboard.store');
-// use App\Http\Controllers\AdminNoticeBoardController;
-
-// Admin routes for noticeboard management
-Route::middleware(['web'])->group(function () {
-    Route::prefix('admin')->group(function () {
-        Route::get('/noticeboard', [AdminNoticeBoardController::class, 'index'])->name('admin.noticeboard.index');
-        Route::post('/noticeboard/store', [AdminNoticeBoardController::class, 'store'])->name('admin.noticeboard.store');
-        Route::get('/noticeboard/{id}/edit', [AdminNoticeBoardController::class, 'edit'])->name('admin.noticeboard.edit');
-        Route::put('/noticeboard/{id}', [AdminNoticeBoardController::class, 'update'])->name('admin.noticeboard.update');
-        Route::delete('/noticeboard/{id}', [AdminNoticeBoardController::class, 'destroy'])->name('admin.noticeboard.destroy');
-    });
-});
+Route::get('/page-content', [PageContentController::class, 'create'])->name('page-content');
+Route::post('/page-content', [PageContentController::class, 'store'])->name('page-content');
 
 
 
@@ -66,9 +61,11 @@ Route::get('/page-content',[PageContentController::class,'create'])->name('page-
 Route::post('/page-content',[PageContentController::class,'store'])->name('page-content');
 
 
-Route::get('/about',[aboutPageController::class,'index'])->name('about');
+Route::get('/about', [aboutPageController::class, 'index'])->name('about');
 
 Route::get('/admin/questions', [QuestionsController::class,'index']);
+
+Route::resource('contact',ContactController::class)->names('contact');
 
 Route::resource('contact',ContactController::class)->names('contact');
 
