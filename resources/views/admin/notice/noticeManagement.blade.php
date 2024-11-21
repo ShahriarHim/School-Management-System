@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 
-@section('title', 'Event Management Panel')
+@section('title', 'Noticeboard Management Panel')
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/noticeManagement.css') }}">
-<div class="management-panel">
-    <h1 class="panel-header">Event Management Panel</h1>
 
+<div class="management-panel">
+    <h1 class="panel-header">Noticeboard Management Panel</h1>
     <!-- Display Success Message -->
     @if(session('success'))
         <div class="alert alert-success">
@@ -24,43 +24,43 @@
             </ul>
         </div>
     @endif
-
+    <!-- Button to Create a New Notice -->
     <div class="actions">
-        <a href="{{ route('admin.eventsmanagement.create') }}" class="btn btn-primary mb-3">Add New Event</a>
+        <a href="{{ route('admin.noticeboard.create') }}" class="btn btn-primary">Create Notice</a>
     </div>
 
-    <!-- Events Table -->
+    <!-- Notices Table -->
     <div class="table-container">
         <table class="notices-table">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Title</th>
-                    <th>Author Name</th>
                     <th>Date</th>
-                    <th>Status</th>
-                    <th>Image</th>
                     <th>Description</th>
+                    <th>Image</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($events as $event)
+                @foreach ($notices as $notice)
                     <tr>
-                        <td>{{ $event->title }}</td>
-                        <td>{{ $event->author_name }}</td>
-                        <td>{{ \Carbon\Carbon::parse($event->date)->format('d M, Y') }}</td>
-                        <td>{{ ucfirst($event->status) }}</td>
+                        <td>{{ $notice->id }}</td>
+                        <td>{{ $notice->title }}</td>
+                        <td>{{ \Carbon\Carbon::parse($notice->date)->format('d M, Y') }}</td>
+                        <td>{{ Str::limit($notice->description, 50, '...') }}</td>
                         <td>
-                            @if ($event->image)
-                                <img src="{{ asset($event->image) }}" alt="Author Image" width="50">
+                            @if ($notice->image)
+                                <img src="{{ asset($notice->image) }}" alt="{{ $notice->title }}" class="notice-image">
                             @else
-                                N/A
+                                <span>No Image</span>
                             @endif
                         </td>
-                        <td>{{ $event->description }}</td>
                         <td class="actions-container">
-                            <a href="{{ route('admin.eventsmanagement.edit', $event->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                            <form action="{{ route('admin.eventsmanagement.destroy', $event->id) }}" method="POST" style="display:inline-block;">
+                            <a href="{{ route('admin.noticeboard.edit', $notice->id) }}"
+                                class="btn btn-sm btn-secondary">Edit</a>
+                            <form action="{{ route('admin.noticeboard.destroy', $notice->id) }}" method="POST"
+                                class="delete-form">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>

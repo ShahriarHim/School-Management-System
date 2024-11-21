@@ -1,6 +1,8 @@
+/* General Panel Styling */
 .management-panel {
-    max-width: 800px;
-    margin: 20px auto;
+    margin-left: 300px;
+    margin-top: 70px;
+    margin-bottom: 100px;
     padding: 20px;
     background: #f9f9f9;
     border-radius: 10px;
@@ -14,8 +16,184 @@
     margin-bottom: 20px;
 }
 
-.notice-form .form-group {
+.actions {
+    text-align: right;
     margin-bottom: 20px;
+}
+
+.actions .btn {
+    padding: 5px 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #007bff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.actions .btn:hover {
+    background-color: #0056b3;
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.notices-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.notices-table th, .notices-table td {
+    padding: 12px 15px;
+    border: none;
+    font-size: 1rem;
+    color: #333;
+    vertical-align: middle;
+}
+
+.notices-table th {
+    background-color: #528eb6;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: left;
+}
+
+.notices-table tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.notices-table tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+
+.notices-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.notice-image {
+    width: 60px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.notice-image-preview {
+    width: 120px;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    .notices-table th, .notices-table td {
+        font-size: 0.9rem; /* Slightly smaller font for small screens */
+        padding: 8px 10px;
+    }
+
+    .actions {
+        text-align: center; /* Center-align buttons on smaller screens */
+    }
+
+    .actions-container {
+        justify-content: center;
+        flex-wrap: wrap; /* Wrap buttons if they don’t fit in one row */
+    }
+
+    .actions-container .btn {
+        margin-bottom: 5px; /* Add space between wrapped buttons */
+        flex: 1 1 auto; /* Allow buttons to adjust their width */
+    }
+}
+
+/* Action Buttons */
+.actions-container {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.actions-container .btn {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.actions-container .btn-secondary {
+    background-color: #6c757d;
+}
+
+.actions-container .btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.actions-container .btn-danger {
+    background-color: #dc3545;
+}
+
+.actions-container .btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Back Button */
+.back-btn-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Space between the icon and text */
+    cursor: pointer; /* Indicate it's clickable */
+    color: #5a6268; /* Adjust text color if needed */
+    font-size: 1rem; /* Adjust font size */
+    text-decoration: none; /* Remove underline if it's a link */
+    margin-bottom: 1rem; /* Add spacing below the back button if needed */
+}
+
+.back-btn-icon {
+    font-size: 1rem; /* Adjust icon size */
+    font-weight: bold;
+}
+
+.back-btn-text {
+    font-size: 1rem;
+    color: inherit; /* Matches the parent color */
+}
+
+/* Alerts */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+/* Forms */
+.notice-form .form-group {
+    margin-bottom: 15px;
 }
 
 .notice-form label {
@@ -77,21 +255,24 @@
 .notice-form .btn-secondary:hover {
     background-color: #5a6268;
 }
-.alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
+
+/* Form Responsiveness */
+@media (max-width: 768px) {
+    .notice-form .form-actions {
+        flex-direction: column; /* Stack buttons vertically on small screens */
+    }
+
+    .notice-form .btn {
+        width: 100%; /* Make buttons full width */
+    }
 }
 
-.alert-success {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-}
+@media (max-width: 996px) {
+    .management-panel {
+        margin-left: 0px;
+        margin-top: 70px;
+        margin-bottom: 100px;
+    }
 
-.alert-danger {
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
+
 }
