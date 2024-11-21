@@ -36,9 +36,8 @@
     background-color: #0056b3;
 }
 
-/* Table Styling */
 .table-container {
-    overflow-x: auto; /* Horizontal scroll for small screens */
+    overflow-x: auto;
     margin-top: 20px;
 }
 

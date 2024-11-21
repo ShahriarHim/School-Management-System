@@ -6,6 +6,7 @@ use App\Http\Controllers\aboutPageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\ContactPageController;
+use App\Http\Controllers\AdminGalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\EventController;
@@ -18,7 +19,7 @@ use App\Http\Controllers\SchoolDetailController;
 use App\Http\Controllers\NoticeBoardController;
 use App\Http\Controllers\AdminNoticeBoardController;
 use App\Http\Controllers\AdminEventController;
-
+use App\Http\Controllers\GalleryImageController;
 
 Route::get('/', function () {
     return view('pages.home');
@@ -98,5 +99,29 @@ Route::middleware(['web'])->group(function () {
         Route::delete('/events-management/{id}', [AdminEventController::class, 'destroy'])->name('admin.eventsmanagement.destroy');
         Route::get('/events-management/{id}/delete', [AdminEventController::class, 'confirmDelete'])->name('admin.eventsmanagement.confirmDelete');
     });
+});
+
+Route::middleware(['web'])->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('/galleries', [AdminGalleryController::class, 'index'])->name('admin.galleries.index');
+        Route::get('/galleries/create', [AdminGalleryController::class, 'create'])->name('admin.galleries.create');
+        Route::post('/galleries/store', [AdminGalleryController::class, 'store'])->name('admin.galleries.store');
+        Route::get('/galleries/{id}/edit', [AdminGalleryController::class, 'edit'])->name('admin.galleries.edit');
+        Route::put('/galleries/{id}', [AdminGalleryController::class, 'update'])->name('admin.galleries.update');
+        Route::get('/galleries/{id}/delete', [AdminGalleryController::class, 'confirmDelete'])->name('admin.galleries.confirmDelete');
+        Route::delete('/galleries/{id}', [AdminGalleryController::class, 'destroy'])->name('admin.galleries.destroy');
+    });
+});
+
+
+Route::prefix('admin')->group(function () {
+    Route::get('/galleries/{gallery_id}/images', [GalleryImageController::class, 'index'])->name('admin.galleries.images.index');
+    Route::get('/galleries/{gallery_id}/images/create', [GalleryImageController::class, 'create'])->name('admin.galleries.images.create');
+    Route::post('/galleries/{gallery_id}/images/store', [GalleryImageController::class, 'store'])->name('admin.galleries.images.store');
+    Route::get('/galleries/{gallery_id}/images/{id}/edit', [GalleryImageController::class, 'edit'])->name('admin.galleries.images.edit');
+    Route::put('/galleries/{gallery_id}/images/{id}', [GalleryImageController::class, 'update'])->name('admin.galleries.images.update');
+    Route::delete('/galleries/{gallery_id}/images/{id}', [GalleryImageController::class, 'destroy'])->name('admin.galleries.images.destroy');
+    Route::get('/galleries/{gallery_id}/images/{id}/delete', [GalleryImageController::class, 'confirmDelete'])->name('admin.galleries.images.confirmDelete');
+
 });
 
