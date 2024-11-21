@@ -9,7 +9,7 @@
         <div class="page-content-header">
             <h2>Page Content Management</h2>
         </div>
-        <form action="{{route('page-content')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('admin.page-content.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
