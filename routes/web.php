@@ -20,6 +20,7 @@ use App\Http\Controllers\NoticeBoardController;
 use App\Http\Controllers\AdminNoticeBoardController;
 use App\Http\Controllers\AdminEventController;
 use App\Http\Controllers\GalleryImageController;
+use App\Http\Controllers\TestController;
 
 Route::get('/', function () {
     return view('pages.home');
@@ -66,12 +67,11 @@ Route::get('/admin/questions', [QuestionsController::class,'index']);
 
 Route::resource('contact',ContactController::class)->names('contact');
 
-Route::resource('contact',ContactController::class)->names('contact');
-
 Route::resource('admin/page-content', PageContentController::class)->names('admin.page-content');
 
 Route::resource('admin/school', SchoolDetailController::class)->names('admin.school');
 
+Route::resource('test',TestController::class)->names('test');
 
 
 //----------Salauddin's route ends here------------
