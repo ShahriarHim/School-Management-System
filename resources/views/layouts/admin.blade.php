@@ -133,6 +133,16 @@
 
 
           <li class="nav-item">
+            <a href="{{route('admin.questions')}}" class="nav-link">
+              <i class="nav-icon fas fa-bullhorn"></i>
+              <p>
+                Questions
+              </p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-sign-out-alt"></i>
             <p>

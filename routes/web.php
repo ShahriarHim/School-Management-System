@@ -59,11 +59,9 @@ Route::post('/page-content', [PageContentController::class, 'store'])->name('pag
 
 //----------Salauddin's route------------
 
-
-
 Route::get('/about', [aboutPageController::class, 'index'])->name('about');
 
-Route::get('/admin/questions', [QuestionsController::class,'index']);
+Route::get('/admin/questions', [QuestionsController::class,'index'])->name('admin.questions');
 
 Route::resource('contact',ContactController::class)->names('contact');
 
