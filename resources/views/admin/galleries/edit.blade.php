@@ -31,7 +31,7 @@
         </div>
         <div class="form-group">
             <label for="date">Gallery Date</label>
-            <input type="date" name="date" id="date" class="form-control" value="{{ $gallery->dates->first()->date }}" required>
+            <input type="date" name="date" id="date" class="form-control" value="{{ $galleryDate->date ?? '' }}" required>
         </div>
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Update Gallery</button>

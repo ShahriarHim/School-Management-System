@@ -17,5 +17,5 @@ class Event extends Model
         'image',
         'description'
     ];
-    protected $casts = [ 'date' => 'datetime', ];
+    protected $dates = ['date'];
 }
