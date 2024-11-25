@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{asset('css/salauddin.css')}}">
-</head>
-<body>
+@extends('layouts.admin')
 
-    <div class="questions-margin">
+@section('content')
+
+    <link rel="stylesheet" href="{{asset('css/salauddin.css')}}">
+
+    <div class="school-margin">
 
         <div class="questions-header">
             <h1>Questions list</h1>
@@ -44,5 +40,5 @@
 
     </div>
 
-</body>
-</html>
+
+@endsection
