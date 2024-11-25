@@ -5,11 +5,11 @@
     <link rel="stylesheet" href="{{ asset('css/teacherstyle.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <div class="first">
-        <h1>{{ $pc->title }}</h1>
+        <h1>{{ $pc[0]->title }}</h1>
     </div>
     <div class="upper">
-        <span class="btn1">{{ $pc->button }}</span>
-        <p class="text-primary">{{ $pc->title2 }}</p>
+        <span class="btn1">{{ $pc[0]->button }}</span>
+        <p class="text-primary">{{ $pc[0]->title2 }}</p>
     </div>
     <div class="team-container">
         @foreach($teachers as $index => $teacher)
@@ -37,7 +37,7 @@
                 <img src="{{ asset($teacher->image) }}" alt="{{ $teacher->name }}" class="round-pic">
             </div>
 
-            @if($index % 2 == 1 || $index == $teachers->count() - 1)
+            @if($index % 2 == 1 || $index == count($teachers) - 1)
                 </div>
             @endif
         @endforeach

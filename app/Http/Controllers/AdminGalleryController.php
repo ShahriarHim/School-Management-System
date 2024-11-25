@@ -50,8 +50,12 @@ class AdminGalleryController extends Controller
     {
         $gallery = Gallery::findOrFail($id);
         $galleryDate = GalleryDate::where('gallery_id', $id)->first();
+        if (!$galleryDate) {
+            $galleryDate = new GalleryDate(['gallery_id' => $gallery->id, 'date' => null]);
+        }
         return view('admin.galleries.edit', compact('gallery', 'galleryDate'));
     }
+
 
     public function update(Request $request, $id)
     {
