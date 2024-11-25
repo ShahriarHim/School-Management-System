@@ -69,7 +69,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="admin/eventsmanagement" class="nav-link">
+            <a href="admin/users" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 User Management
