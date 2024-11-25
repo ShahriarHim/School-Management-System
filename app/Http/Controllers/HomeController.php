@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB; // Import DB for query builder and raw SQL
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Event;
 use App\Models\PageContent;
@@ -12,9 +12,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        /**
-         * SECTION 1: Eloquent ORM
-         */
+        /* SECTION 1: Eloquent ORM */
+
         // Using Eloquent to retrieve data
         // $pageContents = PageContent::whereIn('slug', ['home', 'coaches', 'event'])->get();
         // $home = $pageContents->where('slug', 'home')->first();
@@ -24,9 +23,8 @@ class HomeController extends Controller
         // $events = Event::all();
         // $teachers = User::where('role', 3)->get();
 
-        /**
-         * SECTION 2: Query Builder
-         */
+        /* SECTION 2: Query Builder */
+
         // Using Laravel Query Builder to retrieve data
         // $pageContents = DB::table('page_contents')->whereIn('slug', ['home', 'coaches', 'event'])->get();
         // $home = $pageContents->firstWhere('slug', 'home');
@@ -36,9 +34,8 @@ class HomeController extends Controller
         // $events = DB::table('events')->get();
         // $teachers = DB::table('users')->where('role', 3)->get();
 
-        /**
-         * SECTION 3: Raw SQL
-         */
+        /* SECTION 3: Raw SQL */
+        
         // Using raw SQL to retrieve data
         $pageContents = DB::select("
             SELECT * FROM page_contents WHERE slug IN ('home', 'coaches', 'event')
