@@ -21,6 +21,7 @@ use App\Http\Controllers\NoticeBoardController;
 use App\Http\Controllers\AdminNoticeBoardController;
 use App\Http\Controllers\AdminEventController;
 use App\Http\Controllers\GalleryImageController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserTestController;
 
 Route::get('/', function () {
@@ -72,18 +73,10 @@ Route::resource('admin/page-content', PageContentController::class)->names('admi
 
 Route::resource('admin/school', SchoolDetailController::class)->names('admin.school');
 
+Route::resource('test',TestController::class)->names('test');
 
 
 //----------Salauddin's route end------------
-
-
-
-
-
-
-
-
-
 
 
 //Sobuj Part

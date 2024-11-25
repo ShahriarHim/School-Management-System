@@ -6,11 +6,11 @@
 
 @section('content')
 <div class="noticeboard-header">
-    <h1 class="noticeboard-title">Noticeboard</h1>
+    <h1 class="noticeboard-title">{{$pageContents->title}}</h1>
 </div>
 <div class="noticeboard-precontent">
-    <p class="noticeboard-subheader">Notices</p>
-    <h2 class="section-subtitle">Follow up school notices</h2>
+    <p class="noticeboard-subheader">{{$pageContents->button}}</p>
+    <h2 class="section-subtitle">{{$pageContents->title2}}</h2>
 </div>
 
 <div class="noticeboard-content">
