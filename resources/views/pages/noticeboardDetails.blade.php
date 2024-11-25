@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="noticeboard-header">
-    <h1 class="noticeboard-title">Noticeboard</h1>
+    <h1 class="noticeboard-title">{{$pageContents-> title}}</h1>
 </div>
 
 <section class="notice-details-section">
