@@ -107,7 +107,6 @@ Route::middleware(['web'])->group(function () {
         Route::post('/galleries/store', [AdminGalleryController::class, 'store'])->name('admin.galleries.store');
         Route::get('/galleries/{id}/edit', [AdminGalleryController::class, 'edit'])->name('admin.galleries.edit');
         Route::put('/galleries/{id}', [AdminGalleryController::class, 'update'])->name('admin.galleries.update');
-        Route::get('/galleries/{id}/delete', [AdminGalleryController::class, 'confirmDelete'])->name('admin.galleries.confirmDelete');
         Route::delete('/galleries/{id}', [AdminGalleryController::class, 'destroy'])->name('admin.galleries.destroy');
     });
 });

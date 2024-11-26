@@ -1,10 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class AdminEventController extends Controller
 {
@@ -13,7 +12,15 @@ class AdminEventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
+        // Query Builder
+        // $events = DB::table('events')->get();
+
+        // Raw SQL without placeholders
+        $events = DB::select('SELECT * FROM events');
+
+        // Eloquent ORM
+        // $events = Event::all();
+
         return view('admin.event.index', compact('events'));
     }
 
@@ -49,15 +56,31 @@ class AdminEventController extends Controller
                 $image->move(public_path('images'), $imageName);
             }
 
-            // Create new event
-            Event::create([
-                'title' => $request->title,
-                'author_name' => $request->author_name,
-                'date' => $request->date,
-                'status' => $request->status,
-                'image' => $imagePath,
-                'description' => $request->description,
-            ]);
+            // Raw SQL without placeholders
+            DB::insert("INSERT INTO events (title, author_name, date, status, image, description, created_at, updated_at)
+                        VALUES ('{$request->title}', '{$request->author_name}', '{$request->date}', '{$request->status}', '{$imagePath}', '{$request->description}', '" . now() . "', '" . now() . "')");
+
+            // Query Builder
+            // DB::table('events')->insert([
+            //     'title' => $request->title,
+            //     'author_name' => $request->author_name,
+            //     'date' => $request->date,
+            //     'status' => $request->status,
+            //     'image' => $imagePath,
+            //     'description' => $request->description,
+            //     'created_at' => now(),
+            //     'updated_at' => now(),
+            // ]);
+
+            // Eloquent ORM
+            // Event::create([
+            //     'title' => $request->title,
+            //     'author_name' => $request->author_name,
+            //     'date' => $request->date,
+            //     'status' => $request->status,
+            //     'image' => $imagePath,
+            //     'description' => $request->description,
+            // ]);
 
             return redirect()->route('admin.eventsmanagement.index')->with('success', 'Event created successfully!');
         } catch (\Exception $e) {
@@ -70,7 +93,14 @@ class AdminEventController extends Controller
      */
     public function edit($id)
     {
-        $event = Event::findOrFail($id);
+        // Raw SQL without placeholders
+        $event = DB::select("SELECT * FROM events WHERE id = $id");
+        // Query Builder
+        // $event = DB::table('events')->where('id', $id)->first();
+
+        // Eloquent ORM
+        // $event = Event::findOrFail($id);
+
         return view('admin.event.edit', compact('event'));
     }
 
@@ -88,11 +118,12 @@ class AdminEventController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        $event = Event::findOrFail($id);
+        // Raw SQL without placeholders
+        $id = (int)$id;
+        $eventArray = DB::select("SELECT * FROM events WHERE id = $id");
+        $event = !empty($eventArray) ? $eventArray[0] : null;
 
-        // Handle file upload
         if ($request->hasFile('image')) {
-            // Delete old image if exists
             if ($event->image && file_exists(public_path($event->image))) {
                 unlink(public_path($event->image));
             }
@@ -104,39 +135,54 @@ class AdminEventController extends Controller
             $event->image = $imagePath;
         }
 
-        // Update event details
-        $event->update([
-            'title' => $request->title,
-            'author_name' => $request->author_name,
-            'date' => $request->date,
-            'status' => $request->status,
-            'image' => $event->image,
-            'description' => $request->description,
-        ]);
+        DB::update("UPDATE events SET title = '{$request->title}', author_name = '{$request->author_name}', date = '{$request->date}', status = '{$request->status}', image = '{$event->image}', description = '{$request->description}', updated_at = '" . now() . "' WHERE id = $id");
+
+        // Query Builder
+        // DB::table('events')->where('id', $id)->update([
+        //     'title' => $request->title,
+        //     'author_name' => $request->author_name,
+        //     'date' => $request->date,
+        //     'status' => $request->status,
+        //     'image' => $event->image,
+        //     'description' => $request->description,
+        //     'updated_at' => now(), // Optionally update the timestamp
+        // ]);
+
+        // Eloquent ORM
+        // $event->update([
+        //     'title' => $request->title,
+        //     'author_name' => $request->author_name,
+        //     'date' => $request->date,
+        //     'status' => $request->status,
+        //     'image' => $event->image,
+        //     'description' => $request->description,
+        // ]);
 
         return redirect()->route('admin.eventsmanagement.index')->with('success', 'Event updated successfully!');
     }
 
-    /**
-     * Show the form for confirming the deletion of the specified event.
-     */
-    public function confirmDelete($id)
-    {
-        $event = Event::findOrFail($id);
-        return view('admin.event.delete', compact('event'));
-    }
-
-    /**
-     * Remove the specified event from storage.
-     */
     public function destroy($id)
     {
-        $event = Event::findOrFail($id);
+        // Raw SQL without placeholders
+        $id = (int)$id;
+        $eventArray = DB::select("SELECT * FROM events WHERE id = $id");
+        if (empty($eventArray)) {
+            return redirect()->route('admin.eventsmanagement.index')->with('error', 'Event not found!');
+        }
+        $event = $eventArray[0];
+
         if ($event->image && file_exists(public_path($event->image))) {
             unlink(public_path($event->image));
         }
-        $event->delete();
-        return redirect()->route('admin.eventsmanagement.index')->with('success', 'Event deleted successfully!');;
-    }
 
+        DB::delete("DELETE FROM events WHERE id = $id");
+
+        // Query Builder
+        // DB::table('events')->where('id', $id)->delete();
+
+        // Eloquent ORM
+        // $event->delete();
+
+        return redirect()->route('admin.eventsmanagement.index')->with('success', 'Event deleted successfully!');
+    }
 }
