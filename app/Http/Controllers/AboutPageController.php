@@ -12,9 +12,10 @@ class AboutPageController extends Controller
 
         /* $about= PageContent::where('slug','about')->first(); */
 
-        /* $about= collect(DB::select('select * from page_contents where slug = ?', ['about'])) ->first(); */
-
         /* $about=DB::select('select * from page_contents where slug = ?', ['about']); */
+
+        /* $slug='about';
+        $about=DB::select('select * from page_contents where slug = '."'$slug'"); */
 
         $about= DB::table('page_contents')->where('slug','about')->first(); 
         
