@@ -111,12 +111,19 @@ class TestController extends Controller
 
         //$users=DB::update('update users set name = ? where name = ?',['salauddin' ,'Tony Stark'] );
 
+        //$count = User::where('role', 3)->count();
+ 
+/*         $max = User::max('id');
+        return response()->json($max);
+         */
 
+/*          $test1=Test::create([
+            'name'=>'test1'
+         ]); */
 
-        //return response()->json($users);
-        
+         $tests=Test::all();
 
-
+         return response()->json($tests);
 
 
     }

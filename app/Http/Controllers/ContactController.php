@@ -16,6 +16,9 @@ class ContactController extends Controller
 
         /* $contactPageContent=DB::select('select * from page_contents where slug = ?', ['contact']); */
 
+        /* $slug='contact';
+        $contactPageContent=DB::select('select * from page_contents where slug = '."'$slug'"); */
+
         $contactPageContent = DB::table('page_contents')->where('slug','contact')->first();
         
         return view('pages.contact',['contactPageContent'=>$contactPageContent]);
