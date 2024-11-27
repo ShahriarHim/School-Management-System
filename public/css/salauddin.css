@@ -267,10 +267,11 @@ input{
 
 /* Alerts */
 .alert {
-    padding: 15px;
-    margin-bottom: 20px;
+    padding: 5px;
+    margin-top: 20px;
     border: 1px solid transparent;
     border-radius: 4px;
+    text-align: center;
 }
 
 .alert-success {
@@ -322,7 +323,17 @@ input{
     font-size: 1.3rem;
 }
 
+#status{
+    border: 1px solid #d5dae2;
+    border-radius: 5px;
+    height: 40px;
+    font-size: 1.3rem;
+}
 
+
+.err-message h1{
+    font-size: 1.4rem;
+}
 
 option{
     font-size: 1.3rem;

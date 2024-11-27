@@ -14,7 +14,7 @@ class QuestionsController extends Controller
 
         /* $questions=DB::select('select * from contact_forms'); */
 
-        $questions=DB::table('contact_forms')->get();
+        $questions=DB::table('contact_forms')->paginate(2);
         
         return view('admin.questions',['questions'=>$questions]);
     }

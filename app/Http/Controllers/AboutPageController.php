@@ -17,7 +17,10 @@ class AboutPageController extends Controller
         /* $slug='about';
         $about=DB::select('select * from page_contents where slug = '."'$slug'"); */
 
-        $about= DB::table('page_contents')->where('slug','about')->first(); 
+        $about= DB::table('page_contents')
+        ->where('slug','about')
+        ->where('status', 1)
+        ->first(); 
         
         return view('pages.about',['about'=>$about]);
     }
