@@ -93,14 +93,16 @@ class PageContentController extends Controller
 
  
         DB::table('page_contents')
-        ->updateOrinsert(
-            ['slug'=>$request->input('slug')],
-            [
-                'title'=>$request->input('title'),
-                'button'=>$request->input('button'),
-                'title2'=>$request->input('title2'),
-                'image'=>$fileName,
-                'content'=>$request->input('content'),
+        ->updateOrInsert(
+            ['slug'=>$request->input('slug'),
+            'status'=>$request->input('status')
+            ],
+            
+            ['title'=>$request->input('title'),
+            'button'=>$request->input('button'),
+            'title2'=>$request->input('title2'),
+            'image'=>$fileName,
+            'content'=>$request->input('content')
             ]
         );
 
