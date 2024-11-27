@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PageContent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PageContentController extends Controller
 {
@@ -16,7 +17,6 @@ class PageContentController extends Controller
 
     public function create()
     {
-     /*    $pageContent = PageContent::where('slug','about'); */
         return view('admin.pageContent');
     }
 
@@ -31,7 +31,7 @@ class PageContentController extends Controller
             'image' =>'nullable|image|mimes:jpeg,png,jpg,gif|max:10048',
             'content' =>'nullable'
         ]);
-
+   
 
         $fileName=null;
 
@@ -42,7 +42,7 @@ class PageContentController extends Controller
             $file->move(public_path($fileDestination),$fileName);
         }
 
-
+/* 
         $pagecontent = PageContent::where('slug',$request->input('slug'))->first();
 
         if(!$pagecontent){
@@ -56,7 +56,55 @@ class PageContentController extends Controller
         $pagecontent->image=$fileName;
         $pagecontent->content=$request->input('content');
         $pagecontent->save();
-        
+  */       
+
+
+/* 
+        $pageContent= DB::select('select * from page_contents where slug = ?',[$request->input('slug')]);
+
+        if(!$pageContent){
+
+            DB::insert('INSERT INTO page_contents (slug, title, button, title2, image, content) 
+            values(?,?,?,?,?,?)',
+            [
+                 $request->input('slug'),
+                 $request->input('title'),
+                 $request->input('button'),
+                 $request->input('title2'),
+                 $fileName,
+                 $request->input('content'),
+             ]);
+             
+        }
+
+        else{
+            DB::update('update page_contents set title=? , button=? , title2=?, image=?, content=? where slug=?',[
+                $request->input('title'),
+                $request->input('button'),
+                $request->input('title2'),
+                $fileName,
+                $request->input('content'),
+                $request->input('slug')
+            ]);
+    
+        }
+
+ */
+
+ 
+        DB::table('page_contents')
+        ->updateOrInsert(
+            ['slug'=>$request->input('slug'),
+            'status'=>$request->input('status')
+            ],
+            
+            ['title'=>$request->input('title'),
+            'button'=>$request->input('button'),
+            'title2'=>$request->input('title2'),
+            'image'=>$fileName,
+            'content'=>$request->input('content')
+            ]
+        );
 
         return redirect()->back()->with('status', 'Saved successfully');
 

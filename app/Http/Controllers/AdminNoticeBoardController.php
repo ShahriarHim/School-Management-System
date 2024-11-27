@@ -5,27 +5,58 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\NoticeBoard;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class AdminNoticeBoardController extends Controller
 {
-    /**
-     * Display a listing of the notices.
-     */
+
     public function index()
     {
-        $notices = NoticeBoard::all();
+
+        /* SECTION 1: Eloquent ORM */
+        $notices = NoticeBoard::paginate(2);
+
+        //* Using Chunks
+        // $notices = collect(); // Initialize an empty collection
+
+        // NoticeBoard::chunk(2, function ($chunk) use ($notices) {
+        //     $notices->push(...$chunk); 
+        // });
+
+        /* SECTION 2: Query Builder */
+        // $notices = DB::table("notice_boards")->get();
+
+        /* SECTION 3: Raw SQL */
+        // $notices = DB::select("SELECT * FROM notice_boards");
+
+
+
         return view('admin.notice.noticeManagement', compact('notices'));
     }
-    
+    //! for showing the visualization of chunks
+    // public function index()
+    // {
+        
+    //     NoticeBoard::chunk(2, function ($chunk) {
+    //         dump('Processing a chunk of size: ' . $chunk->count());
+
+    //         foreach ($chunk as $notice) {
+    //             dump('Notice ID: ' . $notice->id);
+    //         }
+    //     });
+
+    //     dd('Chunk processing complete.');
+    // }
+
+
+
     public function create()
     {
         return view('admin.notice.createNotice');
     }
-    
 
-    /**
-     * Store a newly created notice in storage.
-     */
+
+    /* Store a newly created notice in storage */
     public function store(Request $request)
     {
         $request->validate([
@@ -46,12 +77,28 @@ class AdminNoticeBoardController extends Controller
             }
 
             // Create new notice
-            NoticeBoard::create([
-                'title' => $request->title,
-                'date' => $request->date,
-                'image' => $imagePath,
-                'description' => $request->description,
-            ]);
+            /* SECTION 1: Eloquent ORM */
+            // NoticeBoard::create([
+            //     'title' => $request->title,
+            //     'date' => $request->date,
+            //     'image' => $imagePath,
+            //     'description' => $request->description,
+            // ]);
+
+            /* SECTION 2: Query Builder */
+            // DB::table('notice_boards')->insert([
+            //     'title' => $request->title,
+            //     'date' => $request->date,
+            //     'image' => $imagePath,
+            //     'description' => $request->description,
+            // ]);
+
+            /* SECTION 3: Raw SQL */
+            DB::insert(
+                "INSERT INTO notice_boards (title, date, image, description) VALUES ('{$request->title}', '{$request->date}',
+            '{$imagePath}','{$request->description}')"
+            );
+
 
             return redirect()->route('admin.noticeboard.index')->with('success', 'Notice created successfully!');
         } catch (\Exception $e) {
@@ -62,18 +109,23 @@ class AdminNoticeBoardController extends Controller
 
 
 
-    /**
-     * Show the form for editing the specified notice.
-     */
+    /* Show the form for editing the specified notice */
     public function edit($id)
     {
-        $notice = NoticeBoard::findOrFail($id);
+        /* SECTION 1: Eloquent ORM */
+        // $notice = NoticeBoard::findOrFail($id);
+
+        /* SECTION 2: Query Builder */
+        // $notice = DB::table('notice_boards')->where('id', $id)->first();
+
+        /* SECTION 3: Raw SQL */
+        $notice = DB::select('SELECT * FROM notice_boards WHERE id = ? ', [$id]);
+        $notice = $notice[0];
+        // dd($notice);
         return view('admin.notice.editNotice', compact('notice'));
     }
 
-    /**
-     * Update the specified notice in storage.
-     */
+    /* Update the specified notice in storage */
     public function update(Request $request, $id)
     {
         // Validate input
@@ -84,15 +136,33 @@ class AdminNoticeBoardController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        $notice = NoticeBoard::findOrFail($id);
+        /* SECTION 1: Eloquent ORM */
+        // $notice = NoticeBoard::findOrFail($id);
+
+        /* SECTION 2: Query Builder */
+        // $notice = DB::table('notice_boards')->where('id', $id)->first();
+
+        /* SECTION 3: Raw SQL */
+        // $temp = (int) $id;
+        // $query = 'SELECT * FROM notice_boards WHERE id = $temp';
+        // $res = DB::raw($query);
+
+        $notice = DB::select("SELECT * FROM notice_boards WHERE id = $id");
+        // dd($notice);
+
+        if (!$notice) {
+            return redirect()->route('admin.noticeboard.index')->with('error', 'Notice not found.');
+        }
+        $notice = $notice[0]; // Converting the result to an object
 
         // Handle file upload
         if ($request->hasFile('image')) {
             // Delete old image if exists
             if ($notice->image && file_exists(public_path($notice->image))) {
-                unlink(public_path($notice->image));
+                unlink(public_path($notice->image)); // Delete old image from the server
             }
 
+            // Process new image upload
             $image = $request->file('image');
             $imageName = uniqid() . '.' . $image->getClientOriginalExtension(); // Generate a unique file name
             $imagePath = 'images/' . $imageName; // Set the custom path
@@ -102,22 +172,47 @@ class AdminNoticeBoardController extends Controller
         }
 
         // Update notice details
-        $notice->update([
-            'title' => $request->title,
-            'date' => $request->date,
-            'image' => $notice->image, // Ensure the updated image path is saved
-            'description' => $request->description,
+
+        /* SECTION 1: Eloquent ORM */
+        // $notice->update([
+        //     'title' => $request->title,
+        //     'date' => $request->date,
+        //     'image' => $notice->image,
+        //     'description' => $request->description,
+        // ]);
+
+        /* SECTION 2: Query Builder */
+        // DB::table('notice_boards')
+        //     ->where('id', $id)
+        //     ->update([
+        //         'title' => $request->title,
+        //         'date' => $request->date,
+        //         'image' => $notice->image,
+        //         'description' => $request->description,
+        //     ]);
+
+        /* SECTION 3: Raw SQL */
+        DB::statement("UPDATE notice_boards 
+        SET title = ?, date = ?, image = ?, description = ? 
+        WHERE id = ?", [
+            $request->title,
+            $request->date,
+            $notice->image,
+            $request->description,
+            $id
         ]);
 
         return redirect()->route('admin.noticeboard.index')->with('success', 'Notice updated successfully!');
     }
 
 
-    /**
-     * Remove the specified notice from storage.
-     */
+
+    /* Remove the specified notice from storage */
     public function destroy($id)
-    {
+    {   /* SECTION 1: Eloquent ORM */
+        /* SECTION 2: Query Builder */
+        /* SECTION 3: Raw SQL */
+
         $notice = NoticeBoard::findOrFail($id);
 
         // Delete the image file if exists

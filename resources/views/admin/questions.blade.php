@@ -38,7 +38,8 @@
             </table>
         </div>
 
+        <div class="pagination-links">{{$questions->onEachSide(2)->links()}}</div>
+    
     </div>
-
 
 @endsection

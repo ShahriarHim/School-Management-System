@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\SchoolDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SchoolDetailController extends Controller
 {
 
     public function index()
     {
-        $school= SchoolDetail::first();
+        /* $school=SchoolDetail::first(); */
+
+        /* $school=DB::select('select * from school_details limit 1'); */
+
+        $school=DB::table('school_details') ->first();
 
         return view('admin.schoolInfo',['school'=>$school]);
     }
@@ -18,7 +23,12 @@ class SchoolDetailController extends Controller
 
     public function create()
     {
-        $school=SchoolDetail::first();
+        /* $school=SchoolDetail::first(); */
+
+        /* $school=DB::select('select * from school_details limit 1'); */
+
+        $school=DB::table('school_details') ->first();
+
         return view('admin.addUpdateSchool',['school'=>$school]);
     }
 
@@ -40,7 +50,7 @@ class SchoolDetailController extends Controller
     
 
 
-
+/* 
         $school = SchoolDetail::first();
 
         if (!$school) {
@@ -59,7 +69,70 @@ class SchoolDetailController extends Controller
         $school->instagram = $request->input('instagram');
     
         $school->save();
+
+ */
+
+
+/* 
+        $school=DB::select('select * from school_details');
+
+        if(!$school){
+
+            DB::insert('INSERT INTO school_details (school_name, address, email, phone, fax, facebook, linkedin=? , youtube=?, twitter=?, instagram=?) 
+            values(?,?,?,?,?,?,?,?,?,?)',
+            [
+                 $request->input('school_name'),
+                 $request->input('address'),
+                 $request->input('email'),
+                 $request->input('phone'),
+                 $request->input('fax'),
+                 $request->input('facebook'),
+                 $request->input('linkedin'),
+                 $request->input('youtube'),
+                 $request->input('twitter'),
+                 $request->input('instagram'),
+             ]);
+             
+        }
+
+        else{
+            DB::update('update school_details set school_name=?, address=? , email=? , phone=?, fax=?, facebook=?, linkedin=? , youtube=?, twitter=?, instagram=?',[
+                $request->input('school_name'),
+                $request->input('address'),
+                $request->input('email'),
+                $request->input('phone'),
+                $request->input('fax'),
+                $request->input('facebook'),
+                $request->input('linkedin'),
+                $request->input('youtube'),
+                $request->input('twitter'),
+                $request->input('instagram'),
+            ]);
     
+        }
+    
+ */
+
+
+        DB::table('school_details')
+            ->updateOrInsert(
+                ['id'=>1],
+                [
+                    $request->input('school_name'),
+                    $request->input('address'),
+                    $request->input('email'),
+                    $request->input('phone'),
+                    $request->input('fax'),
+                    $request->input('facebook'),
+                    $request->input('linkedin'),
+                    $request->input('youtube'),
+                    $request->input('twitter'),
+                    $request->input('instagram'),
+                ]
+            );
+
+
+
         return redirect()->route('admin.school.index')->with('status', 'School info added successfully!');
 
     }
@@ -95,6 +168,8 @@ class SchoolDetailController extends Controller
             'instagram' => 'nullable|string',
         ]);
 
+
+/*         
         $school= SchoolDetail::first();
 
         $school->school_name = $request->input('school_name');
@@ -109,6 +184,45 @@ class SchoolDetailController extends Controller
         $school->instagram = $request->input('instagram');
     
         $school->save();
+
+ */
+
+
+/* 
+        DB::update('update school_details set school_name=?, address=? , email=? , phone=?, fax=?, facebook=?, linkedin=? , youtube=?, twitter=?, instagram=?',[
+            $request->input('school_name'),
+            $request->input('address'),
+            $request->input('email'),
+            $request->input('phone'),
+            $request->input('fax'),
+            $request->input('facebook'),
+            $request->input('linkedin'),
+            $request->input('youtube'),
+            $request->input('twitter'),
+            $request->input('instagram'),
+        ]);
+
+ */        
+
+
+
+        DB::table('school_details')
+            ->where('id',1)
+            ->update([
+                  'school_name' =>  $request->input('school_name'),
+                  'address'=>  $request->input('address'),
+                  'email'=>  $request->input('email'),
+                  'phone'=>  $request->input('phone'),
+                  'fax'=>  $request->input('fax'),
+                  'facebook'=>  $request->input('facebook'),
+                  'linkedin'=>  $request->input('linkedin'),
+                  'youtube' => $request->input('youtube'),
+                  'twitter' =>  $request->input('twitter'),
+                  'instagram' =>   $request->input('instagram'),
+                ]
+        );
+
+
 
         return redirect()->route('admin.school.index')->with('status', 'School info updated successfully!');
 

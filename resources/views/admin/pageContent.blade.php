@@ -14,6 +14,17 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="col1">
+            
+            @if(session('status'))
+                <div class="err-message alert alert-success">
+                    <h1>{{session('status')}}</h1>
+                </div>
+            @endif
+    
+            </div>
+            
+
+            <div class="col1">
                 <label for="title">Select Page name</label>
                 <select name="slug" id="slug">
                     <option value="">Select One</option>
@@ -26,6 +37,14 @@
                     <option value="gallery_detail">gallery detail</option>
                     <option value="about">about</option>
                     <option value="contact">contact</option>
+                </select>
+            </div>
+
+            <div class="col1">
+                <label for="title">Status</label>
+                <select name="status" id="status">
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
                 </select>
             </div>
 
