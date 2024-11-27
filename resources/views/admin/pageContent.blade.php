@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CKEditor 5 - Extend Features</title>
-    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.css" />
-    <link rel="stylesheet" href="{{asset('css/salauddin.css')}}">
+@extends('layouts.admin')
 
-</head>
-<body>
+@section('content')
+    <link rel="stylesheet" href="{{asset('css/salauddin.css')}}">
+    <script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
+
 
     <div class="form-div">
-        <form action="{{route('page-content')}}" method="POST" enctype="multipart/form-data">
+        <div class="page-content-header">
+            <h2>Page Content Management</h2>
+        </div>
+        <form action="{{route('admin.page-content.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -57,7 +55,7 @@
 
             <div class="col1">
                 <label for="editor">Page Content</label>
-                <textarea id="editor" name="content" class="page-content-text"></textarea>
+                <textarea id="editor2" name="content" class="page-content-text"></textarea>
             </div>
 
 
@@ -71,7 +69,7 @@
 
 
     <!-- CKEditor dependencies -->
-    <script type="importmap">
+<!--     <script type="importmap">
         {
             "imports": {
                 "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.js",
@@ -107,7 +105,7 @@
         } from 'ckeditor5';
 
         ClassicEditor
-            .create(document.querySelector('#editor'), {
+            .create(document.querySelector('#editor2'), {
                 plugins: [
                     Essentials, Bold, Italic, Underline, Strikethrough, Paragraph,
                     Font, Alignment, List, Indent, Link, BlockQuote, Table, TableToolbar,
@@ -164,6 +162,24 @@
             .catch(error => {
                 console.error('Error initializing CKEditor:', error);
             });
+    </script> -->
+
+
+    <script>
+        CKEDITOR.replace('editor2', {
+            height: 500, // Set editor height
+            toolbar: [
+                { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'Undo', 'Redo'] },
+                { name: 'editing', items: ['Find', 'Replace'] },
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
+                { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
+                { name: 'insert', items: ['Image', 'Table', 'HorizontalRule'] },
+                { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                { name: 'colors', items: ['TextColor', 'BGColor'] },
+                { name: 'tools', items: ['Maximize'] },
+            ],
+            extraPlugins: 'font,colorbutton,colordialog',
+        });
     </script>
-</body>
-</html>
+
+@endsection

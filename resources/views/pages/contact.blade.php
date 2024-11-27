@@ -69,10 +69,22 @@
 </div>
 
 
+
+
 <div class="form-body">
 
     <form action=" {{route('contact.store')}} " method="post">
+    @csrf
+    
+        <div class="row1">
+            
+        @if(session('status'))
+            <div class="err-message alert alert-success">
+                <h1>{{session('status')}}</h1>
+            </div>
+        @endif
 
+        </div>
         <div class="row1">
             <div class="col1">
                 <label for="name1-label">FIRST NAME<span class="required">*</span></label>

@@ -5,32 +5,36 @@ namespace App\Http\Controllers;
 use App\Models\ContactForm;
 use App\Models\PageContent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ContactController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        $contactPageContent=PageContent::where('slug','contact')->first();
+        /* $contactPageContent=PageContent::where('slug','contact')->first(); */
+
+        /* $contactPageContent=DB::select('select * from page_contents where slug = ?', ['contact']); */
+
+        /* $slug='contact';
+        $contactPageContent=DB::select('select * from page_contents where slug = '."'$slug'"); */
+
+        $contactPageContent = DB::table('page_contents')->where('slug','contact')->first();
         
         return view('pages.contact',['contactPageContent'=>$contactPageContent]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
+
+        
         $request->validate([
             'fname'=>'required',
             'lname'=>'required',
@@ -41,7 +45,7 @@ class ContactController extends Controller
 
         ]);
 
-
+/* 
         $question=new ContactForm();
 
         $question->fname=$request->input('fname');
@@ -53,36 +57,54 @@ class ContactController extends Controller
 
         $question->save();
 
+         */
+
+
+/* 
+         $question = DB::insert('insert into contact_forms ( fname, lname, email, phone, location, question) values(?,?,?,?,?,?)',
+                            [$request->input('fname'),
+                            $request->input('lname'),
+                            $request->input('email'),
+                            $request->input('phone'), 
+                            $request->input('location'),
+                            $request->input('question') ]);
+
+ */
+
+
+        $question = DB::table('contact_forms')
+                    ->insert([
+                        'fname' => $request->input('fname'),
+                        'lname'=> $request->input('lname'),
+                        'email' => $request->input('email'),
+                        'phone' => $request->input('phone'), 
+                        'location' => $request->input('location'),
+                        'question' => $request->input('question')
+                    ]);
+
         return redirect()->back()->with('status','question submitted');
+
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
         //

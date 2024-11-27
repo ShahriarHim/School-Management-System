@@ -1,7 +1,9 @@
 @extends('layouts.admin')
+
 @section('title', 'Event Management Panel')
+
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/table.css') }}">
+<link rel="stylesheet" href="{{ asset('css/noticeManagement.css') }}">
 <div class="management-panel">
     <h1 class="panel-header">Event Management Panel</h1>
 
@@ -23,11 +25,13 @@
         </div>
     @endif
 
-    <a href="{{ route('admin.eventsmanagement.create') }}" class="btn btn-primary mb-3">Add New Event</a>
+    <div class="actions">
+        <a href="{{ route('admin.eventsmanagement.create') }}" class="btn btn-primary mb-3">Add New Event</a>
+    </div>
 
     <!-- Events Table -->
-    <div class="events-table">
-        <table class="table table-striped">
+    <div class="table-container">
+        <table class="notices-table">
             <thead>
                 <tr>
                     <th>Title</th>
@@ -54,7 +58,7 @@
                             @endif
                         </td>
                         <td>{{ $event->description }}</td>
-                        <td>
+                        <td class="actions-container">
                             <a href="{{ route('admin.eventsmanagement.edit', $event->id) }}" class="btn btn-sm btn-primary">Edit</a>
                             <form action="{{ route('admin.eventsmanagement.destroy', $event->id) }}" method="POST" style="display:inline-block;">
                                 @csrf

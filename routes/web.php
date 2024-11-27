@@ -5,7 +5,9 @@ use App\Http\Controllers\Auth\SignupController;
 use App\Http\Controllers\aboutPageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactFormController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactPageController;
+use App\Http\Controllers\AdminGalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\EventController;
@@ -18,7 +20,9 @@ use App\Http\Controllers\SchoolDetailController;
 use App\Http\Controllers\NoticeBoardController;
 use App\Http\Controllers\AdminNoticeBoardController;
 use App\Http\Controllers\AdminEventController;
-
+use App\Http\Controllers\GalleryImageController;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserTestController;
 
 Route::get('/', function () {
     return view('pages.home');
@@ -57,20 +61,17 @@ Route::post('/page-content', [PageContentController::class, 'store'])->name('pag
 
 //----------Salauddin's route------------
 
-Route::get('/page-content',[PageContentController::class,'create'])->name('page-content');
-Route::post('/page-content',[PageContentController::class,'store'])->name('page-content');
-
-
 Route::get('/about', [aboutPageController::class, 'index'])->name('about');
 
-Route::get('/admin/questions', [QuestionsController::class,'index']);
+Route::get('/admin/questions', [QuestionsController::class,'index'])->name('admin.questions');
 
 Route::resource('contact',ContactController::class)->names('contact');
 
-Route::resource('contact',ContactController::class)->names('contact');
+Route::resource('admin/page-content', PageContentController::class)->names('admin.page-content');
 
 Route::resource('admin/school', SchoolDetailController::class)->names('admin.school');
 
+Route::resource('test',TestController::class)->names('test');
 
 
 //----------Salauddin's route end------------
@@ -81,11 +82,6 @@ Route::get('/coaches', [TeacherController::class, 'index'])->name('teachers.inde
 Route::get('/galdetails/{id}', [GalleryDetailsController::class, 'show'])->name('gallery.details');
 Route::get('/events', [EventController::class, 'show'])->name('events.show');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
-Route::get('/signup', [SignupController::class, 'showSignupForm']);
-Route::post('/signup', [SignupController::class, 'signup']);
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/admin', function (){ $user = Auth::user(); return view('layouts.admin', ['user'=>$user]);});
 
 Route::middleware(['web'])->group(function () {
@@ -100,3 +96,28 @@ Route::middleware(['web'])->group(function () {
     });
 });
 
+
+
+ Route::middleware(['web'])->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('/galleries', [AdminGalleryController::class, 'index'])->name('admin.galleries.index');
+        Route::get('/galleries/create', [AdminGalleryController::class, 'create'])->name('admin.galleries.create');
+        Route::post('/galleries/store', [AdminGalleryController::class, 'store'])->name('admin.galleries.store');
+        Route::get('/galleries/{id}/edit', [AdminGalleryController::class, 'edit'])->name('admin.galleries.edit');
+        Route::put('/galleries/{id}', [AdminGalleryController::class, 'update'])->name('admin.galleries.update');
+        Route::delete('/galleries/{id}', [AdminGalleryController::class, 'destroy'])->name('admin.galleries.destroy');
+    });
+});
+
+
+Route::prefix('admin')->group(function () {
+    Route::get('/galleries/{gallery_id}/images', [GalleryImageController::class, 'index'])->name('admin.galleries.images.index');
+    Route::get('/galleries/{gallery_id}/images/create', [GalleryImageController::class, 'create'])->name('admin.galleries.images.create');
+    Route::post('/galleries/{gallery_id}/images/store', [GalleryImageController::class, 'store'])->name('admin.galleries.images.store');
+    Route::get('/galleries/{gallery_id}/images/{id}/edit', [GalleryImageController::class, 'edit'])->name('admin.galleries.images.edit');
+    Route::put('/galleries/{gallery_id}/images/{id}', [GalleryImageController::class, 'update'])->name('admin.galleries.images.update');
+    Route::delete('/galleries/{gallery_id}/images/{id}', [GalleryImageController::class, 'destroy'])->name('admin.galleries.images.destroy');
+    Route::get('/galleries/{gallery_id}/images/{id}/delete', [GalleryImageController::class, 'confirmDelete'])->name('admin.galleries.images.confirmDelete');
+
+});
+Route::get('/utest', [UserTestController::class, 'processUsers']);

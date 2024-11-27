@@ -5,17 +5,17 @@
 
 <link rel="stylesheet" href="{{ asset('css/eventstyle.css') }}">
 <div class="first">
-    <h1>{{ $pc->title }}</h1>
+    <h1>{{ $pc[0]->title }}</h1>
 </div>
 <div class="upper">
-    <span class="btn">{{ $pc->button }}</span>
-    <p class="text-primary">{{ $pc->title2 }}</p>
+    <span class="btn">{{ $pc[0]->button }}</span>
+    <p class="text-primary">{{ $pc[0]->title2 }}</p>
 </div>
 <div class="vlog-grid">
     @foreach($events as $event)
         @if($event->status !== 'upcoming')
             <div class="vlog-item">
-                <div class="date">{{ $event->date->format('d M, Y') }}</div>
+                <div class="date">{{ \Carbon\Carbon::parse($event->date)->format('d M, Y') }}</div>
                 <span class="vlog-name"><a class="styled-link" href="#">{{ $event->description }}</a></span>
                 <hr>
                 <div class="vlog-footer">
@@ -27,7 +27,7 @@
     @endforeach
 </div>
 <div class="slider-dots">
-    @for ($i = 0; $i < ceil($events->count() / 4); $i++)
+    @for ($i = 0; $i < ceil(count($events) / 4); $i++)
         <span class="dot" onclick="currentSlide({{ $i + 1 }})"></span>
     @endfor
 </div>
