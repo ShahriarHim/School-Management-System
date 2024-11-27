@@ -71,5 +71,9 @@
             </tbody>
         </table>
     </div>
+    <!-- Pagination Links -->
+    <div class="pagination-links">
+        {{ $notices->links() }}
+    </div>
 </div>
 @endsection
