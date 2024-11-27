@@ -2,6 +2,7 @@
 .management-panel {
     margin-left: 300px;
     margin-top: 70px;
+    margin-right: 200px;
     margin-bottom: 100px;
     padding: 20px;
     background: #f9f9f9;
@@ -37,7 +38,7 @@
 }
 
 .table-container {
-    overflow-x: auto;
+    /* overflow-x: auto; */
     margin-top: 20px;
 }
 
