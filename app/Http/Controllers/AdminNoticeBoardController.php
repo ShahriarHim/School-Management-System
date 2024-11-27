@@ -14,18 +14,41 @@ class AdminNoticeBoardController extends Controller
     {
 
         /* SECTION 1: Eloquent ORM */
-        // $notices = NoticeBoard::all();
+        $notices = NoticeBoard::paginate(2);
+
+        //* Using Chunks
+        // $notices = collect(); // Initialize an empty collection
+
+        // NoticeBoard::chunk(2, function ($chunk) use ($notices) {
+        //     $notices->push(...$chunk); 
+        // });
 
         /* SECTION 2: Query Builder */
         // $notices = DB::table("notice_boards")->get();
 
         /* SECTION 3: Raw SQL */
-        $notices = DB::select("SELECT * FROM notice_boards");
+        // $notices = DB::select("SELECT * FROM notice_boards");
 
 
 
         return view('admin.notice.noticeManagement', compact('notices'));
     }
+    //! for showing the visualization of chunks
+    // public function index()
+    // {
+        
+    //     NoticeBoard::chunk(2, function ($chunk) {
+    //         dump('Processing a chunk of size: ' . $chunk->count());
+
+    //         foreach ($chunk as $notice) {
+    //             dump('Notice ID: ' . $notice->id);
+    //         }
+    //     });
+
+    //     dd('Chunk processing complete.');
+    // }
+
+
 
     public function create()
     {
@@ -71,8 +94,9 @@ class AdminNoticeBoardController extends Controller
             // ]);
 
             /* SECTION 3: Raw SQL */
-            DB::insert("INSERT INTO notice_boards (title, date, image, description) VALUES ('{$request->title}', '{$request->date}',
-            '{$imagePath}','{$request->description}')" 
+            DB::insert(
+                "INSERT INTO notice_boards (title, date, image, description) VALUES ('{$request->title}', '{$request->date}',
+            '{$imagePath}','{$request->description}')"
             );
 
 
@@ -96,7 +120,7 @@ class AdminNoticeBoardController extends Controller
 
         /* SECTION 3: Raw SQL */
         $notice = DB::select('SELECT * FROM notice_boards WHERE id = ? ', [$id]);
-        $notice = $notice[0]; 
+        $notice = $notice[0];
         // dd($notice);
         return view('admin.notice.editNotice', compact('notice'));
     }
@@ -122,7 +146,7 @@ class AdminNoticeBoardController extends Controller
         // $temp = (int) $id;
         // $query = 'SELECT * FROM notice_boards WHERE id = $temp';
         // $res = DB::raw($query);
-        
+
         $notice = DB::select("SELECT * FROM notice_boards WHERE id = $id");
         // dd($notice);
 
