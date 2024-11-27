@@ -12,17 +12,17 @@ class GalleryImageController extends Controller
     public function index($gallery_id)
     {
         // Eloquent ORM
-      /*   $gallery = Gallery::findOrFail($gallery_id);
-        $images = $gallery->images; */
+        $gallery = Gallery::findOrFail($gallery_id);
+        $images = $gallery->images()->paginate(4); //Using Paginate
 
         // Query Builder
         // $gallery = DB::table('galleries')->where('id', $gallery_id)->first();
         // $images = DB::table('gallery_images')->where('gallery_id', $gallery_id)->get();
 
         // Raw SQL
-        $galleryArray = DB::select("SELECT * FROM galleries WHERE id = $gallery_id");
-        $gallery = !empty($galleryArray) ? $galleryArray[0] : null;
-        $images = DB::select("SELECT * FROM gallery_images WHERE gallery_id = $gallery_id");
+       /*  $galleryArray = DB::select("SELECT * FROM galleries WHERE id = $gallery_id");
+        $gallery =  $galleryArray[0];
+        $images = DB::select("SELECT * FROM gallery_images WHERE gallery_id = $gallery_id"); */
 
         return view('admin.galleryimages.index', compact('gallery', 'images'));
     }
@@ -161,7 +161,6 @@ class GalleryImageController extends Controller
 
         // Raw SQL
         DB::delete("DELETE FROM gallery_images WHERE id = $id");
-
         return redirect()->route('admin.galleries.images.index', $gallery_id)->with('success', 'Gallery image deleted successfully!');
     }
 }
