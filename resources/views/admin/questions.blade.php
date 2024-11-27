@@ -3,8 +3,7 @@
 @section('content')
 
     <link rel="stylesheet" href="{{asset('css/salauddin.css')}}">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJxv4n6+QvctFz4tQ+REJrfMhu5no8+Iuq8DdbBsdmWqzSYwoaF3bP5om+H5u" crossorigin="anonymous">
- -->
+
     <div class="school-margin">
 
         <div class="questions-header">
@@ -42,6 +41,5 @@
         <div class="pagination-links">{{$questions->onEachSide(2)->links()}}</div>
     
     </div>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0Z5Gr9ZYpiGJN9IB5q8P9rMlhc9kVtGGXvNq6+hDqO75hxnp" crossorigin="anonymous"></script>
- -->
+
 @endsection

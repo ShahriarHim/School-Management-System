@@ -406,7 +406,12 @@ tr:hover{
 }
 
 
-
+.pagination-links{
+    background-color: gainsboro;
+    margin-top: 90px;
+    padding: 10px;
+    border-radius: 15px;
+}
 
 
 
