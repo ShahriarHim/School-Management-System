@@ -375,12 +375,20 @@ option{
     overflow-x: auto;
 } */
 
-
+/* 
 .quesitons-table{
     width: 100%;
     margin: 0 auto;
     border-collapse: collapse;
     border-spacing: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    unicode-bidi: isolate;
+    border-color: inherit;
 }
 
 th, td{
@@ -404,15 +412,57 @@ tr:nth-child(even){
 tr:hover{
     background-color: bisque;
 }
+ */
+.questions-header{
+    margin-bottom: 40px;
+    text-align: center;
+}
+.quesitons-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.quesitons-table th, .quesitons-table td {
+    padding: 12px 15px;
+    border: none;
+    font-size: 1rem;
+    color: #333;
+    vertical-align: middle;
+}
+
+.quesitons-table th {
+    background-color: #528eb6;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: left;
+}
+
+.quesitons-table tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.quesitons-table tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+
+.quesitons-table tr:hover {
+    background-color: #f1f1f1;
+}
 
 
-.pagination-links{
+/* .pagination-links{
     background-color: gainsboro;
     margin-top: 90px;
     padding: 10px;
     border-radius: 15px;
 }
-
+ */
 
 
 /* ----------------addUpdateSchool---------------------- */
