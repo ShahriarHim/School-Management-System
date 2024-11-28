@@ -132,10 +132,12 @@
     text-decoration: none;
     color: #fff;
     transition: background-color 0.3s ease;
+
 }
 
 .actions-container .btn-secondary {
     background-color: #6c757d;
+
 }
 
 .actions-container .btn-secondary:hover {
