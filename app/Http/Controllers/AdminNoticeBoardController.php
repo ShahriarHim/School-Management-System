@@ -6,37 +6,56 @@ use Illuminate\Http\Request;
 use App\Models\NoticeBoard;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use yajra\DataTables\Datatables;
 
 class AdminNoticeBoardController extends Controller
 {
-
     public function index()
     {
-
-        /* SECTION 1: Eloquent ORM */
-        $notices = NoticeBoard::paginate(2);
-
-        //* Using Chunks
-        // $notices = collect(); // Initialize an empty collection
-
-        // NoticeBoard::chunk(2, function ($chunk) use ($notices) {
-        //     $notices->push(...$chunk); 
-        // });
-
-        /* SECTION 2: Query Builder */
-        // $notices = DB::table("notice_boards")->get();
-
-        /* SECTION 3: Raw SQL */
-        // $notices = DB::select("SELECT * FROM notice_boards");
-
-
-
-        return view('admin.notice.noticeManagement', compact('notices'));
+        if (request()->ajax()) {
+            $notices = NoticeBoard::select('id', 'title', 'date', 'image', 'description');
+    
+            return DataTables::of($notices)
+                ->addColumn('action', function($notice) {
+                    return '<a href="'.route('admin.noticeboard.edit', $notice->id).'" class="btn btn-sm btn-primary">Edit</a>
+                            <a href="'.route('admin.noticeboard.destroy', $notice->id).'" class="btn btn-sm btn-danger" onclick="return confirm(\'Are you sure?\')">Delete</a>';
+                })
+                ->rawColumns(['action'])  // Make action column HTML-safe
+                ->make(true);
+        }
+    
+        return view('admin.notice.noticeManagementYajra');
     }
+    
+
+
+    // public function index()
+    // {
+
+    //     /* SECTION 1: Eloquent ORM */
+    //     $notices = NoticeBoard::paginate(2);
+
+    //     //* Using Chunks
+    //     // $notices = collect(); // Initialize an empty collection
+
+    //     // NoticeBoard::chunk(2, function ($chunk) use ($notices) {
+    //     //     $notices->push(...$chunk); 
+    //     // });
+
+    //     /* SECTION 2: Query Builder */
+    //     // $notices = DB::table("notice_boards")->get();
+
+    //     /* SECTION 3: Raw SQL */
+    //     // $notices = DB::select("SELECT * FROM notice_boards");
+
+
+
+    //     return view('admin.notice.noticeManagement', compact('notices'));
+    // }
     //! for showing the visualization of chunks
     // public function index()
     // {
-        
+
     //     NoticeBoard::chunk(2, function ($chunk) {
     //         dump('Processing a chunk of size: ' . $chunk->count());
 
