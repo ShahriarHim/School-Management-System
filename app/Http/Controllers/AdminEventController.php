@@ -1,16 +1,17 @@
 <?php
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Event;
 use Illuminate\Support\Facades\DB;
-
+use Yajra\DataTables\Facades\DataTables;
 class AdminEventController extends Controller
 {
     /**
      * Display a listing of the events.
      */
-    public function index()
+
+
+    /* public function index()
     {
         // Query Builder
         // $events = DB::table('events')->get();
@@ -23,6 +24,32 @@ class AdminEventController extends Controller
 
         return view('admin.event.index', compact('events'));
     }
+ */
+
+
+
+public function index(Request $request)
+{
+    if ($request->ajax()) {
+        $data = Event::select(['id', 'title', 'author_name', 'date', 'status', 'image', 'description']);
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function($row){
+                $editUrl = route('admin.eventsmanagement.edit', $row->id);
+                $deleteUrl = route('admin.eventsmanagement.destroy', $row->id);
+
+                return '<a href="'.$editUrl.'" class="edit btn btn-primary btn-sm">Edit</a>
+                        <a href="'.$deleteUrl.'" class="delete btn btn-danger btn-sm">Delete</a>';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
+    return view('admin.event.index');
+}
+
+
+
 
     /**
      * Show the form for creating a new event.
