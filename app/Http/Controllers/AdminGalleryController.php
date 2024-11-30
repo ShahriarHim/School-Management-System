@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Gallery;
 use App\Models\GalleryDate;
 use Illuminate\Support\Facades\DB;
-
+use Yajra\DataTables\Facades\DataTables;
 class AdminGalleryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // ORM
         // $galleries = Gallery::all();
@@ -17,10 +17,21 @@ class AdminGalleryController extends Controller
         // Query Builder
         // $galleries = DB::table('galleries')->get();
 
-        // Raw SQL without placeholders
-        $galleries = DB::select("SELECT * FROM galleries");
+        if($request->ajax()){
+            $data = Gallery::select('*');
+            return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function($row){
+                $editUrl = route('admin.galleries.edit', $row->id);
+                $deleteUrl = route('admin.galleries.destroy', $row->id);
 
-        return view('admin.galleries.index', compact('galleries'));
+                return '<a href="'.$editUrl.'" class="edit btn btn-primary btn-sm">Edit</a>
+                        <a href="'.$deleteUrl.'" class="delete btn btn-danger btn-sm">Delete</a>';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+        return view('admin.galleries.index');
     }
 
     public function create()
