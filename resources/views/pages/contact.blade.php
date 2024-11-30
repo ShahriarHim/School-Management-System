@@ -23,7 +23,7 @@
         
     </div>
 
-<div class="row">
+<div class="contact-row">
 
     <div class="col col-1">
         <i class="fa-solid fa-globe"></i>

@@ -9,13 +9,14 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class TestController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
 /*         $order=DB::table('orders')
         ->select('state','city')
@@ -121,13 +122,21 @@ class TestController extends Controller
 /*          $test1=Test::create([
             'name'=>'test1'
          ]); */
-
+/* 
          $tests=Test::chunkById(2, function(Collection $tests){
             $tests->each->update(['name'=>'testing purpose']);
          });
 
          return response()->json($tests);
+ */
 
+        if($request->ajax()){
+
+            $tests = Test::all();
+            return DataTables::of($tests)->make(true);
+        }
+
+        return view('test1');
 
     }
 
