@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 class AdminGalleryController extends Controller
 {
-    public function index(Request $request)
+    /* public function index(Request $request)
     {
         // ORM
         // $galleries = Gallery::all();
@@ -21,18 +21,53 @@ class AdminGalleryController extends Controller
             $data = Gallery::select('*');
             return DataTables::of($data)
             ->addIndexColumn()
-            ->addColumn('action', function($row){
+            ->addColumn('action', function ($row) {
                 $editUrl = route('admin.galleries.edit', $row->id);
                 $deleteUrl = route('admin.galleries.destroy', $row->id);
 
-                return '<a href="'.$editUrl.'" class="edit btn btn-primary btn-sm">Edit</a>
-                        <a href="'.$deleteUrl.'" class="delete btn btn-danger btn-sm">Delete</a>';
+                return '
+                    <a href="' . $editUrl . '" class="edit btn btn-primary btn-sm">Edit</a>
+                    <form action="' . $deleteUrl . '" method="POST" style="display:inline;">
+                        ' . csrf_field() . '
+                        ' . method_field('DELETE') . '
+                        <button type="submit" class="delete btn btn-danger btn-sm">Delete</button>
+                    </form>
+                ';
             })
             ->rawColumns(['action'])
             ->make(true);
         }
         return view('admin.galleries.index');
+    } */
+
+    public function index(Request $request)
+{
+    if ($request->ajax()) {
+        $data = Gallery::select('*');
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) {
+                $editUrl = route('admin.galleries.edit', $row->id);
+                $deleteUrl = route('admin.galleries.destroy', $row->id);
+                $viewImagesUrl = route('admin.galleries.images.index', ['gallery_id' => $row->id]);
+
+                return '
+                    <a href="' . $editUrl . '" class="edit btn btn-primary btn-sm">Edit</a>
+                    <form action="' . $deleteUrl . '" method="POST" style="display:inline;">
+                        ' . csrf_field() . '
+                        ' . method_field('DELETE') . '
+                        <button type="submit" class="delete btn btn-danger btn-sm">Delete</button>
+                    </form>
+                    <a href="' . $viewImagesUrl . '" class="view-images btn btn-info btn-sm">View Images</a>
+                ';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
+
+    return view('admin.galleries.index');
+}
+
 
     public function create()
     {
@@ -189,7 +224,7 @@ class AdminGalleryController extends Controller
         // $gallery = DB::table('galleries')->where('id', $id)->first();
 
         // Raw SQL without placeholders
-        $id = (int) $id;
+       /*  $id = (int) $id;
         $galleryArray = DB::select("SELECT * FROM galleries WHERE id = $id");
         if (empty($galleryArray)) {
             return redirect()->route('admin.galleries.index')->with('error', 'Gallery not found!');
@@ -198,7 +233,7 @@ class AdminGalleryController extends Controller
 
         if ($gallery->thumbnail && file_exists(public_path($gallery->thumbnail))) {
             unlink(public_path($gallery->thumbnail));
-        }
+        } */
 
         // ORM
         // $gallery->delete();
@@ -212,3 +247,5 @@ class AdminGalleryController extends Controller
         return redirect()->route('admin.galleries.index')->with('success', 'Gallery deleted successfully!');
     }
 }
+
+

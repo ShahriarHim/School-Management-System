@@ -68,7 +68,7 @@
                     name: 'thumbnail',
                     render: function(data) {
                         if (data) {
-                            return `<img src="{{ asset('/${data}') }}" width="50" alt="Event Image"/>`;
+                            return `<img src="{{ asset('/${data}') }}" width="50" alt="Gallery Image"/>`;
                         } else {
                             return 'N/A';
                         }
@@ -81,6 +81,12 @@
                     searchable: false
                 },
             ]
+        });
+
+        // Optional: Handle the view images button click event if you need any additional functionality
+        $('#events-table').on('click', '.view-images', function() {
+            const viewImagesUrl = $(this).attr('href');
+            window.location.href = viewImagesUrl;
         });
     });
 </script>
