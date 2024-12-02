@@ -3,7 +3,7 @@
 @section('title', 'Event Management Panel')
 
 @section('content')
-    <link rel="stylesheet" href="{{ asset('css/noticeManagement.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/noticeManagement.css') }}"> --}}
 
     <div class="management-panel">
         <h1 class="panel-header">Event Management Panel</h1>
@@ -32,7 +32,7 @@
 
         <!-- Events Table -->
         <div class="table-container">
-            <table class="table table-striped table-bordered" id="events-table">
+            <table class="notices-table datatable" id="events-table">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -53,12 +53,12 @@
 @endsection
 
 @push('styles')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="{{ asset('css/noticeManagement.css') }}">
 @endpush
 
 @push('scripts')
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script>
         $(function() {
             $('#events-table').DataTable({
