@@ -13,20 +13,20 @@ class AdminNoticeBoardController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $notices = NoticeBoard::select('id', 'title', 'date', 'image', 'description');
-    
+            $notices = NoticeBoard::select('id', 'title', 'description', 'image', 'date');
+
             return DataTables::of($notices)
-                ->addColumn('action', function($notice) {
-                    return '<a href="'.route('admin.noticeboard.edit', $notice->id).'" class="btn btn-sm btn-primary">Edit</a>
-                            <a href="'.route('admin.noticeboard.destroy', $notice->id).'" class="btn btn-sm btn-danger" onclick="return confirm(\'Are you sure?\')">Delete</a>';
-                })
+                ->addColumn('action', function ($notice) {
+                    return '<a href="'.route('admin.noticeboard.edit', $notice->id).'" class="btn btn-sm btn-primary custom-edit-btn">Edit</a>
+                    <a href="'.route('admin.noticeboard.destroy', $notice->id).'" class="btn btn-sm btn-danger custom-delete-btn" onclick="return confirm(\'Are you sure?\')">Delete</a>';
+        })
                 ->rawColumns(['action'])  // Make action column HTML-safe
                 ->make(true);
         }
-    
+
         return view('admin.notice.noticeManagementYajra');
     }
-    
+
 
 
     // public function index()
@@ -117,11 +117,12 @@ class AdminNoticeBoardController extends Controller
                 "INSERT INTO notice_boards (title, date, image, description) VALUES ('{$request->title}', '{$request->date}',
             '{$imagePath}','{$request->description}')"
             );
-
+            // return response()->json(['success' => true]);
 
             return redirect()->route('admin.noticeboard.index')->with('success', 'Notice created successfully!');
         } catch (\Exception $e) {
             return redirect()->route('admin.noticeboard.index')->with('error', 'Failed to create notice. Please try again.');
+            // return response()->json(['success' => false, 'message' => 'Failed to create notice. Please try again.']);
         }
     }
 
@@ -170,7 +171,8 @@ class AdminNoticeBoardController extends Controller
         // dd($notice);
 
         if (!$notice) {
-            return redirect()->route('admin.noticeboard.index')->with('error', 'Notice not found.');
+            // return redirect()->route('admin.noticeboard.index')->with('error', 'Notice not found.');
+            return response()->json(['success' => false, 'message' => 'Notice not found.']);
         }
         $notice = $notice[0]; // Converting the result to an object
 
@@ -222,6 +224,10 @@ class AdminNoticeBoardController extends Controller
         ]);
 
         return redirect()->route('admin.noticeboard.index')->with('success', 'Notice updated successfully!');
+        // return response()->json([
+        //     'success' => true,
+        //     'redirectUrl' => route('admin.noticeboard.index')  // The URL to redirect to
+        // ]);
     }
 
 

@@ -28,7 +28,7 @@
     @endif
 
     <!-- Notice Form -->
-    <form action="{{ route('admin.noticeboard.update', $notice->id) }}" method="POST" enctype="multipart/form-data" class="notice-form">
+    <form id="editNoticeForm" method="POST" action="{{ route('admin.noticeboard.update', $notice->id) }}" enctype="multipart/form-data" class="notice-form">
         @csrf
         @method('PUT')
         <div class="form-group">
@@ -61,4 +61,35 @@
         </div>
     </form>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#editNoticeForm').on('submit', function (e) {
+            e.preventDefault();  // Prevent normal form submission
+
+            var formData = new FormData(this);
+
+            $.ajax({
+                url: "{{ route('admin.noticeboard.update', $notice->id) }}",  // Your AJAX route
+                type: 'PUT',
+                data: formData,
+                processData: false,  // Don't process the files
+                contentType: false,  // Set content type to false when sending a file
+                success: function(response) {
+                    if (response.success) {
+                        alert('Notice updated successfully!');
+                        window.location.href = "{{ route('admin.noticeboard.index') }}"; // Redirect to index page
+                    } else {
+                        alert('Failed to update notice. Please try again.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert('Error occurred! Please try again.');
+                }
+            });
+        });
+    });
+</script>
+
 @endsection

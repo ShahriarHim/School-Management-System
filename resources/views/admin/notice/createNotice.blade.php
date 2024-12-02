@@ -6,10 +6,10 @@
 <link rel="stylesheet" href="{{ asset('css/noticeManagement.css') }}">
 
 <div class="management-panel">
-<a href="{{ url('/admin/noticeboard') }}" class="back-btn-container">
-                <span class="fas fa-arrow-left small back-btn-icon"></span>
-                <span class="back-btn-text">Noticeboard Management</span>
-            </a>
+    <a href="{{ url('/admin/noticeboard') }}" class="back-btn-container">
+        <span class="fas fa-arrow-left small back-btn-icon"></span>
+        <span class="back-btn-text">Noticeboard Management</span>
+    </a>
     <h1 class="panel-header">Create New Notice</h1>
 
     <!-- Success and Error Messages -->
@@ -28,7 +28,7 @@
     @endif
 
     <!-- Notice Form -->
-    <form action="{{ route('admin.noticeboard.store') }}" method="POST" enctype="multipart/form-data" class="notice-form">
+    <form id="createNoticeForm" method="POST" action="{{ route('admin.noticeboard.store') }}" enctype="multipart/form-data" class="notice-form">
         @csrf
         <div class="form-group">
             <label for="title">Notice Title</label>
@@ -56,4 +56,35 @@
         </div>
     </form>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#createNoticeForm').on('submit', function (e) {
+            e.preventDefault();  // Prevent normal form submission
+
+            var formData = new FormData(this);
+
+            $.ajax({
+                url: "{{ route('admin.noticeboard.store') }}",  // Your AJAX route
+                type: 'POST',
+                data: formData,
+                processData: false,  // Don't process the files
+                contentType: false,  // Set content type to false when sending a file
+                success: function(response) {
+                    if (response.success) {
+                        alert('Notice created successfully!');
+                        window.location.href = "{{ route('admin.noticeboard.index') }}"; // Redirect to index page
+                    } else {
+                        alert('Failed to create notice. Please try again.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert('Error occurred! Please try again.');
+                }
+            });
+        });
+    });
+</script>
+
 @endsection

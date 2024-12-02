@@ -33,6 +33,9 @@
             </div>
         </div>
     @endforeach
-
+</div>
+<!-- Pagination Links -->
+<div class="">
+    {{ $notices->links() }}
 </div>
 @endsection
