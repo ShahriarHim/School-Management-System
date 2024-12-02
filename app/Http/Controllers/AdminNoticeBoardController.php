@@ -6,37 +6,56 @@ use Illuminate\Http\Request;
 use App\Models\NoticeBoard;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use yajra\DataTables\Datatables;
 
 class AdminNoticeBoardController extends Controller
 {
-
     public function index()
     {
+        if (request()->ajax()) {
+            $notices = NoticeBoard::select('id', 'title', 'description', 'image', 'date');
 
-        /* SECTION 1: Eloquent ORM */
-        $notices = NoticeBoard::paginate(2);
+            return DataTables::of($notices)
+                ->addColumn('action', function ($notice) {
+                    return '<a href="'.route('admin.noticeboard.edit', $notice->id).'" class="btn btn-sm btn-primary custom-edit-btn">Edit</a>
+                    <a href="'.route('admin.noticeboard.destroy', $notice->id).'" class="btn btn-sm btn-danger custom-delete-btn" onclick="return confirm(\'Are you sure?\')">Delete</a>';
+        })
+                ->rawColumns(['action'])  // Make action column HTML-safe
+                ->make(true);
+        }
 
-        //* Using Chunks
-        // $notices = collect(); // Initialize an empty collection
-
-        // NoticeBoard::chunk(2, function ($chunk) use ($notices) {
-        //     $notices->push(...$chunk); 
-        // });
-
-        /* SECTION 2: Query Builder */
-        // $notices = DB::table("notice_boards")->get();
-
-        /* SECTION 3: Raw SQL */
-        // $notices = DB::select("SELECT * FROM notice_boards");
-
-
-
-        return view('admin.notice.noticeManagement', compact('notices'));
+        return view('admin.notice.noticeManagementYajra');
     }
+
+
+
+    // public function index()
+    // {
+
+    //     /* SECTION 1: Eloquent ORM */
+    //     $notices = NoticeBoard::paginate(2);
+
+    //     //* Using Chunks
+    //     // $notices = collect(); // Initialize an empty collection
+
+    //     // NoticeBoard::chunk(2, function ($chunk) use ($notices) {
+    //     //     $notices->push(...$chunk); 
+    //     // });
+
+    //     /* SECTION 2: Query Builder */
+    //     // $notices = DB::table("notice_boards")->get();
+
+    //     /* SECTION 3: Raw SQL */
+    //     // $notices = DB::select("SELECT * FROM notice_boards");
+
+
+
+    //     return view('admin.notice.noticeManagement', compact('notices'));
+    // }
     //! for showing the visualization of chunks
     // public function index()
     // {
-        
+
     //     NoticeBoard::chunk(2, function ($chunk) {
     //         dump('Processing a chunk of size: ' . $chunk->count());
 
@@ -98,11 +117,12 @@ class AdminNoticeBoardController extends Controller
                 "INSERT INTO notice_boards (title, date, image, description) VALUES ('{$request->title}', '{$request->date}',
             '{$imagePath}','{$request->description}')"
             );
-
+            // return response()->json(['success' => true]);
 
             return redirect()->route('admin.noticeboard.index')->with('success', 'Notice created successfully!');
         } catch (\Exception $e) {
             return redirect()->route('admin.noticeboard.index')->with('error', 'Failed to create notice. Please try again.');
+            // return response()->json(['success' => false, 'message' => 'Failed to create notice. Please try again.']);
         }
     }
 
@@ -151,7 +171,8 @@ class AdminNoticeBoardController extends Controller
         // dd($notice);
 
         if (!$notice) {
-            return redirect()->route('admin.noticeboard.index')->with('error', 'Notice not found.');
+            // return redirect()->route('admin.noticeboard.index')->with('error', 'Notice not found.');
+            return response()->json(['success' => false, 'message' => 'Notice not found.']);
         }
         $notice = $notice[0]; // Converting the result to an object
 
@@ -203,6 +224,10 @@ class AdminNoticeBoardController extends Controller
         ]);
 
         return redirect()->route('admin.noticeboard.index')->with('success', 'Notice updated successfully!');
+        // return response()->json([
+        //     'success' => true,
+        //     'redirectUrl' => route('admin.noticeboard.index')  // The URL to redirect to
+        // ]);
     }
 
 

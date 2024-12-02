@@ -15,8 +15,8 @@ class NoticeBoardController extends Controller
 
         /* SECTION 1: Eloquent ORM */
 
-        // $notices = NoticeBoard::all(); 
-        // $pageContents = PageContent::where('slug', 'notice')->first(); 
+        $notices = NoticeBoard::paginate(5); 
+        $pageContents = PageContent::where('slug', 'notice')->first(); 
 
         /* SECTION 2: Query Builder */
 
@@ -25,9 +25,9 @@ class NoticeBoardController extends Controller
 
         /* SECTION 3: Raw SQL */
 
-        $notices = DB::select("SELECT * FROM notice_boards"); 
-        $pageContents = DB::select("SELECT * FROM page_contents WHERE slug = ?", ['notice']);
-        $pageContents = $pageContents ? collect($pageContents)->first() : null; 
+        // $notices = DB::select("SELECT * FROM notice_boards"); 
+        // $pageContents = DB::select("SELECT * FROM page_contents WHERE slug = ?", ['notice']);
+        // $pageContents = $pageContents ? collect($pageContents)->first() : null; 
 
         // Pass the notices and pageContents to the view
         return view('pages.noticeboard', compact('notices', 'pageContents'));
