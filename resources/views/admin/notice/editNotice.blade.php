@@ -73,8 +73,8 @@
                 url: "{{ route('admin.noticeboard.update', $notice->id) }}",  
                 type: 'PUT',
                 data: formData,
-                processData: false,  
-                contentType: false,  
+                processData: false,  //preventing jquery to process
+                contentType: false,  //preventing jquery to set the formdata
                 success: function(response) {
                     if (response.success) {
                         alert('Notice updated successfully!');

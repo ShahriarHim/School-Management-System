@@ -68,8 +68,8 @@
                 url: "{{ route('admin.noticeboard.store') }}",  
                 type: 'POST',
                 data: formData,
-                processData: false,  
-                contentType: false,  
+                processData: false,  //preventing jquery to process
+                contentType: false,  //preventing jquery to set the formdata
                 success: function(response) {
                     if (response.success) {
                         alert('Notice created successfully!');
