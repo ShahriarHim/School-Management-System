@@ -24,9 +24,9 @@ use App\Http\Controllers\GalleryImageController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserTestController;
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+// Route::get('/', function () {
+//     return view('testJs');
+// });
 // Route::get('/noticeboard', function () {
 //     return view('pages.noticeboard');
 // });
@@ -37,6 +37,7 @@ Route::get('/', function () {
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
 Route::get('/noticeboard', [NoticeBoardController::class, 'index'])->name('noticeboard.index');
 Route::get('/noticeboard-details/{id}', [NoticeBoardController::class, 'show'])->name('noticeboard.show');
 

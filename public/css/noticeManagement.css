@@ -1,13 +1,15 @@
 /* General Panel Styling */
 .management-panel {
-    margin-left: 300px;
+    margin-left: 100px;
     margin-top: 70px;
-    margin-right: 200px;
-    margin-bottom: 100px;
+    margin-right: 20px;
+    margin-bottom: 20px;
     padding: 20px;
     background: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+
 }
 
 .panel-header {
@@ -38,8 +40,8 @@
 }
 
 .table-container {
-    /* overflow-x: auto; */
     margin-top: 20px;
+    overflow-x: auto; /* Allow scrolling for wide tables */
 }
 
 .notices-table {
@@ -101,18 +103,22 @@
         padding: 8px 10px;
     }
 
+    /* Stack action buttons in smaller screens */
     .actions {
         text-align: center; /* Center-align buttons on smaller screens */
     }
 
-    .actions-container {
-        justify-content: center;
-        flex-wrap: wrap; /* Wrap buttons if they don’t fit in one row */
+    .table-container {
+        overflow-x: scroll;
     }
 
-    .actions-container .btn {
-        margin-bottom: 5px; /* Add space between wrapped buttons */
-        flex: 1 1 auto; /* Allow buttons to adjust their width */
+    .actions .btn {
+        width: 100%; /* Make buttons full width */
+        margin-top: 10px;
+    }
+
+    .panel-header {
+        font-size: 1.5rem; /* Slightly smaller header text on small screens */
     }
 }
 
@@ -121,6 +127,7 @@
     display: flex;
     gap: 5px;
     align-items: center;
+    flex-wrap: wrap; /* Allow buttons to wrap if they don't fit */
 }
 
 .actions-container .btn {
@@ -268,5 +275,73 @@
     }
 }
 
+/* Style the pagination container */
+.dataTables_paginate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
 
+/* Style the pagination links */
+.dataTables_paginate .paginate_button {
+    padding: 5px 12px;
+    margin: 0 5px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Style the active page button */
+.dataTables_paginate .paginate_button.current {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* Style the hover effect for page buttons */
+.dataTables_paginate .paginate_button:hover {
+    background-color: #0056b3;
+    color: white;
+    border-color: #0056b3;
+}
+
+/* Style the previous and next buttons */
+.dataTables_paginate .paginate_button.previous,
+.dataTables_paginate .paginate_button.next {
+    font-weight: bold;
+    padding: 5px 12px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 3px;
+}
+
+/* Previous and Next buttons hover effect */
+.dataTables_paginate .paginate_button.previous:hover,
+.dataTables_paginate .paginate_button.next:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+/* Disabled state for previous/next */
+.dataTables_paginate .paginate_button.disabled {
+    background-color: #e9ecef;
+    color: #6c757d;
+    border-color: #dee2e6;
+    cursor: not-allowed;
+}
+
+/* Optional: Add a "Next" and "Previous" label for better UX */
+.dataTables_paginate .paginate_button.previous:before {
+    content: "← Previous";
+    margin-right: 5px;
+}
+
+.dataTables_paginate .paginate_button.next:after {
+    content: "Next →";
+    margin-left: 5px;
+}
 
