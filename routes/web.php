@@ -24,9 +24,9 @@ use App\Http\Controllers\GalleryImageController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserTestController;
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+// Route::get('/', function () {
+//     return view('testJs');
+// });
 // Route::get('/noticeboard', function () {
 //     return view('pages.noticeboard');
 // });
@@ -37,6 +37,7 @@ Route::get('/', function () {
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
 Route::get('/noticeboard', [NoticeBoardController::class, 'index'])->name('noticeboard.index');
 Route::get('/noticeboard-details/{id}', [NoticeBoardController::class, 'show'])->name('noticeboard.show');
 
@@ -92,7 +93,6 @@ Route::middleware(['web'])->group(function () {
         Route::get('/events-management/{id}/edit', [AdminEventController::class, 'edit'])->name('admin.eventsmanagement.edit');
         Route::put('/events-management/{id}', [AdminEventController::class, 'update'])->name('admin.eventsmanagement.update');
         Route::delete('/events-management/{id}', [AdminEventController::class, 'destroy'])->name('admin.eventsmanagement.destroy');
-        Route::get('/events-management/{id}/delete', [AdminEventController::class, 'confirmDelete'])->name('admin.eventsmanagement.confirmDelete');
     });
 });
 
@@ -117,7 +117,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/galleries/{gallery_id}/images/{id}/edit', [GalleryImageController::class, 'edit'])->name('admin.galleries.images.edit');
     Route::put('/galleries/{gallery_id}/images/{id}', [GalleryImageController::class, 'update'])->name('admin.galleries.images.update');
     Route::delete('/galleries/{gallery_id}/images/{id}', [GalleryImageController::class, 'destroy'])->name('admin.galleries.images.destroy');
-    Route::get('/galleries/{gallery_id}/images/{id}/delete', [GalleryImageController::class, 'confirmDelete'])->name('admin.galleries.images.confirmDelete');
 
 });
 Route::get('/utest', [UserTestController::class, 'processUsers']);

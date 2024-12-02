@@ -40,7 +40,15 @@ class HomeController extends Controller
         $pageContents = DB::select("
             SELECT * FROM page_contents WHERE slug IN ('home', 'coaches', 'event')
         ");
-        $home = collect($pageContents)->firstWhere('slug', 'home');
+        // $home = collect($pageContents)->firstWhere('slug', 'home');
+        $home = DB::table("page_contents")
+        ->whereIn('slug', ['home']) 
+        ->orderBy('status', 'desc')        
+        ->first() ;
+        // dd($home) ;               
+                     
+
+
         $coach = collect($pageContents)->firstWhere('slug', 'coaches');
         $event_head = collect($pageContents)->firstWhere('slug', 'event');
 
