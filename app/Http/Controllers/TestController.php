@@ -129,7 +129,7 @@ class TestController extends Controller
 
          return response()->json($tests);
  */
-
+/* 
         if($request->ajax()){
 
             $tests = Test::all();
@@ -138,6 +138,16 @@ class TestController extends Controller
 
         return view('test1');
 
+         */
+
+        if($request->ajax()){
+            $data=Test::all();
+            return response()->json($data);
+
+        }
+        
+        return view('test.testAjaxGet');
+         
     }
 
     /**
@@ -145,7 +155,7 @@ class TestController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -153,7 +163,15 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $test= new Test();
+        $test->name=$request->input('name');
+        $test->description=$request->input('description');
+        $test->price=$request->input('price');
+        $test->stock=$request->input('stock');
+
+        $test->save();
+        
+        return response()->json(['message'=>'form submitted']);
     }
 
     /**
@@ -185,6 +203,7 @@ class TestController extends Controller
      */
     public function destroy(Test $test)
     {
-        //
+        $test->delete();
+        return response()->json(['status'=>'delete success']);
     }
 }

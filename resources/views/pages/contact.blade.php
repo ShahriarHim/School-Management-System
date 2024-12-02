@@ -6,7 +6,6 @@
 
 @section('content')
 <link rel="stylesheet" href="{{asset('css/salauddin.css')}}">
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
 
     <div class="noticeboard-header">
 
@@ -73,17 +72,15 @@
 
 <div class="form-body">
 
-    <form action=" {{route('contact.store')}} " method="post">
+    <form id="contactForm">
     @csrf
     
         <div class="row1">
             
-        @if(session('status'))
             <div class="err-message alert alert-success">
-                <h1>{{session('status')}}</h1>
+                
             </div>
-        @endif
-
+        
         </div>
         
         <div class="row1">
@@ -119,14 +116,6 @@
         </div>
 
 
-        <!-- <div class="row2">
-                <div class="col2">
-                    <label for="name1-label">COMMENTS OR QUESTIONS<span class="required">*</span></label>
-                    <input type="text" name="comments" class="comments" required>
-                </div>
-            </div> -->
-
-
         <div class="row2">
             <div class="col2">
                 <label for="name1-label">COMMENTS OR QUESTIONS<span class="required">*</span></label>
@@ -144,5 +133,34 @@
 </div>
 
 
+<script>
+    $(document).ready(function(){
+
+        $('#contactForm').on('submit', function(e){
+
+            e.preventDefault();
+
+            var formData = $(this).serialize();
+
+            $.ajax({
+                url: "{{route('contact.store')}}",
+                type: "POST", 
+                data: formData,
+
+                success: function(response){
+                    $('.alert-success').html('<h1>' + response.message + '</h1>');
+                    $('#contactForm')[0].reset();
+                },
+
+                error: function(){
+                    alert('form submit failed');
+                }
+
+            });
+        });
+    });
+</script>
+
 <script src="https://kit.fontawesome.com/2d7883494f.js" crossorigin="anonymous"></script>
+
 @endsection

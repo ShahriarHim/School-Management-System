@@ -25,6 +25,6 @@ class QuestionsController extends Controller
             return DataTables::of($questions)->make(true);
         }
 
-        return view('admin.questions1');
+        return view('admin.questions');
     }
 }
