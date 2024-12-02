@@ -1,16 +1,17 @@
 <?php
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Event;
 use Illuminate\Support\Facades\DB;
-
+use Yajra\DataTables\Facades\DataTables;
 class AdminEventController extends Controller
 {
     /**
      * Display a listing of the events.
      */
-    public function index()
+
+
+    /* public function index()
     {
         // Query Builder
         // $events = DB::table('events')->get();
@@ -23,6 +24,40 @@ class AdminEventController extends Controller
 
         return view('admin.event.index', compact('events'));
     }
+ */
+
+
+
+ public function index(Request $request)
+ {
+     if ($request->ajax()) {
+         $data = Event::select(['id', 'title', 'author_name', 'date', 'status', 'image', 'description']);
+
+         return DataTables::of($data)
+             ->addIndexColumn()
+             ->addColumn('action', function ($row) {
+                 $editUrl = route('admin.eventsmanagement.edit', $row->id);
+                 $deleteUrl = route('admin.eventsmanagement.destroy', $row->id);
+
+                 return '
+                     <a href="' . $editUrl . '" class="edit btn btn-primary btn-sm">Edit</a>
+                     <form action="' . $deleteUrl . '" method="POST" style="display:inline;">
+                         ' . csrf_field() . '
+                         ' . method_field('DELETE') . '
+                         <button type="submit" class="delete btn btn-danger btn-sm">Delete</button>
+                     </form>
+                 ';
+             })
+             ->rawColumns(['action'])
+             ->make(true);
+     }
+
+     return view('admin.event.index');
+ }
+
+
+
+
 
     /**
      * Show the form for creating a new event.
@@ -164,7 +199,7 @@ class AdminEventController extends Controller
     public function destroy($id)
     {
         // Raw SQL without placeholders
-        $id = (int)$id;
+        /* $id = (int)$id;
         $eventArray = DB::select("SELECT * FROM events WHERE id = $id");
         if (empty($eventArray)) {
             return redirect()->route('admin.eventsmanagement.index')->with('error', 'Event not found!');
@@ -174,11 +209,11 @@ class AdminEventController extends Controller
         if ($event->image && file_exists(public_path($event->image))) {
             unlink(public_path($event->image));
         }
-
-        DB::delete("DELETE FROM events WHERE id = $id");
+ */
+        /* DB::delete("DELETE FROM events WHERE id = $id"); */
 
         // Query Builder
-        // DB::table('events')->where('id', $id)->delete();
+        DB::table('events')->where('id', $id)->delete();
 
         // Eloquent ORM
         // $event->delete();

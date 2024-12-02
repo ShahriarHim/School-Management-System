@@ -3,73 +3,107 @@
 @section('title', 'Event Management Panel')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/noticeManagement.css') }}">
-<div class="management-panel">
-    <h1 class="panel-header">Event Management Panel</h1>
+    <link rel="stylesheet" href="{{ asset('css/noticeManagement.css') }}">
 
-    <!-- Display Success Message -->
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+    <div class="management-panel">
+        <h1 class="panel-header">Event Management Panel</h1>
+
+        <!-- Display Success Message -->
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <!-- Display Error Messages -->
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <div class="actions">
+            <a href="{{ route('admin.eventsmanagement.create') }}" class="btn btn-primary mb-3">Add New Event</a>
         </div>
-    @endif
 
-    <!-- Display Error Messages -->
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    <div class="actions">
-        <a href="{{ route('admin.eventsmanagement.create') }}" class="btn btn-primary mb-3">Add New Event</a>
-    </div>
-
-    <!-- Events Table -->
-    <div class="table-container">
-        <table class="notices-table">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Author Name</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Image</th>
-                    <th>Description</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($events as $event)
+        <!-- Events Table -->
+        <div class="table-container">
+            <table class="table table-striped table-bordered" id="events-table">
+                <thead>
                     <tr>
-                        <td>{{ $event->title }}</td>
-                        <td>{{ $event->author_name }}</td>
-                        <td>{{ \Carbon\Carbon::parse($event->date)->format('d M, Y') }}</td>
-                        <td>{{ ucfirst($event->status) }}</td>
-                        <td>
-                            @if ($event->image)
-                                <img src="{{ asset($event->image) }}" alt="Author Image" width="50">
-                            @else
-                                N/A
-                            @endif
-                        </td>
-                        <td>{{ $event->description }}</td>
-                        <td class="actions-container">
-                            <a href="{{ route('admin.eventsmanagement.edit', $event->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                            <form action="{{ route('admin.eventsmanagement.destroy', $event->id) }}" method="POST" style="display:inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                            </form>
-                        </td>
+                        <th>Title</th>
+                        <th>Author Name</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Image</th>
+                        <th>Description</th>
+                        <th>Actions</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <!-- DataTables will populate the rows dynamically -->
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+@endpush
+
+@push('scripts')
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(function() {
+            $('#events-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('admin.eventsmanagement.index') }}",
+                columns: [{
+                        data: 'title',
+                        name: 'title'
+                    },
+                    {
+                        data: 'author_name',
+                        name: 'author_name'
+                    },
+                    {
+                        data: 'date',
+                        name: 'date'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
+                    },
+                    {
+                        data: 'image',
+                        name: 'image',
+                        render: function(data) {
+                            if (data) {
+                                return `<img src="{{ url('/') }}/${data}" width="50" alt="Event Image"/>`;
+                            } else {
+                                return 'N/A';
+                            }
+                        }
+                    },
+                    {
+                        data: 'description',
+                        name: 'description'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
+            });
+        });
+    </script>
+@endpush

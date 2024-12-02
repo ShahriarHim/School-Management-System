@@ -47,6 +47,7 @@
                 @endforeach
             </tbody>
         </table>
+        <div>{{ $images->links() }}</div>
     </div>
 </div>
 @endsection

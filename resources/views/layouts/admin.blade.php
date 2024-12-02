@@ -16,12 +16,10 @@
   <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
-  @stack ('styles')
 </head>
 
 
 <body class="hold-transition sidebar-mini layout-fixed">
-
   {{----NavBar----}}
   <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="position: fixed !important; top: 0; width: 100%; z-index: 1030;">
     <ul class="navbar-nav">
@@ -192,6 +190,7 @@
   <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
   <script src="{{ asset('dist/js/adminlte.js') }}"></script>
   <!-- <script src="{{ asset('dist/js/demo.js') }}"></script> -->
+
   <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
   {{-- <script>
     function closeToggle() {
@@ -205,7 +204,6 @@
         }
     }
 </script> --}}
-@stack  ('scripts')
 </body>
 
 </html>

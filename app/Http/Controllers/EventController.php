@@ -14,11 +14,10 @@ class EventController extends Controller
         // $pc = PageContent::where('slug', 'event')->first();
 
         // Query Builder Equivalent
-        // $pc = DB::table('page_contents')->where('slug', 'event')->first();
+        // $pc = DB::table('page_contents')->where('slug', 'event')->orderBy('status', 'desc')->get();
 
         // Raw SQL Equivalent without placeholders
-        $pc = DB::select("SELECT * FROM page_contents WHERE slug = 'event' LIMIT 1");
-
+        $pc = DB::select("SELECT * FROM page_contents WHERE slug = 'event' ORDER BY status DESC limit 1"); //Using Order By
         // Eloquent ORM Query
         // $events = Event::all();
 

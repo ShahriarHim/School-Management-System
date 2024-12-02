@@ -85,6 +85,7 @@
         @endif
 
         </div>
+        
         <div class="row1">
             <div class="col1">
                 <label for="name1-label">FIRST NAME<span class="required">*</span></label>

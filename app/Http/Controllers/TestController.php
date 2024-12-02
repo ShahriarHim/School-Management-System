@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Test;
 use App\Models\User;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -121,7 +122,9 @@ class TestController extends Controller
             'name'=>'test1'
          ]); */
 
-         $tests=Test::all();
+         $tests=Test::chunkById(2, function(Collection $tests){
+            $tests->each->update(['name'=>'testing purpose']);
+         });
 
          return response()->json($tests);
 

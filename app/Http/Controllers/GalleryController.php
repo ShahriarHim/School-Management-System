@@ -14,10 +14,10 @@ class GalleryController extends Controller
         // $pc = PageContent::where('slug', 'gallery')->first();
 
         // Query Builder Equivalent
-        // $pc = DB::table('page_contents')->where('slug', 'gallery')->first();
+        // $pc = DB::table('page_contents')->where('slug', 'gallery')orderBy->('status', 'desc')->get();
 
         // Raw SQL Equivalent without placeholders
-        $pc = DB::select("SELECT * FROM page_contents WHERE slug = 'gallery' LIMIT 1");
+        $pc = DB::select("SELECT * FROM page_contents WHERE slug = 'gallery' order by status desc LIMIT 1");
 
         // Gallery view
         // Eloquent ORM Query
