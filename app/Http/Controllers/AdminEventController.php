@@ -70,7 +70,7 @@ class AdminEventController extends Controller
     /**
      * Store a newly created event in storage.
      */
-    public function store(Request $request)
+    /* public function store(Request $request)
     {
         $request->validate([
             'title' => 'required|string|max:255',
@@ -121,7 +121,47 @@ class AdminEventController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('admin.eventsmanagement.index')->with('error', 'Failed to create event. Please try again.');
         }
+    } */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'author_name' => 'required|string|max:255',
+            'date' => 'required|date',
+            'status' => 'required|string|in:upcoming,past',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'nullable|string',
+        ]);
+
+        try {
+            // Handle file upload
+            $imagePath = null;
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+                $imagePath = 'images/' . $imageName;
+                $image->move(public_path('images'), $imageName);
+            }
+
+            // Insert data using Eloquent ORM
+            Event::create([
+                'title' => $request->title,
+                'author_name' => $request->author_name,
+                'date' => $request->date,
+                'status' => $request->status,
+                'image' => $imagePath,
+                'description' => $request->description,
+            ]);
+
+            return response()->json([
+                'message' => 'Event created successfully!',
+                'redirect_url' => route('admin.eventsmanagement.index')
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Failed to create event. Please try again.'], 500);
+        }
     }
+
 
     /**
      * Show the form for editing the specified event.
