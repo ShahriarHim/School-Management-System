@@ -18,7 +18,7 @@
     </div>
 
     <div class="table-container">
-        <table class="table table-striped">
+        <table class="table table-striped table-bordered" id="images-table">
             <thead>
                 <tr>
                     <th>Image</th>
@@ -26,28 +26,46 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($images as $image)
-                    <tr>
-                        <td>
-                            @if ($image->image)
-                                <img src="{{ asset($image->image) }}" alt="Gallery Image" width="50">
-                            @else
-                                No Image
-                            @endif
-                        </td>
-                        <td>
-                            <a href="{{ route('admin.galleries.images.edit', [$gallery->id, $image->id]) }}" class="btn btn-sm btn-primary">Edit</a>
-                            <form action="{{ route('admin.galleries.images.destroy', [$gallery->id, $image->id]) }}" method="POST" style="display:inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
+                <!-- DataTables will populate the rows dynamically -->
             </tbody>
         </table>
-        <div>{{ $images->links() }}</div>
     </div>
 </div>
 @endsection
+
+@push('styles')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+@endpush
+
+@push('scripts')
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(function() {
+        const table = $('#images-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('admin.galleries.images.index', ['gallery_id' => $gallery->id]) }}",
+            columns: [
+                {
+                    data: 'image',
+                    name: 'image',
+                    render: function(data) {
+                        if (data) {
+                            return `<img src="{{ asset('${data}') }}" width="50" alt="Gallery Image"/>`;
+                        } else {
+                            return 'N/A';
+                        }
+                    }
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+            ]
+        });
+    });
+</script>
+@endpush
