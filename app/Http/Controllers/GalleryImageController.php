@@ -6,26 +6,38 @@ use Illuminate\Http\Request;
 use App\Models\Gallery;
 use App\Models\GalleryImage;
 use Illuminate\Support\Facades\DB;
-
+use Yajra\DataTables\Facades\DataTables;
 class GalleryImageController extends Controller
 {
-    public function index($gallery_id)
+    public function index($gallery_id, Request $request)
     {
         // Eloquent ORM
         $gallery = Gallery::findOrFail($gallery_id);
-        $images = $gallery->images()->paginate(4); //Using Paginate
 
-        // Query Builder
-        // $gallery = DB::table('galleries')->where('id', $gallery_id)->first();
-        // $images = DB::table('gallery_images')->where('gallery_id', $gallery_id)->get();
+        if ($request->ajax()) {
+            $data = $gallery->images()->select('*'); // Adjust based on your actual relationship and columns
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row) use ($gallery) {
+                    $deleteUrl = route('admin.galleries.images.destroy', [$gallery->id, $row->id]);
+                    $editUrl = route('admin.galleries.images.edit', [$gallery->id, $row->id]);
 
-        // Raw SQL
-       /*  $galleryArray = DB::select("SELECT * FROM galleries WHERE id = $gallery_id");
-        $gallery =  $galleryArray[0];
-        $images = DB::select("SELECT * FROM gallery_images WHERE gallery_id = $gallery_id"); */
+                    return '
+                        <a href="' . $editUrl . '" class="edit btn btn-primary btn-sm">Edit</a>
+                        <form action="' . $deleteUrl . '" method="POST" style="display:inline;">
+                            ' . csrf_field() . '
+                            ' . method_field('DELETE') . '
+                            <button type="submit" class="delete btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    ';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
 
-        return view('admin.galleryimages.index', compact('gallery', 'images'));
+        return view('admin.galleryimages.index', compact('gallery'));
     }
+
 
     public function create($gallery_id)
     {

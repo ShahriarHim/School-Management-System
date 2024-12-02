@@ -8,17 +8,11 @@
     <h1 class="panel-header">Create New Event</h1>
 
     <!-- Display Error Messages -->
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    <div id="errorMessages" class="alert alert-danger" style="display: none;">
+        <ul id="errorList"></ul>
+    </div>
 
-    <form action="{{ route('admin.eventsmanagement.store') }}" method="POST" enctype="multipart/form-data" class="notice-form">
+    <form id="eventForm" enctype="multipart/form-data" class="notice-form">
         @csrf
         <div class="form-group">
             <label for="title">Event Title</label>
@@ -52,5 +46,43 @@
             <button type="reset" class="btn btn-secondary">Clear</button>
         </div>
     </form>
+    <p id="response"></p>
 </div>
 @endsection
+
+@push('scripts')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#eventForm').on('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: "{{ route('admin.eventsmanagement.store') }}",
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    if (response.redirect_url) {
+                        window.location.href = response.redirect_url; // Redirect to the index page
+                        $('#response').text(response.message).css('color', 'green');
+                    } else {
+                        // Display success message in green
+                        $('#eventForm')[0].reset(); // Clear form fields
+                    }
+                },
+                error: function(xhr) {
+                    let errors = xhr.responseJSON.errors;
+                    let errorMessages = '';
+                    $.each(errors, function(key, value) {
+                        errorMessages += '<li>' + value[0] + '</li>';
+                    });
+                    $('#errorMessages').show(); // Show the error message div
+                    $('#errorList').html(errorMessages); // Populate the error list
+                }
+            });
+        });
+    });
+</script>
