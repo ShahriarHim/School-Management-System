@@ -60,20 +60,19 @@
 <script>
     $(document).ready(function () {
         $('#createNoticeForm').on('submit', function (e) {
-            e.preventDefault();  // Prevent normal form submission
+            e.preventDefault();  
 
             var formData = new FormData(this);
 
             $.ajax({
-                url: "{{ route('admin.noticeboard.store') }}",  // Your AJAX route
+                url: "{{ route('admin.noticeboard.store') }}",  
                 type: 'POST',
                 data: formData,
-                processData: false,  // Don't process the files
-                contentType: false,  // Set content type to false when sending a file
+                processData: false,  //preventing jquery to process
+                contentType: false,  //preventing jquery to set the formdata
                 success: function(response) {
                     if (response.success) {
                         alert('Notice created successfully!');
-                        window.location.href = "{{ route('admin.noticeboard.index') }}"; // Redirect to index page
                     } else {
                         alert('Failed to create notice. Please try again.');
                     }

@@ -65,20 +65,19 @@
 <script>
     $(document).ready(function () {
         $('#editNoticeForm').on('submit', function (e) {
-            e.preventDefault();  // Prevent normal form submission
+            e.preventDefault();  
 
             var formData = new FormData(this);
 
             $.ajax({
-                url: "{{ route('admin.noticeboard.update', $notice->id) }}",  // Your AJAX route
+                url: "{{ route('admin.noticeboard.update', $notice->id) }}",  
                 type: 'PUT',
                 data: formData,
-                processData: false,  // Don't process the files
-                contentType: false,  // Set content type to false when sending a file
+                processData: false,  //preventing jquery to process
+                contentType: false,  //preventing jquery to set the formdata
                 success: function(response) {
                     if (response.success) {
                         alert('Notice updated successfully!');
-                        window.location.href = "{{ route('admin.noticeboard.index') }}"; // Redirect to index page
                     } else {
                         alert('Failed to update notice. Please try again.');
                     }
