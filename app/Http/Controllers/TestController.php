@@ -138,7 +138,7 @@ class TestController extends Controller
 
         return view('test1');
 
-         */
+*/
 
         if($request->ajax()){
             $data=Test::all();
@@ -187,7 +187,7 @@ class TestController extends Controller
      */
     public function edit(Test $test)
     {
-        //
+        return view('test.testAjaxUpdate' , ['test'=>$test]);
     }
 
     /**
@@ -195,7 +195,13 @@ class TestController extends Controller
      */
     public function update(Request $request, Test $test)
     {
-        //
+        $test->name=$request->input('name');
+        $test->description=$request->input('description');
+        $test->price=$request->input('price');
+        $test->stock=$request->input('stock');
+        $test->save();
+        
+        return response()->json(['message'=>'Order data Updated']);
     }
 
     /**

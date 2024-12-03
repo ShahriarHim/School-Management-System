@@ -568,3 +568,21 @@ tr:hover{
 
     
 }
+
+
+/* -----------Order update page------------- */
+
+#ajax-form .col1{
+    margin-bottom: 30px;
+}
+
+#ajax-form label{
+    font-size: 1.4rem;
+}
+
+#response-message{
+    text-align: center;
+    background-color: greenyellow;
+    padding: 10px;
+    display: none;
+}
