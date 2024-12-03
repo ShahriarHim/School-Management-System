@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>AJAX Table</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
-</head>
-<body>
-    <h1>Tests Table</h1>
-    <table border="1" id="tests-table">
+@extends('layouts.admin')
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+@section('content')
+<link rel="stylesheet" href="{{asset('css/salauddin.css')}}">
+<div class="school-margin">
+
+
+    <h1>List of Orders</h1>
+    <table class="table table-bordered data-table " id="tests-table" >
         <thead>
             <tr>
                 <th>Name</th>
@@ -23,7 +24,6 @@
         </tbody>
 
     </table>
-    <button onclick="deleteItem()" type="submit"></button>
 
     <script>
         $(document).ready(function(){
@@ -81,9 +81,4 @@
     </script> 
 
 
-
-
-     
-
-</body>
-</html>
+@endsection
