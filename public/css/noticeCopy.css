@@ -1,0 +1,347 @@
+/* General Panel Styling */
+.management-panel {
+    margin-left: 260px;
+    margin-top: 70px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+
+}
+
+.panel-header {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.actions {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.actions .btn {
+    padding: 5px 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #007bff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.actions .btn:hover {
+    background-color: #0056b3;
+}
+
+.table-container {
+    margin-top: 20px;
+    overflow-x: auto; /* Allow scrolling for wide tables */
+}
+
+.notices-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.notices-table th, .notices-table td {
+    padding: 12px 15px;
+    border: none;
+    font-size: 1rem;
+    color: #333;
+    vertical-align: middle;
+}
+
+.notices-table th {
+    background-color: #528eb6;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: left;
+}
+
+.notices-table tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.notices-table tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+
+.notices-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.notice-image {
+    width: 60px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.notice-image-preview {
+    width: 120px;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    .notices-table th, .notices-table td {
+        font-size: 0.9rem; /* Slightly smaller font for small screens */
+        padding: 8px 10px;
+    }
+
+    /* Stack action buttons in smaller screens */
+    .actions {
+        text-align: center; /* Center-align buttons on smaller screens */
+    }
+
+    .table-container {
+        overflow-x: scroll;
+    }
+
+    .actions .btn {
+        width: 100%; /* Make buttons full width */
+        margin-top: 10px;
+    }
+
+    .panel-header {
+        font-size: 1.5rem; /* Slightly smaller header text on small screens */
+    }
+}
+
+/* Action Buttons */
+.actions-container {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    flex-wrap: wrap; /* Allow buttons to wrap if they don't fit */
+}
+
+.actions-container .btn {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.actions-container .btn-secondary {
+    background-color: #6c757d;
+}
+
+.actions-container .btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.actions-container .btn-danger {
+    background-color: #dc3545;
+}
+
+.actions-container .btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Back Button */
+.back-btn-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Space between the icon and text */
+    cursor: pointer; /* Indicate it's clickable */
+    color: #5a6268; /* Adjust text color if needed */
+    font-size: 1rem; /* Adjust font size */
+    text-decoration: none; /* Remove underline if it's a link */
+    margin-bottom: 1rem; /* Add spacing below the back button if needed */
+}
+
+.back-btn-icon {
+    font-size: 1rem; /* Adjust icon size */
+    font-weight: bold;
+}
+
+.back-btn-text {
+    font-size: 1rem;
+    color: inherit; /* Matches the parent color */
+}
+
+/* Alerts */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+/* Forms */
+.notice-form .form-group {
+    margin-bottom: 15px;
+}
+
+.notice-form label {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.notice-form .form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.notice-form .form-control:focus {
+    border-color: #007bff;
+}
+
+.notice-form textarea.form-control {
+    resize: vertical;
+}
+
+.notice-form .form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.notice-form .btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.notice-form .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.notice-form .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.notice-form .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.notice-form .btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Form Responsiveness */
+@media (max-width: 768px) {
+    .notice-form .form-actions {
+        flex-direction: column; /* Stack buttons vertically on small screens */
+    }
+
+    .notice-form .btn {
+        width: 100%; /* Make buttons full width */
+    }
+}
+
+/* Style the pagination container */
+.dataTables_paginate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+/* Style the pagination links */
+.dataTables_paginate .paginate_button {
+    padding: 5px 12px;
+    margin: 0 5px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Style the active page button */
+.dataTables_paginate .paginate_button.current {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* Style the hover effect for page buttons */
+.dataTables_paginate .paginate_button:hover {
+    background-color: #0056b3;
+    color: white;
+    border-color: #0056b3;
+}
+
+/* Style the previous and next buttons */
+.dataTables_paginate .paginate_button.previous,
+.dataTables_paginate .paginate_button.next {
+    font-weight: bold;
+    padding: 5px 12px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 3px;
+}
+
+/* Previous and Next buttons hover effect */
+.dataTables_paginate .paginate_button.previous:hover,
+.dataTables_paginate .paginate_button.next:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+/* Disabled state for previous/next */
+.dataTables_paginate .paginate_button.disabled {
+    background-color: #e9ecef;
+    color: #6c757d;
+    border-color: #dee2e6;
+    cursor: not-allowed;
+}
+
+/* Optional: Add a "Next" and "Previous" label for better UX */
+.dataTables_paginate .paginate_button.previous:before {
+    content: "← Previous";
+    margin-right: 5px;
+}
+
+.dataTables_paginate .paginate_button.next:after {
+    content: "Next →";
+    margin-left: 5px;
+}
+

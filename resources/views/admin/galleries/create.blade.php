@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('title', 'Create Gallery')
 @section('content')
-    <link rel="stylesheet" href="{{ asset('css/noticeManagement.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/noticeCopy.css') }}">
     <div class="management-panel">
         <h1 class="panel-header">Create New Gallery</h1>
 
