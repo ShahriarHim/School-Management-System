@@ -49,7 +49,7 @@
 @endsection
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/noticeManagement.css') }}">
+<link rel="stylesheet" href="{{ asset('css/noticeCopy.css') }}">
 @endpush
 
 @push('scripts')

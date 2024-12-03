@@ -10,10 +10,11 @@
 
         <!-- Display Success Message -->
         @if (session('success'))
-            <div class="alert alert-success">
+            <div id="flash-message" class="alert alert-success">
                 {{ session('success') }}
             </div>
         @endif
+
 
         <!-- Display Error Messages -->
         @if ($errors->any())
@@ -53,12 +54,12 @@
 @endsection
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/noticeManagement.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/noticeCopy.css') }}">
 @endpush
 
 @push('scripts')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script>
         $(function() {
             $('#events-table').DataTable({
@@ -104,6 +105,9 @@
                     },
                 ]
             });
+            if ($('#flash-message').length) {
+                $('#flash-message').show().delay(1000).fadeOut();
+            }
         });
     </script>
 @endpush
