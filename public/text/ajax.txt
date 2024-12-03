@@ -1,0 +1,16 @@
+This is ajax text for test purpose.AJAX can be used for interactive communication with a database.
+
+AJAX Database Example
+The following example will demonstrate how a web page can fetch information from a database with AJAX:
+
+Example
+
+Alfreds Futterkiste
+
+CustomerID	ALFKI 
+CompanyName	Alfreds Futterkiste 
+ContactName	Maria Anders 
+Address	Obere Str. 57 
+City	Berlin 
+PostalCode	12209 
+Country	Germany 

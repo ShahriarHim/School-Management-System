@@ -9,13 +9,14 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class TestController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
 /*         $order=DB::table('orders')
         ->select('state','city')
@@ -121,14 +122,32 @@ class TestController extends Controller
 /*          $test1=Test::create([
             'name'=>'test1'
          ]); */
-
+/* 
          $tests=Test::chunkById(2, function(Collection $tests){
             $tests->each->update(['name'=>'testing purpose']);
          });
 
          return response()->json($tests);
+ */
+/* 
+        if($request->ajax()){
 
+            $tests = Test::all();
+            return DataTables::of($tests)->make(true);
+        }
 
+        return view('test1');
+
+         */
+
+        if($request->ajax()){
+            $data=Test::all();
+            return response()->json($data);
+
+        }
+        
+        return view('test.testAjaxGet');
+         
     }
 
     /**
@@ -136,7 +155,7 @@ class TestController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -144,7 +163,15 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $test= new Test();
+        $test->name=$request->input('name');
+        $test->description=$request->input('description');
+        $test->price=$request->input('price');
+        $test->stock=$request->input('stock');
+
+        $test->save();
+        
+        return response()->json(['message'=>'form submitted']);
     }
 
     /**
@@ -176,6 +203,7 @@ class TestController extends Controller
      */
     public function destroy(Test $test)
     {
-        //
+        $test->delete();
+        return response()->json(['status'=>'delete success']);
     }
 }

@@ -82,7 +82,9 @@ class ContactController extends Controller
                         'question' => $request->input('question')
                     ]);
 
-        return redirect()->back()->with('status','question submitted');
+        //return redirect()->back()->with('status','question submitted');
+        return response()->json(['message'=>'form submitted successfully']);
+
 
     }
 
