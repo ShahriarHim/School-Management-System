@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminEventController;
+use App\Http\Controllers\AdminGalleryController;
+use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,3 +20,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+
+
+
+
+
+//Sobuj Part
+Route::get('/api-events', [AdminEventController::class, 'apiIndex'])->name('api.events.index');
+Route::get('/api-galleries', [AdminGalleryController::class, 'apiIndex'])->name('api.galleries.index');
