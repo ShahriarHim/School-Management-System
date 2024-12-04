@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 class AdminGalleryController extends Controller
 {
+    public function apiIndex() {
+        $galleries = Gallery::all();
+        return response()->json($galleries);
+    }
     /* public function index(Request $request)
     {
         // ORM
@@ -40,8 +44,9 @@ class AdminGalleryController extends Controller
         return view('admin.galleries.index');
     } */
 
-    public function index(Request $request)
+public function index(Request $request)
 {
+    $galleries = Gallery::all();
     if ($request->ajax()) {
         $data = Gallery::select('*');
         return DataTables::of($data)

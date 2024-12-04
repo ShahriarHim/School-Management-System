@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 class AdminEventController extends Controller
 {
+
     /**
      * Display a listing of the events.
      */
@@ -25,35 +26,36 @@ class AdminEventController extends Controller
         return view('admin.event.index', compact('events'));
     }
  */
+public function apiIndex() {
+    $events = Event::all();
+    return response()->json($events);
+}
 
+public function index(Request $request)
+{
+    if ($request->ajax()) {
+        $data = Event::select(['id', 'title', 'author_name', 'date', 'status', 'image', 'description']);
 
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) {
+                $editUrl = route('admin.eventsmanagement.edit', $row->id);
+                $deleteUrl = route('admin.eventsmanagement.destroy', $row->id);
 
- public function index(Request $request)
- {
-     if ($request->ajax()) {
-         $data = Event::select(['id', 'title', 'author_name', 'date', 'status', 'image', 'description']);
-
-         return DataTables::of($data)
-             ->addIndexColumn()
-             ->addColumn('action', function ($row) {
-                 $editUrl = route('admin.eventsmanagement.edit', $row->id);
-                 $deleteUrl = route('admin.eventsmanagement.destroy', $row->id);
-
-                 return '
-                     <a href="' . $editUrl . '" class="edit btn btn-primary btn-sm">Edit</a>
-                     <form action="' . $deleteUrl . '" method="POST" style="display:inline;">
-                         ' . csrf_field() . '
-                         ' . method_field('DELETE') . '
-                         <button type="submit" class="delete btn btn-danger btn-sm">Delete</button>
-                     </form>
-                 ';
-             })
-             ->rawColumns(['action'])
-             ->make(true);
-     }
-
-     return view('admin.event.index');
- }
+                return '
+                    <a href="' . $editUrl . '" class="edit btn btn-primary btn-sm">Edit</a>
+                    <form action="' . $deleteUrl . '" method="POST" style="display:inline;">
+                        ' . csrf_field() . '
+                        ' . method_field('DELETE') . '
+                        <button type="submit" class="delete btn btn-danger btn-sm">Delete</button>
+                    </form>
+                ';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+        return view('admin.event.index');
+}
 
 
 
