@@ -150,6 +150,15 @@ class TestController extends Controller
          
     }
 
+
+    public function apiIndex(Request $request)
+    {
+        $data=Test::all();
+        return response()->json($data);
+                 
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */
@@ -193,8 +202,15 @@ class TestController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Test $test)
+    public function update(Request $request, $id)
     {
+        $test= Test::find($id);
+
+        if(!$test){
+            return response()->json(['message'=>'No record found']);
+
+        }
+
         $test->name=$request->input('name');
         $test->description=$request->input('description');
         $test->price=$request->input('price');
@@ -207,8 +223,12 @@ class TestController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Test $test)
+    public function destroy($id)
     {
+        $test= Test::find($id);
+        if(!$test){
+            return response()->json(['status'=>'No record found']);
+        }
         $test->delete();
         return response()->json(['status'=>'delete success']);
     }

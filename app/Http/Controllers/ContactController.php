@@ -25,6 +25,15 @@ class ContactController extends Controller
     }
 
 
+    public function apiIndex()
+    {
+
+        $contactPageContent = DB::table('page_contents')->where('slug','contact')->first();
+        
+        return response()->json($contactPageContent);
+    }
+
+
     public function create()
     {
         //
@@ -88,6 +97,7 @@ class ContactController extends Controller
 
     }
 
+    
 
     public function show(string $id)
     {
