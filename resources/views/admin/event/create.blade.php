@@ -3,15 +3,11 @@
 @section('title', 'Create Event')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/noticeManagement.css') }}">
 <div class="management-panel">
     <h1 class="panel-header">Create New Event</h1>
-
-    <!-- Display Error Messages -->
-    <div id="errorMessages" class="alert alert-danger" style="display: none;">
-        <ul id="errorList"></ul>
+    <div id="successMessage" class="alert alert-success" style="display: none;">
+        Event created successfully!
     </div>
-
     <form id="eventForm" enctype="multipart/form-data" class="notice-form">
         @csrf
         <div class="form-group">
@@ -50,8 +46,13 @@
 </div>
 @endsection
 
-@push('scripts')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+@push('styles')
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" /> -->
+    <link rel="stylesheet" href="{{ asset('css/noticeCopy.css') }}">
+@endpush
+@push ('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#eventForm').on('submit', function(e) {
@@ -65,23 +66,12 @@
                 contentType: false,
                 processData: false,
                 success: function(response) {
-                    if (response.redirect_url) {
-                        window.location.href = response.redirect_url; // Redirect to the index page
-                        $('#response').text(response.message).css('color', 'green');
-                    } else {
-                        // Display success message in green
-                        $('#eventForm')[0].reset(); // Clear form fields
-                    }
+                    console.log('Success response:', response);
+                    $('#successMessage').css({ 'display': 'block'});
+                    setTimeout(function() {
+                        window.location.href = "{{ route('admin.eventsmanagement.index') }}";
+                    }, 1000);
                 },
-                error: function(xhr) {
-                    let errors = xhr.responseJSON.errors;
-                    let errorMessages = '';
-                    $.each(errors, function(key, value) {
-                        errorMessages += '<li>' + value[0] + '</li>';
-                    });
-                    $('#errorMessages').show(); // Show the error message div
-                    $('#errorList').html(errorMessages); // Populate the error list
-                }
             });
         });
     });

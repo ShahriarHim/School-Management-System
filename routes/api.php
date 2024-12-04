@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminEventController;
+use App\Http\Controllers\AdminGalleryController;
+use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
@@ -9,7 +12,6 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactPageController;
-use App\Http\Controllers\AdminGalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\EventController;
@@ -21,7 +23,6 @@ use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\SchoolDetailController;
 use App\Http\Controllers\NoticeBoardController;
 use App\Http\Controllers\AdminNoticeBoardController;
-use App\Http\Controllers\AdminEventController;
 use App\Http\Controllers\GalleryImageController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserTestController;
@@ -61,3 +62,11 @@ Route::resource('test',TestController::class)->names('test');
 
 
 //----------Salauddin's route end------------
+
+
+
+
+
+//Sobuj Part
+Route::get('/api-events', [AdminEventController::class, 'apiIndex'])->name('api.events.index');
+Route::get('/api-galleries', [AdminGalleryController::class, 'apiIndex'])->name('api.galleries.index');
