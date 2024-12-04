@@ -32,5 +32,16 @@ class AboutPageController extends Controller
 
         
         return view('pages.about',['about'=>$about]);
+
+    }
+
+    public function apiIndex(){
+
+        $about= DB::table('page_contents')
+        ->where('slug','about')
+        ->where('status', 1)
+        ->first(); 
+        
+        return response()->json($about);
     }
 }
