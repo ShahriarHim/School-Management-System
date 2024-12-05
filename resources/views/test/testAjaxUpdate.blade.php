@@ -10,7 +10,7 @@
 <div class="school-margin">
 
 
-    <h1>Submit a New Order</h1>
+    <h1>Update Order</h1>
 
     <form id="ajax-form">
         @csrf
