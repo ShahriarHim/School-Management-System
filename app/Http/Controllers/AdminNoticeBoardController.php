@@ -13,16 +13,27 @@ class AdminNoticeBoardController extends Controller
     public function index()
     {
         if (request()->ajax()) {
+
             $notices = NoticeBoard::select('id', 'title', 'description', 'image', 'date');
 
             return DataTables::of($notices)
                 ->addColumn('action', function ($notice) {
-                    return '<a href="'.route('admin.noticeboard.edit', $notice->id).'" class="btn btn-sm btn-primary custom-edit-btn">Edit</a>
-                    <a href="'.route('admin.noticeboard.destroy', $notice->id).'" class="btn btn-sm btn-danger custom-delete-btn" onclick="return confirm(\'Are you sure?\')">Delete</a>';
-        })
-                ->rawColumns(['action'])  // Make action column HTML-safe
+                    return '<a href="' . route('admin.noticeboard.edit', $notice->id) . '" class="btn btn-sm btn-primary custom-edit-btn">Edit</a>
+                            <a href="' . route('admin.noticeboard.destroy', $notice->id) . '" class="btn btn-sm btn-danger custom-delete-btn" onclick="return confirm(\'Are you sure?\')">Delete</a>';
+                })
+                ->rawColumns(['action'])
                 ->make(true);
         }
+
+
+        // $notices = NoticeBoard::all();
+
+        // return response()->json([
+        //     'success' => true,
+        //     'data' => $notices,
+        //     'message' => 'Notices retrieved successfully!'
+        // ]);
+
 
         return view('admin.notice.noticeManagementYajra');
     }
@@ -117,12 +128,12 @@ class AdminNoticeBoardController extends Controller
                 "INSERT INTO notice_boards (title, date, image, description) VALUES ('{$request->title}', '{$request->date}',
             '{$imagePath}','{$request->description}')"
             );
-            // return response()->json(['success' => true]);
+            // return response()->json(['success' => true, 'message' => 'Notice Created Successfully!']);
 
             return redirect()->route('admin.noticeboard.index')->with('success', 'Notice created successfully!');
         } catch (\Exception $e) {
             return redirect()->route('admin.noticeboard.index')->with('error', 'Failed to create notice. Please try again.');
-            // return response()->json(['success' => false, 'message' => 'Failed to create notice. Please try again.']);
+            // return response()->json(['success' => false, $e, 'message' => 'Failed to create notice. Please try again.']);
         }
     }
 
@@ -143,12 +154,16 @@ class AdminNoticeBoardController extends Controller
         $notice = $notice[0];
         // dd($notice);
         return view('admin.notice.editNotice', compact('notice'));
+        // return response()->json(['success' => true, '' => $notice]);
     }
 
     /* Update the specified notice in storage */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         // Validate input
+
+        // Validate input (all fields are optional for updates)
         $request->validate([
             'title' => 'required|string|max:255',
             'date' => 'required|date',
@@ -156,18 +171,22 @@ class AdminNoticeBoardController extends Controller
             'description' => 'nullable|string',
         ]);
 
+
         /* SECTION 1: Eloquent ORM */
         // $notice = NoticeBoard::findOrFail($id);
 
         /* SECTION 2: Query Builder */
-        // $notice = DB::table('notice_boards')->where('id', $id)->first();
+        // Fetch the notice using Query Builder or Raw SQL
+        $notice = DB::table('notice_boards')->where('id', $id)->first();
+
+
 
         /* SECTION 3: Raw SQL */
         // $temp = (int) $id;
         // $query = 'SELECT * FROM notice_boards WHERE id = $temp';
         // $res = DB::raw($query);
 
-        $notice = DB::select("SELECT * FROM notice_boards WHERE id = $id");
+        // $notice = DB::select("SELECT * FROM notice_boards WHERE id = $id");
         // dd($notice);
 
         if (!$notice) {
@@ -176,11 +195,12 @@ class AdminNoticeBoardController extends Controller
         }
         $notice = $notice[0]; // Converting the result to an object
 
+        $imagePath = $notice->image; // Keep the old image path
         // Handle file upload
         if ($request->hasFile('image')) {
             // Delete old image if exists
-            if ($notice->image && file_exists(public_path($notice->image))) {
-                unlink(public_path($notice->image)); // Delete old image from the server
+            if ($imagePath && file_exists(public_path($imagePath))) {
+                unlink(public_path($imagePath)); // Delete old image
             }
 
             // Process new image upload
@@ -201,7 +221,7 @@ class AdminNoticeBoardController extends Controller
         //     'image' => $notice->image,
         //     'description' => $request->description,
         // ]);
-
+        // dd($request->all());
         /* SECTION 2: Query Builder */
         // DB::table('notice_boards')
         //     ->where('id', $id)
@@ -222,32 +242,61 @@ class AdminNoticeBoardController extends Controller
             $request->description,
             $id
         ]);
+        // Update notice with provided fields
 
         return redirect()->route('admin.noticeboard.index')->with('success', 'Notice updated successfully!');
+        // Fetch updated notice
+        // $updatedNotice = DB::table('notice_boards')->where('id', $id)->first();
+
+        // // Return success response with updated data
         // return response()->json([
         //     'success' => true,
-        //     'redirectUrl' => route('admin.noticeboard.index')  // The URL to redirect to
+        //     'data' => $updatedNotice,
+        //     'message' => 'Notice updated successfully!'
         // ]);
     }
 
 
 
     /* Remove the specified notice from storage */
+    // public function destroy($id)
+    // {   /* SECTION 1: Eloquent ORM */
+    //     /* SECTION 2: Query Builder */
+    //     /* SECTION 3: Raw SQL */
+
+    //     $notice = NoticeBoard::findOrFail($id);
+
+    //     // Delete the image file if exists
+    //     if ($notice->image) {
+    //         Storage::disk('public')->delete($notice->image);
+    //     }
+
+    //     $notice->delete();
+    //     return response()->json(['success' => true, 'message' => 'The notice has been deleted']);
+    //     // return redirect()->route('admin.noticeboard.index')->with('success', 'Notice deleted successfully!');
+    // }
     public function destroy($id)
-    {   /* SECTION 1: Eloquent ORM */
-        /* SECTION 2: Query Builder */
-        /* SECTION 3: Raw SQL */
+    {
+        // Fetch the notice
+        $notice = NoticeBoard::find($id);
 
-        $notice = NoticeBoard::findOrFail($id);
-
-        // Delete the image file if exists
-        if ($notice->image) {
-            Storage::disk('public')->delete($notice->image);
+        // If the notice doesn't exist, return 404
+        if (!$notice) {
+            return response()->json(['success' => false, 'message' => 'Notice not found'], 404);
         }
 
+        // Delete the image file if it exists
+        if ($notice->image && Storage::exists('public/' . $notice->image)) {
+            Storage::delete('public/' . $notice->image);
+        }
+
+        // Delete the notice
         $notice->delete();
 
+        // Return success response
         return redirect()->route('admin.noticeboard.index')->with('success', 'Notice deleted successfully!');
+        // return response()->json(['success' => true, 'message' => 'The notice has been deleted']);
     }
+
 }
 
