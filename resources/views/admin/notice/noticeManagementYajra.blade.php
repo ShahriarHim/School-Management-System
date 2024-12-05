@@ -88,7 +88,8 @@
                 ajax: {
                     url: '{{route("admin.noticeboard.index")}}'
                 },
-                columns: [
+
+                        columns: [
                     { data: 'id', name: 'id' },
                     { data: 'title', name: 'title' },
                     { data: 'description', name: 'description' },
