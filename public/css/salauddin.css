@@ -586,3 +586,11 @@ tr:hover{
     padding: 10px;
     display: none;
 }
+
+.error{
+    color: red;
+}
+
+.valid{
+    color: green;
+}
