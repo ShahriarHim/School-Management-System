@@ -95,7 +95,7 @@
                     { data: 'description', name: 'description' },
                     {
                         data: 'image', name: 'image', render: function (data, type, row) {
-                            return '<img src="/' + data + '" width="50" height="50">';
+                            return '<img src="/' + data + '" width="80" height="60">';
                         }
                     },
                     { data: 'date', name: 'date' },

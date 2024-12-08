@@ -17,10 +17,15 @@ class AdminNoticeBoardController extends Controller
             $notices = NoticeBoard::select('id', 'title', 'description', 'image', 'date');
 
             return DataTables::of($notices)
-                ->addColumn('action', function ($notice) {
-                    return '<a href="' . route('admin.noticeboard.edit', $notice->id) . '" class="btn btn-sm btn-primary custom-edit-btn">Edit</a>
-                            <a href="' . route('admin.noticeboard.destroy', $notice->id) . '" class="btn btn-sm btn-danger custom-delete-btn" onclick="return confirm(\'Are you sure?\')">Delete</a>';
-                })
+            ->addColumn('action', function ($notice) {
+                return '<a href="' . route('admin.noticeboard.edit', $notice->id) . '" class="btn btn-sm btn-primary custom-edit-btn">Edit</a>
+                        <form action="' . route('admin.noticeboard.destroy', $notice->id) . '" method="POST" style="display:inline-block;">
+                            ' . csrf_field() . '
+                            ' . method_field('DELETE') . '
+                            <button type="submit" class="btn btn-sm btn-danger custom-delete-btn"  onclick="return confirm(\'Are you sure?\')">Delete</button>
+                        </form>';
+            })
+            
                 ->rawColumns(['action'])
                 ->make(true);
         }
@@ -276,7 +281,7 @@ class AdminNoticeBoardController extends Controller
     //     // return redirect()->route('admin.noticeboard.index')->with('success', 'Notice deleted successfully!');
     // }
     public function destroy($id)
-    {
+    {  
         // Fetch the notice
         $notice = NoticeBoard::find($id);
 

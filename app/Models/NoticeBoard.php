@@ -9,5 +9,8 @@ class NoticeBoard extends Model
 {
     use HasFactory;
     protected $fillable = ['title', 'date', 'image','description'];
+    // protected $guarded = [];
     use HasFactory;
+
+
 }
