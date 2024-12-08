@@ -24,6 +24,8 @@ use App\Http\Controllers\GalleryImageController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserTestController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\DashboardController;
+
 // Route::get('/', function () {
 //     return view('testJs');
 // });
@@ -73,6 +75,8 @@ Route::resource('admin/page-content', PageContentController::class)->names('admi
 Route::resource('admin/school', SchoolDetailController::class)->names('admin.school');
 
 Route::resource('test',TestController::class)->names('test');
+
+Route::resource('admin/dashboard', DashboardController::class)->names('admin.dashboard');
 
 
 //----------Salauddin's route end------------
