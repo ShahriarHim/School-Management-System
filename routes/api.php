@@ -69,4 +69,6 @@ Route::resource('test',TestController::class)->names('test');
 
 //Sobuj Part
 Route::get('/api-events', [AdminEventController::class, 'apiIndex'])->name('api.events.index');
-Route::get('/api-galleries', [AdminGalleryController::class, 'apiIndex'])->name('api.galleries.index');
+Route::post('/events/store', [AdminEventController::class, 'store'])->name('api.events.store');
+Route::put('/api-events/{id}', [AdminEventController::class, 'APIupdate'])->name('api.events.APIupdate');
+Route::delete('/events/{id}', [AdminEventController::class, 'APIdelete'])->name('api.events.APIdelete');
