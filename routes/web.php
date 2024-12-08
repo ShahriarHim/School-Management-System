@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\SignupController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SignupController;
 use App\Http\Controllers\aboutPageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactFormController;
@@ -23,7 +23,7 @@ use App\Http\Controllers\AdminEventController;
 use App\Http\Controllers\GalleryImageController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserTestController;
-
+use App\Http\Controllers\ApiController;
 // Route::get('/', function () {
 //     return view('testJs');
 // });
@@ -83,7 +83,7 @@ Route::get('/coaches', [TeacherController::class, 'index'])->name('teachers.inde
 Route::get('/galdetails/{id}', [GalleryDetailsController::class, 'show'])->name('gallery.details');
 Route::get('/events', [EventController::class, 'show'])->name('events.show');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
-Route::get('/admin', function (){ $user = Auth::user(); return view('layouts.admin', ['user'=>$user]);});
+Route::get('/admin', function (){ $user = Auth::user(); return view('layouts.admin', ['user'=>$user]);})->name('admin');
 
 Route::middleware(['web'])->group(function () {
     Route::prefix('admin')->group(function () {
@@ -98,7 +98,7 @@ Route::middleware(['web'])->group(function () {
 
 
 
- Route::middleware(['web'])->group(function () {
+Route::middleware(['web'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/galleries', [AdminGalleryController::class, 'index'])->name('admin.galleries.index');
         Route::get('/galleries/create', [AdminGalleryController::class, 'create'])->name('admin.galleries.create');
@@ -120,3 +120,13 @@ Route::prefix('admin')->group(function () {
 
 });
 Route::get('/utest', [UserTestController::class, 'processUsers']);
+// routes/web.php
+
+Route::get('/signup', [SignupController::class, 'showForm'])->name('signup.form');
+Route::post('/signup', [SignupController::class, 'register'])->name('signup.submit');
+
+Route::get('/login', [LoginController::class, 'showForm'])->name('login.form');
+Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+

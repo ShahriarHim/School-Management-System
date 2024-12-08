@@ -9,13 +9,14 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class TestController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
 /*         $order=DB::table('orders')
         ->select('state','city')
@@ -121,22 +122,49 @@ class TestController extends Controller
 /*          $test1=Test::create([
             'name'=>'test1'
          ]); */
-
+/* 
          $tests=Test::chunkById(2, function(Collection $tests){
             $tests->each->update(['name'=>'testing purpose']);
          });
 
          return response()->json($tests);
+ */
+/* 
+        if($request->ajax()){
 
+            $tests = Test::all();
+            return DataTables::of($tests)->make(true);
+        }
 
+        return view('test1');
+
+*/
+
+        if($request->ajax()){
+            $data=Test::all();
+            return response()->json($data);
+
+        }
+        
+        return view('test.testAjaxGet');
+         
     }
+
+
+    public function apiIndex(Request $request)
+    {
+        $data=Test::all();
+        return response()->json($data);
+                 
+    }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('test.testJqueryValidation');
     }
 
     /**
@@ -144,7 +172,15 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $test= new Test();
+        $test->name=$request->input('name');
+        $test->description=$request->input('description');
+        $test->price=$request->input('price');
+        $test->stock=$request->input('stock');
+
+        $test->save();
+        
+        return response()->json(['message'=>'form submitted']);
     }
 
     /**
@@ -160,22 +196,40 @@ class TestController extends Controller
      */
     public function edit(Test $test)
     {
-        //
+        return view('test.testAjaxUpdate' , ['test'=>$test]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Test $test)
+    public function update(Request $request, $id)
     {
-        //
+        $test= Test::find($id);
+
+        if(!$test){
+            return response()->json(['message'=>'No record found']);
+
+        }
+
+        $test->name=$request->input('name');
+        $test->description=$request->input('description');
+        $test->price=$request->input('price');
+        $test->stock=$request->input('stock');
+        $test->save();
+        
+        return response()->json(['message'=>'Order data Updated']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Test $test)
+    public function destroy($id)
     {
-        //
+        $test= Test::find($id);
+        if(!$test){
+            return response()->json(['status'=>'No record found']);
+        }
+        $test->delete();
+        return response()->json(['status'=>'delete success']);
     }
 }

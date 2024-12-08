@@ -25,6 +25,15 @@ class ContactController extends Controller
     }
 
 
+    public function apiIndex()
+    {
+
+        $contactPageContent = DB::table('page_contents')->where('slug','contact')->first();
+        
+        return response()->json($contactPageContent);
+    }
+
+
     public function create()
     {
         //
@@ -82,10 +91,13 @@ class ContactController extends Controller
                         'question' => $request->input('question')
                     ]);
 
-        return redirect()->back()->with('status','question submitted');
+        //return redirect()->back()->with('status','question submitted');
+        return response()->json(['message'=>'form submitted successfully']);
+
 
     }
 
+    
 
     public function show(string $id)
     {

@@ -3,7 +3,7 @@
 @section('title', 'Add Gallery Image')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/noticeManagement.css') }}">
+<link rel="stylesheet" href="{{ asset('css/noticeCopy.css') }}">
 <div class="management-panel">
     <h1 class="panel-header">Add New Image for {{ $gallery->title }}</h1>
 

@@ -62,7 +62,7 @@ p{
 }
 
 
-.row{
+.contact-row{
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -417,6 +417,8 @@ tr:hover{
     margin-bottom: 40px;
     text-align: center;
 }
+
+
 .quesitons-table {
     width: 100%;
     border-collapse: collapse;
@@ -454,6 +456,8 @@ tr:hover{
 .quesitons-table tr:hover {
     background-color: #f1f1f1;
 }
+
+
 
 
 /* .pagination-links{
@@ -563,4 +567,30 @@ tr:hover{
     }
 
     
+}
+
+
+/* -----------Order update page------------- */
+
+#ajax-form .col1{
+    margin-bottom: 30px;
+}
+
+#ajax-form label{
+    font-size: 1.4rem;
+}
+
+#response-message{
+    text-align: center;
+    background-color: greenyellow;
+    padding: 10px;
+    display: none;
+}
+
+.error{
+    color: red;
+}
+
+.valid{
+    color: green;
 }

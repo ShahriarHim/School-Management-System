@@ -31,7 +31,7 @@ class GalleryDetailsController extends Controller
         $gallery_date = DB::select("SELECT * FROM gallery_dates WHERE gallery_id = $id LIMIT 1");
 
         // Eloquent ORM Query
-        $gallery = Gallery::with('images')->findOrFail($id);
+        //$gallery = Gallery::with('images')->findOrFail($id);
         // Query Builder Equivalent
         // $gallery = DB::table('galleries')
         //              ->leftJoin('gallery_images', 'galleries.id', '=', 'gallery_images.gallery_id')
@@ -40,12 +40,12 @@ class GalleryDetailsController extends Controller
         //              ->get();
 
         // Raw SQL Equivalent without placeholders
-        /* $gallery = DB::select("
+        $gallery = DB::select("
             SELECT galleries.*, gallery_images.*
             FROM galleries
             LEFT JOIN gallery_images ON galleries.id = gallery_images.gallery_id
             WHERE galleries.id = $id
-        "); */
+        ");
 
         return view('pages.backfromgal', compact('gallery', 'gallery_date', 'pc'));
     }
