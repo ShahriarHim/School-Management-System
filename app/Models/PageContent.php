@@ -16,4 +16,8 @@ class PageContent extends Model
         'image',
         'content'
     ];
+
+/*     public function user(){
+        return $this->hasOne(user::class,'user_id','id');
+    } */
 }
