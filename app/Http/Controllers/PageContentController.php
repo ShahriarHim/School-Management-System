@@ -4,20 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Models\PageContent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class PageContentController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $pageContents= PageContent::all();
+
+        if($request->ajax()){
+            return DataTables::of($pageContents)
+             ->addColumn('action', function($pageContent){
+                return '
+                    <a href="'.route('admin.page-content.show', $pageContent->id).'" class="page-content-edit-button">See more</a>                    
+                ';
+             })
+            ->rawColumns(['action'])
+            ->make(true);
+
+        }
+        
+        return view('admin.pageContents.pageContentIndex');
     }
 
 
     public function create()
     {
-        return view('admin.pageContent');
+        return view('admin.pageContents.pageContentCreate');
     }
 
 
@@ -56,7 +72,7 @@ class PageContentController extends Controller
         $pagecontent->image=$fileName;
         $pagecontent->content=$request->input('content');
         $pagecontent->save();
-  */       
+*/       
 
 
 /* 
@@ -89,7 +105,7 @@ class PageContentController extends Controller
     
         }
 
- */
+*/
 
  
         DB::table('page_contents')
@@ -113,19 +129,19 @@ class PageContentController extends Controller
 
     public function show(PageContent $pageContent)
     {
-        //
+        return view('admin.pageContents.pageContentShow',[ 'pageContent'=>$pageContent]);
     }
 
 
     public function edit(PageContent $pageContent)
     {
-        //
+        return view('admin.pageContents.pageContentEdit',['pageContent'=>$pageContent]);
     }
 
 
     public function update(Request $request, PageContent $pageContent)
     {
-        //
+
     }
 
     public function destroy(PageContent $pageContent)
