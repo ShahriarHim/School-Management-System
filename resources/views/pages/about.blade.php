@@ -18,7 +18,7 @@
 
 
         <div>
-            {!!$about->content!!}
+            {!!$about->pageContentDetail->content!!}
         </div>
     </div>
 
