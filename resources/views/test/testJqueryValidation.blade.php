@@ -25,23 +25,27 @@
         <div class="col1">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" >
-            <span class="error" id="nameError"></span>
+            <span class="errorSpan" id="nameError"></span>
 
         </div>
 
         <div class="col1">
             <label for="name">Description:</label>
             <input type="text" id="description" name="description">
+            <span class="errorSpan" id="descriptionError"></span>
         </div>
 
         <div class="col1">
             <label for="name">Price:</label>
             <input type="text" id="price" name="price">
+            <span class="errorSpan" id="priceError"></span>
+
         </div>
 
         <div class="col1">
             <label for="name">Stock:</label>
             <input type="text" id="stock" name="stock">
+            <span class="errorSpan" id="stockError"></span>
         </div>
 
         <div class="addUpdate-school-button-div">
@@ -97,14 +101,51 @@ $(document).ready(function(){
         let nameVal=$(this).val().trim();
 
         if(nameVal.length < 3){
-            $('#nameError').addClass('error').text('Name must be at least 3 character');
+            $('#nameError').addClass('errorSpan').text('Name must be at least 3 characters').removeClass('validSpan');
         }
         else{
-            $('#nameError').text('').addClass('valid').text('Name looks good');
+            $('#nameError').addClass('validSpan').text('Name looks good').removeClass('errorSpan');
 
         }
     })
 
+    $('#description').on('input', function(){
+        let val=$(this).val().trim();
+
+        if(val.length < 5){
+            $('#descriptionError').addClass('errorSpan').text('Description must be at least 5 characters').removeClass('validSpan');
+        }
+
+        else{
+            $('#descriptionError').addClass('validSpan').text('looks fine now').removeClass('errorSpan');
+        }
+    })
+
+
+    $('#price').on('input', function(){
+        let val=$(this).val();
+
+        if(isNaN(val) || val.length ==''){
+            $('#priceError').addClass('errorSpan').text('price must be a number').removeClass('validSpan');
+        }
+        else{
+            $('#priceError').addClass('validSpan').text('looks fine now').removeClass('errorSpan');
+        }
+    })
+
+
+    $('#stock').on('input', function(){
+        let val=$(this).val();
+
+        if(isNaN(val) || val.length ==''){
+            $('#stockError').addClass('errorSpan').text('stock must be a number').removeClass('validSpan');
+        }
+        else{
+            $('#stockError').addClass('validSpan').text('looks fine now').removeClass('errorSpan');
+        }
+    })
+
+    
 
     $(document).ready(function(){
 
@@ -123,6 +164,7 @@ $(document).ready(function(){
                     $('#response-message').html(response.message);
                     $('#response-message').show();
                     $('#ajax-form')[0].reset();
+                    $('.validSpan').text('');
 
                 },
 
