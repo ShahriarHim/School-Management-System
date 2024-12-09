@@ -45,7 +45,6 @@ class PageContentController extends Controller
             'button' =>'nullable',
             'title2' =>'nullable',
             'image' =>'nullable|image|mimes:jpeg,png,jpg,gif|max:10048',
-            'content' =>'nullable'
         ]);
    
 

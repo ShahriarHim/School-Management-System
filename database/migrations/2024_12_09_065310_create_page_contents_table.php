@@ -6,17 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
         Schema::create('page_contents', function (Blueprint $table) {
             $table->id();
             $table->string('slug');
+            $table->boolean('status')->default(1);
             $table->string('title');
             $table->string('button')->nullable();
             $table->string('title2')->nullable();
             $table->string('image')->nullable();
-            $table->longText('content')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
+
         });
     }
 
