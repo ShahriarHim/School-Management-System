@@ -7,36 +7,78 @@ use App\Models\NoticeBoard;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use yajra\DataTables\Datatables;
+use App\Models\NoticeBoardDetails;
+use Illuminate\Support\Facades\Auth;
 
 class AdminNoticeBoardController extends Controller
 {
+
     public function index()
     {
         if (request()->ajax()) {
-
-            $notices = NoticeBoard::select('id', 'title', 'description', 'image', 'date');
+            // Eager load both user (created_by) and details for each notice
+            $notices = NoticeBoard::with(['user', 'details'])->get();
 
             return DataTables::of($notices)
                 ->addColumn('action', function ($notice) {
                     return '<a href="' . route('admin.noticeboard.edit', $notice->id) . '" class="btn btn-sm btn-primary custom-edit-btn">Edit</a>
-                            <a href="' . route('admin.noticeboard.destroy', $notice->id) . '" class="btn btn-sm btn-danger custom-delete-btn" onclick="return confirm(\'Are you sure?\')">Delete</a>';
+                        <form action="' . route('admin.noticeboard.destroy', $notice->id) . '" method="POST" style="display:inline-block;">
+                            ' . csrf_field() . '
+                            ' . method_field('DELETE') . '
+                            <button type="submit" class="btn btn-sm btn-danger custom-delete-btn"  onclick="return confirm(\'Are you sure?\')">Delete</button>
+                        </form>';
                 })
-                ->rawColumns(['action'])
+                ->addColumn('created_by', function ($notice) {
+                    return $notice->user ? $notice->user->name : 'N/A'; // Show the name of the user
+                })
+                ->addColumn('description', function ($notice) {
+                    return $notice->details ? $notice->details->description : 'No description available'; // Show the description from NoticeBoardDetails
+                })
+                ->addColumn('image', function ($notice) {
+                    return $notice->details ? $notice->details->image : 'No image to show'; // Show image if available
+                })
+                ->addColumn('date', function ($notice) {
+                    return $notice->details ? $notice->details->date : 'N/A'; // Show date from NoticeBoardDetails
+                })
+                ->rawColumns(['action']) // Allow action and image columns to render HTML
                 ->make(true);
         }
 
-
-        // $notices = NoticeBoard::all();
-
-        // return response()->json([
-        //     'success' => true,
-        //     'data' => $notices,
-        //     'message' => 'Notices retrieved successfully!'
-        // ]);
-
-
         return view('admin.notice.noticeManagementYajra');
     }
+
+    // public function index()
+    // {
+    //     if (request()->ajax()) {
+
+    //         $notices = NoticeBoard::with('details')->get();
+
+    //         return DataTables::of($notices)
+    //             ->addColumn('action', function ($notice) {
+    //                 return '<a href="' . route('admin.noticeboard.edit', $notice->id) . '" class="btn btn-sm btn-primary custom-edit-btn">Edit</a>
+    //                     <form action="' . route('admin.noticeboard.destroy', $notice->id) . '" method="POST" style="display:inline-block;">
+    //                         ' . csrf_field() . '
+    //                         ' . method_field('DELETE') . '
+    //                         <button type="submit" class="btn btn-sm btn-danger custom-delete-btn"  onclick="return confirm(\'Are you sure?\')">Delete</button>
+    //                     </form>';
+    //             })
+
+    //             ->rawColumns(['action'])
+    //             ->make(true);
+    //     }
+
+
+    //     // $notices = NoticeBoard::all();
+
+    //     // return response()->json([
+    //     //     'success' => true,
+    //     //     'data' => $notices,
+    //     //     'message' => 'Notices retrieved successfully!'
+    //     // ]);
+
+
+    //     return view('admin.notice.noticeManagementYajra');
+    // }
 
 
 
@@ -89,15 +131,16 @@ class AdminNoticeBoardController extends Controller
     /* Store a newly created notice in storage */
     public function store(Request $request)
     {
+
+        // Validate the form input
         $request->validate([
-            'title' => 'required|string|max:255',
+            'title' => 'required|min:3|max:255',
             'date' => 'required|date',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description' => 'nullable|string',
+            'description' => 'required|min:2|max:255',
         ]);
 
-        try {
-            // Handle file upload
+        // try {
             $imagePath = null;
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
@@ -106,36 +149,75 @@ class AdminNoticeBoardController extends Controller
                 $image->move(public_path('images'), $imageName);
             }
 
-            // Create new notice
-            /* SECTION 1: Eloquent ORM */
-            // NoticeBoard::create([
-            //     'title' => $request->title,
-            //     'date' => $request->date,
-            //     'image' => $imagePath,
-            //     'description' => $request->description,
+            // Get the username of the authenticated user
+            $createdBy = Auth::user();
+            // dd($name);
+
+            // Save the notice board data
+            // $noticeBoard = NoticeBoard::create([
+            //     'title' => $request->input('title'),
+            //     'created_by' => $createdBy->name,
             // ]);
+            $noticeBoard = new NoticeBoard();
+            $noticeBoard->title = $request->input('title');
+            $noticeBoard->created_by = $createdBy->id;
+            // dd($noticeBoard);
+            $noticeBoard->save();
 
-            /* SECTION 2: Query Builder */
-            // DB::table('notice_boards')->insert([
-            //     'title' => $request->title,
-            //     'date' => $request->date,
-            //     'image' => $imagePath,
-            //     'description' => $request->description,
-            // ]);
 
-            /* SECTION 3: Raw SQL */
-            DB::insert(
-                "INSERT INTO notice_boards (title, date, image, description) VALUES ('{$request->title}', '{$request->date}',
-            '{$imagePath}','{$request->description}')"
-            );
-            // return response()->json(['success' => true, 'message' => 'Notice Created Successfully!']);
 
+            // Save notice board details
+            NoticeBoardDetails::create([
+                'notice_board_id' => $noticeBoard->id,
+                'image' => $imagePath,
+                'description' => $request->description,
+                'date' => $request->date,
+            ]);
+
+            // Redirect with success message
             return redirect()->route('admin.noticeboard.index')->with('success', 'Notice created successfully!');
-        } catch (\Exception $e) {
-            return redirect()->route('admin.noticeboard.index')->with('error', 'Failed to create notice. Please try again.');
-            // return response()->json(['success' => false, $e, 'message' => 'Failed to create notice. Please try again.']);
-        }
+
+        // } catch (\Exception $e) {
+        //     dd($e);
+        //     // Handle any errors
+        //     return redirect()->route('admin.noticeboard.index')->with('error', 'Failed to create notice. Please try again.');
+        // }
     }
+
+
+
+
+    // Create new notice
+    /* SECTION 2: Eloquent ORM */
+    // NoticeBoard::create([
+    //     'title' => $request->title,
+    //     'date' => $request->date,
+    //     'image' => $imagePath,
+    //     'description' => $request->description,
+    // ]);
+
+
+    /* SECTION 3: Query Builder */
+    // DB::table('notice_boards')->insert([
+    //     'title' => $request->title,
+    //     'date' => $request->date,
+    //     'image' => $imagePath,
+    //     'description' => $request->description,
+    // ]);
+
+    /* SECTION 4: Raw SQL */
+    // DB::insert(
+    //     "INSERT INTO notice_boards (title, date, image, description) VALUES ('{$request->title}', '{$request->date}',
+    // '{$imagePath}','{$request->description}')"
+    // );
+    // return response()->json(['success' => true, 'message' => 'Notice Created Successfully!']);
+    //     dd($request->all());
+    //     return redirect()->route('admin.noticeboard.index')->with('success', 'Notice created successfully!');
+    // } catch (\Exception $e) {
+    //     return redirect()->route('admin.noticeboard.index')->with('error', $e, 'Failed to create notice. Please try again.');
+    //     // return response()->json(['success' => false, $e, 'message' => 'Failed to create notice. Please try again.']);
+    // }
+
 
 
 
@@ -297,6 +379,25 @@ class AdminNoticeBoardController extends Controller
         return redirect()->route('admin.noticeboard.index')->with('success', 'Notice deleted successfully!');
         // return response()->json(['success' => true, 'message' => 'The notice has been deleted']);
     }
+
+    public function deleteData()
+    {
+        // Step 1: Delete all data from the `notice_board_details` table first
+        DB::table('notice_board_details')->delete();
+    
+        // Step 2: Delete all data from the `notice_boards` table
+        DB::table('notice_boards')->delete();
+    
+        // Step 3: Reset the auto-increment counter for both tables (optional, depending on your DBMS)
+        DB::statement('ALTER TABLE notice_boards AUTO_INCREMENT = 1');
+        DB::statement('ALTER TABLE notice_board_details AUTO_INCREMENT = 1');
+    
+        // Return success response
+        return redirect()->route('admin.noticeboard.index')->with('success', 'All data has been deleted and auto-increment has been reset');
+    }
+    
+
+
 
 }
 

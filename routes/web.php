@@ -55,6 +55,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/noticeboard/{id}/edit', [AdminNoticeBoardController::class, 'edit'])->name('admin.noticeboard.edit'); // Edit form
     Route::put('/noticeboard/{id}', [AdminNoticeBoardController::class, 'update'])->name('admin.noticeboard.update'); // Update notice
     Route::delete('/noticeboard/{id}', [AdminNoticeBoardController::class, 'destroy'])->name('admin.noticeboard.destroy'); // Delete notice
+    Route::delete('/noticeboard', [AdminNoticeBoardController::class, 'deleteData'])->name('admin.noticeboard.deleteData'); // Delete all data
+
 });
 
 Route::get('/page-content', [PageContentController::class, 'create'])->name('page-content');

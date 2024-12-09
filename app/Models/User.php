@@ -57,6 +57,10 @@ class User extends Authenticatable
     {
         return $this->role === self::ROLE_ADMIN;
     }
+    public function noticeBoard()
+    {
+        return $this->hasMany(NoticeBoard::class);
+    }
 
     public function pageContent(){
         return $this->hasMany(PageContent::class);

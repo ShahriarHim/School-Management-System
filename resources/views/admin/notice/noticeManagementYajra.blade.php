@@ -41,6 +41,12 @@
     <!-- Button to Create a New Notice -->
     <div class="actions">
         <a href="{{ route('admin.noticeboard.create') }}" class="btn btn-primary">Create Notice</a>
+        <form action="{{ route('admin.noticeboard.deleteData') }}" method="POST" style="display: inline-block;">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">Delete All Data</button>
+        </form>
+
     </div>
 
     <div class="table-container">
@@ -52,6 +58,7 @@
                     <th>Description</th>
                     <th>Image</th>
                     <th>Date</th>
+                    <th>Created By</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -89,17 +96,18 @@
                     url: '{{route("admin.noticeboard.index")}}'
                 },
 
-                        columns: [
+                columns: [
                     { data: 'id', name: 'id' },
                     { data: 'title', name: 'title' },
                     { data: 'description', name: 'description' },
                     {
                         data: 'image', name: 'image', render: function (data, type, row) {
-                            return '<img src="/' + data + '" width="50" height="50">';
+                            return '<img src="/' + data + '" width="80" height="60">';
                         }
                     },
                     { data: 'date', name: 'date' },
-                    { data: 'action', name: 'action', orderable: false, searchable: false }
+                    { data: 'action', name: 'action', orderable: false, searchable: false },
+                    { data: 'created_by', name: 'created_by' },
                 ]
 
             });

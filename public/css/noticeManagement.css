@@ -1,6 +1,6 @@
 /* General Panel Styling */
 .management-panel {
-    margin-left: 100px;
+    margin-left: 300px;
     margin-top: 70px;
     margin-right: 20px;
     margin-bottom: 20px;
@@ -9,7 +9,6 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-width: 1200px;
-
 }
 
 .panel-header {
@@ -54,7 +53,8 @@
     overflow: hidden;
 }
 
-.notices-table th, .notices-table td {
+.notices-table th,
+.notices-table td {
     padding: 12px 15px;
     border: none;
     font-size: 1rem;
@@ -98,7 +98,8 @@
 
 /* Responsive Table */
 @media (max-width: 768px) {
-    .notices-table th, .notices-table td {
+    .notices-table th,
+    .notices-table td {
         font-size: 0.9rem; /* Slightly smaller font for small screens */
         padding: 8px 10px;
     }
@@ -345,3 +346,12 @@
     margin-left: 5px;
 }
 
+#title-error {
+    color: red;
+}
+#image-error {
+    color: red;
+}
+#description-error {
+    color: red;
+}
