@@ -14,10 +14,8 @@ class CreateNoticeBoardsTable extends Migration
     {
         Schema::create('notice_boards', function (Blueprint $table) {
             $table->id();
-            $table->date('date')->nullable();
-            $table->string('image')->nullable(); // Adds an image column
-            $table->string('title'); // Correctly defines the title column
-            $table->text('description')->nullable(); // Example for additional fields
+            $table->string('title');
+            $table->foreignId('created_by')->constrained('users')->onDelete('cascade'); // Foreign key to users (creator)
             $table->timestamps();
         });
     }

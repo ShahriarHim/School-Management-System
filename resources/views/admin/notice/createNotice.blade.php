@@ -34,23 +34,23 @@
         <div class="form-group">
             <label for="title">Notice Title</label>
             <input type="text" name="title" id="title" class="form-control" placeholder="Enter the notice title"
-                required>
+                value="{{ old('title') }}" required>
         </div>
 
         <div class="form-group">
             <label for="date">Notice Date</label>
-            <input type="date" name="date" id="date" class="form-control" required>
+            <input type="date" name="date" id="date" class="form-control" value="{{ old('date') }}" required>
         </div>
 
         <div class="form-group">
             <label for="image">Notice Image</label>
-            <input type="file" name="image" id="image" class="form-control">
+            <input type="file" name="image" id="image" class="form-control" accept="image/*">
         </div>
 
         <div class="form-group">
             <label for="description">Notice Description</label>
             <textarea name="description" id="description" rows="5" class="form-control"
-                placeholder="Enter the notice description"></textarea>
+                placeholder="Enter the notice description">{{ old('description') }}</textarea>
         </div>
 
         <div class="form-actions">
@@ -60,40 +60,34 @@
     </form>
 </div>
 
-
 @endsection
-@push ('scripts')
+
+@push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#createNoticeForm').validate({
-
                 rules: {
                     title: {
                         required: true,
                         minlength: 3,
                         maxlength: 255,
-                        pattern: /^[a-zA-Z\s]*$/ 
+                        pattern: /^[a-zA-Z\s]*$/
                     },
                     date: {
                         required: true,
                         date: true
                     },
                     image: {
-                        required: true,
-                        extension: "jpeg|jpg|png|gif" 
+                        extension: "jpeg|jpg|png|gif"
                     },
                     description: {
                         required: true,
                         minlength: 10,
-                        maxlength:100
+                        maxlength: 1000
                     }
                 },
-
-
                 messages: {
                     title: {
                         required: "Please enter the notice title.",
@@ -106,26 +100,20 @@
                         date: "Please enter a valid date."
                     },
                     image: {
-                        required: "Please upload an image.",
                         extension: "Only image files are allowed (jpg, jpeg, png, gif)."
                     },
                     description: {
                         required: "Please enter a description.",
-                        minlength: "Description must be at least 10 characters."
+                        minlength: "Description must be at least 10 characters.",
+                        maxlength: "Description cannot exceed 1000 characters."
                     }
                 },
-
-                
                 highlight: function (element) {
                     $(element).addClass("invalid").removeClass("valid");
                 },
-
-                
                 unhighlight: function (element) {
                     $(element).removeClass("invalid").addClass("valid");
                 },
-
-                
                 submitHandler: function (form) {
                     var formData = new FormData(form);
 
@@ -136,20 +124,20 @@
                         processData: false,  // Prevent jQuery from processing the data
                         contentType: false,  // Prevent jQuery from setting the content type
                         success: function (response) {
-                            if (response.success) {
-                                alert('Notice created successfully!');
-                            } else {
-                                alert('Failed to create notice. Please try again.');
-                            }
-                        },
-                        error: function (xhr, status, error) {
-                            console.error(xhr.responseText);
+
+                            alert('Notice created successfully!');
+                            window.location.href = '{{ route('admin.noticeboard.index') }}'; // Redirect on success
+                        }
+                                error: function (xhr, status, error) {
+                            console.error('Error:', xhr.responseText);  // Log the response text
+                            console.error('Status:', status);  // Log the status
+                            console.error('Error Message:', error);  // Log the error message
                             alert('Error occurred! Please try again.');
                         }
+
                     });
                 }
             });
         });
-
     </script>
 @endpush
