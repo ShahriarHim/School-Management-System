@@ -10,7 +10,7 @@ class AboutPageController extends Controller
 {
     public function index(){
 
-        /* $about= PageContent::where('slug','about')->first(); */
+        
 
         /* $about=DB::select('select * from page_contents where slug = ?', ['about']); */
 
@@ -24,13 +24,15 @@ class AboutPageController extends Controller
         ->orderBy('status', 'desc')
         ->first();  */
 
-
+/* 
         $about= DB::table('page_contents')
         ->where('slug','about')
         ->where('status', 1)
         ->first(); 
 
-        
+*/      
+        $about= PageContent::where('slug','about')->first(); //$about= PageContent::where('slug','about')->with('pageContentDetail')->first();
+
         return view('pages.about',['about'=>$about]);
 
     }

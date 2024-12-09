@@ -631,3 +631,14 @@ tr:hover{
 .card-footer {
     text-align: right;
 }
+
+.page-content-manager{
+    background-color: #00c9a7;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.page-content-manager p{
+    margin: 5px;
+    font-weight: 600;
+}

@@ -87,7 +87,6 @@
 
 
 
-    <!-- CKEditor dependencies -->
 <!--     <script type="importmap">
         {
             "imports": {
@@ -181,7 +180,9 @@
             .catch(error => {
                 console.error('Error initializing CKEditor:', error);
             });
-    </script> -->
+    </script> 
+    
+-->
 
 
     <script>

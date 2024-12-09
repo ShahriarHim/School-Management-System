@@ -9,11 +9,13 @@
     <div class="container">
         <div class="card mt-4">
             <div class="card-header">
-                <h2>{{ $pageContent->title }}</h2>
-                <p><strong>Managed By:</strong> {{ $pageContent->managed_by }}</p>
+                <h2>{{ $pageContent->title }} Page Content</h2>
+                
 
             </div>
             <div class="card-body">
+                <div class="page-content-manager"><p>Managed By: {{ $pageContent->user->name }}</p></div>
+
                 @if($pageContent->image)
                     <div>
                         <strong>Image:</strong><br>
@@ -25,8 +27,8 @@
                 <p><strong>Slug:</strong> {{ $pageContent->slug }}</p>
                 <p><strong>Status:</strong> {{ $pageContent->status }}</p>
                 <p><strong>Content:</strong>
-                @if($pageContent->content)
-                 {!! $pageContent->content !!}</p>
+                @if($pageContent->pageContentDetail->content)
+                 {!! $pageContent->pageContentDetail->content !!}</p>
                 @else
                     No Content available
                 @endif

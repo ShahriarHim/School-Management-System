@@ -17,7 +17,11 @@ class PageContent extends Model
         'content'
     ];
 
-/*     public function user(){
-        return $this->hasOne(user::class,'user_id','id');
-    } */
+    public function user(){
+        return $this->belongsTo(User::class); //User::class,'user_id','id'
+    }
+
+    public function pageContentDetail(){
+        return $this->hasOne(PageContentDetail::class);
+    }
 }
