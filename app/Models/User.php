@@ -61,5 +61,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(NoticeBoard::class);
     }
+
+    public function pageContent(){
+        return $this->hasMany(PageContent::class);
+    }
     
 }

@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PageContentDetail extends Model
 {
     use HasFactory;
+    public function pageContent(){
+        return $this->belongsTo(PageContent::class);
+    }
 }

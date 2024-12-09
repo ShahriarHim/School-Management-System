@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PageContent;
+use App\Models\PageContentDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +14,7 @@ class PageContentController extends Controller
 
     public function index(Request $request)
     {
-        $pageContents= PageContent::all();
+        $pageContents= PageContent::with('pageContentDetail')->get();
 
         if($request->ajax()){
             return DataTables::of($pageContents)
@@ -55,23 +56,7 @@ class PageContentController extends Controller
             $fileDestination='images/admin';
             $fileName=time().'_'.$file->getClientOriginalName() ;
             $file->move(public_path($fileDestination),$fileName);
-        }
-
-/* 
-        $pagecontent = PageContent::where('slug',$request->input('slug'))->first();
-
-        if(!$pagecontent){
-            $pagecontent= new PageContent();
-            $pagecontent->slug=$request->input('slug');
-        }
-
-        $pagecontent->title=$request->input('title');
-        $pagecontent->button=$request->input('button');
-        $pagecontent->title2=$request->input('title2');
-        $pagecontent->image=$fileName;
-        $pagecontent->content=$request->input('content');
-        $pagecontent->save();
-*/       
+        }       
 
 
 /* 
@@ -106,7 +91,7 @@ class PageContentController extends Controller
 
 */
 
- 
+/*  
         DB::table('page_contents')
         ->updateOrInsert(
             ['slug'=>$request->input('slug'),
@@ -120,6 +105,34 @@ class PageContentController extends Controller
             'content'=>$request->input('content')
             ]
         );
+
+*/
+
+        $user = Auth::user();
+        $pagecontent = PageContent::where('slug',$request->input('slug'))
+                                  ->where('status',$request->input('status'))
+                                  ->first();
+
+        if(!$pagecontent){
+            $pagecontent= new PageContent();
+            $pagecontent->slug=$request->input('slug');
+        }
+
+        $pagecontent->status=$request->input('status');
+        $pagecontent->title=$request->input('title');
+        $pagecontent->button=$request->input('button');
+        $pagecontent->title2=$request->input('title2');
+        $pagecontent->image=$fileName;
+        /* $pagecontent->content=$request->input('content'); */
+        $pagecontent->user_id=$user->id;
+        $pagecontent->save();
+
+
+        $pagecontentDetail= new PageContentDetail();
+        $pagecontentDetail->content=$request->input('content');
+        $pagecontentDetail->page_content_id=$pagecontent->id;
+        $pagecontentDetail->save();
+
 
         return redirect()->back()->with('status', 'Saved successfully');
 
