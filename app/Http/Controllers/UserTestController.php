@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Support\Facades\DB;
-use App\Models\User;
+use App\Models\Post;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class UserTestController extends Controller
@@ -64,8 +65,12 @@ class UserTestController extends Controller
 
         /* DB::insert('INSERT INTO users (name, role, email, password) VALUES (?, ?, ?, ?)', ['John Doe1', 3, 'john@ex1ample.com', "qwerty"]);
         $users = DB::select('select * from users'); */
-        $query = User::all();
+        /* $query = User::all();
         $query->toSql();
-        return response()->json($query);
+        return response()->json($query); */
+        /* $comments = Post::find(1)->comments;
+        return $comments; */
+        $post = Comment::find(3)->post;
+        return $post;
     }
 }

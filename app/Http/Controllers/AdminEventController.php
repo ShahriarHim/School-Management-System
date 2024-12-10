@@ -135,33 +135,29 @@ public function index(Request $request)
             'description' => 'nullable|string',
         ]);
 
-        try {
             // Handle file upload
-            $imagePath = null;
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
-                $imagePath = 'images/' . $imageName;
-                $image->move(public_path('images'), $imageName);
-            }
-
-            // Insert data using Eloquent ORM
-            Event::create([
-                'title' => $request->title,
-                'author_name' => $request->author_name,
-                'date' => $request->date,
-                'status' => $request->status,
-                'image' => $imagePath,
-                'description' => $request->description,
-            ]);
-
-            return response()->json([
-                'message' => 'Event created successfully!',
-                'redirect_url' => route('admin.eventsmanagement.index')
-            ]);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Failed to create event. Please try again.'], 500);
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+            $imagePath = 'images/' . $imageName;
+            $image->move(public_path('images'), $imageName);
         }
+
+        // Insert data using Eloquent ORM
+        Event::create([
+            'title' => $request->title,
+            'author_name' => $request->author_name,
+            'date' => $request->date,
+            'status' => $request->status,
+            'image' => $imagePath,
+            'description' => $request->description,
+        ]);
+
+        return response()->json([
+            'message' => 'Event created successfully!',
+        ]);
+
     }
 
 

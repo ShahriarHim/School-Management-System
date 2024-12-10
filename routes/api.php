@@ -28,4 +28,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //Sobuj Part
 Route::get('/api-events', [AdminEventController::class, 'apiIndex'])->name('api.events.index');
+Route::post('/api-events', [AdminEventController::class, 'store'])->name('api.events.store');
 Route::get('/api-galleries', [AdminGalleryController::class, 'apiIndex'])->name('api.galleries.index');
