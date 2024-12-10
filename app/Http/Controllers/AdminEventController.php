@@ -1,9 +1,12 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Event;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
+
 class AdminEventController extends Controller
 {
 
@@ -26,23 +29,24 @@ class AdminEventController extends Controller
         return view('admin.event.index', compact('events'));
     }
  */
-public function apiIndex() {
-    $events = Event::all();
-    return response()->json($events);
-}
+    public function apiIndex()
+    {
+        $events = Event::all();
+        return response()->json($events);
+    }
 
-public function index(Request $request)
-{
-    if ($request->ajax()) {
-        $data = Event::select(['id', 'title', 'author_name', 'date', 'status', 'image', 'description']);
+    public function index(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Event::select(['id', 'title', 'author_name', 'date', 'status', 'image', 'description']);
 
-        return DataTables::of($data)
-            ->addIndexColumn()
-            ->addColumn('action', function ($row) {
-                $editUrl = route('admin.eventsmanagement.edit', $row->id);
-                $deleteUrl = route('admin.eventsmanagement.destroy', $row->id);
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $editUrl = route('admin.eventsmanagement.edit', $row->id);
+                    $deleteUrl = route('admin.eventsmanagement.destroy', $row->id);
 
-                return '
+                    return '
                     <a href="' . $editUrl . '" class="edit btn btn-primary btn-sm">Edit</a>
                     <form action="' . $deleteUrl . '" method="POST" style="display:inline;">
                         ' . csrf_field() . '
@@ -50,12 +54,12 @@ public function index(Request $request)
                         <button type="submit" class="delete btn btn-danger btn-sm">Delete</button>
                     </form>
                 ';
-            })
-            ->rawColumns(['action'])
-            ->make(true);
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
         return view('admin.event.index');
-}
+    }
 
 
 
@@ -136,12 +140,29 @@ public function index(Request $request)
         ]);
 
             // Handle file upload
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
-            $imagePath = 'images/' . $imageName;
-            $image->move(public_path('images'), $imageName);
+            $imagePath = null;
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+                $imagePath = 'images/' . $imageName;
+                $image->move(public_path('images'), $imageName);
+            }
+
+            // Insert data using Eloquent ORM
+            Event::create([
+                'title' => $request->title,
+                'author_name' => $request->author_name,
+                'date' => $request->date,
+                'status' => $request->status,
+                'image' => $imagePath,
+                'description' => $request->description,
+            ]);
+
+            return response()->json([
+                'message' => 'Event created successfully!',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Failed to create event. Please try again.'], 500);
         }
 
         // Insert data using Eloquent ORM
@@ -234,6 +255,51 @@ public function index(Request $request)
         return redirect()->route('admin.eventsmanagement.index')->with('success', 'Event updated successfully!');
     }
 
+    public function APIupdate(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'author_name' => 'required|string|max:255',
+            'date' => 'required|date',
+            'status' => 'required|string|in:upcoming,past',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Handle image validation
+            'description' => 'nullable|string',
+        ]);
+
+        $event = Event::findOrFail($id);
+
+        if ($request->hasFile('image')) {
+            // If there's a previous image, remove it
+            if ($event->image && file_exists(public_path($event->image))) {
+                unlink(public_path($event->image));
+            }
+
+            // Store the new image
+            $image = $request->file('image');
+            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+            $imagePath = 'images/' . $imageName;
+            $image->move(public_path('images'), $imageName);
+            $event->image = $imagePath; // Save the image path to the event
+        }
+
+        // Update other fields
+        $event->update([
+            'title' => $request->title,
+            'author_name' => $request->author_name,
+            'date' => $request->date,
+            'status' => $request->status,
+            'image' => $event->image,
+            'description' => $request->description,
+        ]);
+
+        return response()->json([
+            'message' => 'Event updated successfully!',
+            'event' => $event,
+        ], 200);
+    }
+
+
+
     public function destroy($id)
     {
         // Raw SQL without placeholders
@@ -257,5 +323,20 @@ public function index(Request $request)
         // $event->delete();
 
         return redirect()->route('admin.eventsmanagement.index')->with('success', 'Event deleted successfully!');
+    }
+    public function APIdelete($id)
+    {
+        // Find the event by ID
+        $event = Event::findOrFail($id);
+        // Delete the event from the database
+        if ($event->delete()) {
+            return response()->json([
+                'message' => 'Event deleted successfully!',
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Failed to delete event.',
+            ], 500);
+        }
     }
 }
